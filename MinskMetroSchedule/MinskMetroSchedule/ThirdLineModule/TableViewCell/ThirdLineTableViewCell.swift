@@ -24,7 +24,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     private lazy var toKovalskayaStationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green
-        button.setTitle("На Ковальскую Слободу", for: .normal)
+        button.setTitle("На Ковальскую", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
@@ -39,7 +39,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     private lazy var toUbileinayaStationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green
-        button.setTitle("На Ковальскую Слободу", for: .normal)
+        button.setTitle("На Юбилейную", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
@@ -54,7 +54,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     private lazy var showFullScheduleButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green
-        button.setTitle("На Ковальскую Слободу", for: .normal)
+        button.setTitle("Полное расписание", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
@@ -73,28 +73,77 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         // Initialization code
     }
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(stationNameLabel)
+        contentView.addSubview(toKovalskayaStationButton)
+        contentView.addSubview(toUbileinayaStationButton)
+        contentView.addSubview(showFullScheduleButton)
+        
+        updateConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+    }
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        
     }
     
     func configureCell() {
         
     }
     
+    override func updateConstraints() {
+        
+        stationNameLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(10)
+        }
+        
+        toKovalskayaStationButton.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(10)
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(10)
+            $0.width.equalTo(contentView.frame.width * 0.5)
+        }
+        
+        toUbileinayaStationButton.snp.makeConstraints {
+            $0.right.equalToSuperview().inset(10)
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(10)
+            $0.width.equalTo(contentView.frame.width * 0.5)
+        }
+        
+        showFullScheduleButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(toKovalskayaStationButton.snp.bottom).offset(20)
+            $0.bottom.equalToSuperview().inset(10)
+            $0.width.equalTo(contentView.frame.width * 0.5)
+        }
+        
+        
+        super.updateConstraints()
+    }
+    
     //MARK: - Действие кнопки toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
-        
+        print("На Ковальскую")
     }
     
     //MARK: - Действие кнопки toUbileinayaStationButton
     @objc private func toUbileinayaStationButtonPressed() {
-        
+        print("На Юбилейную")
     }
     
     //MARK: - Действие кнопки showFullScheduleButton
     @objc private func showFullScheduleButtonPressed() {
-        
+        print("Полное расписание")
     }
 }

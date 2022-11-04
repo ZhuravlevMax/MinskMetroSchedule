@@ -23,6 +23,9 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ThirdLineTableViewCell.self, forCellReuseIdentifier: ThirdLineTableViewCell.key)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 68
         return tableView
     }()
     
@@ -79,5 +82,8 @@ extension ThirdLineViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
 }
