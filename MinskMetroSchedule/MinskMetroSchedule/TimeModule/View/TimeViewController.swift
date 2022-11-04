@@ -11,6 +11,7 @@ import SnapKit
 protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
+    func setItem(nameLabel: String)
 
 }
 
@@ -100,6 +101,10 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         super.updateViewConstraints()
+    }
+    
+    func setItem(nameLabel: String) {
+        fromStation.text = nameLabel
     }
 
 }

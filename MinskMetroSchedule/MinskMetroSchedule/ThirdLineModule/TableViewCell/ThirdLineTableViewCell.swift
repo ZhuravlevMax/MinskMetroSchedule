@@ -148,7 +148,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
-        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC()
+        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(stationName: stationNameLabel.text!)
         print("На Ковальскую")
     }
     

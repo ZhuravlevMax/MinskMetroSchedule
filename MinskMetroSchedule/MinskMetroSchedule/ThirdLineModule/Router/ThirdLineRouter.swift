@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol ThirdLineRouterProtocol: BaseModulRouterProtocol {
-    func openTimeVC()
+    func openTimeVC(stationName: String)
 }
 
 class ThirdLineRouter: ThirdLineRouterProtocol {
@@ -22,8 +22,8 @@ class ThirdLineRouter: ThirdLineRouterProtocol {
         self.viewController = viewController
     }
     
-    func openTimeVC() {
-        guard let timeModule = builder?.createTimeModule(), let timeVC = viewController?.navigationController else {return}
+    func openTimeVC(stationName: String) {
+        guard let timeModule = builder?.createTimeModule(nameLabel: stationName), let timeVC = viewController?.navigationController else {return}
         timeVC.pushViewController(timeModule, animated: true)
     }
 }

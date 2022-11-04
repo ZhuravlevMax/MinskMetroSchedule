@@ -11,6 +11,7 @@ import UIKit
 protocol ThirdLineViewPresenterProtocol: AnyObject {
     
     var thirdViewControllerBackgroundColor: UIColor {get}
+    func openTimeVC(stationName: String)
     
 }
 
@@ -49,8 +50,8 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         
     }
     
-    func openTimeVC() {
-        router.openTimeVC()
+    func openTimeVC(stationName: String) {
+        router.openTimeVC(stationName: stationName)
     }
     
 }
