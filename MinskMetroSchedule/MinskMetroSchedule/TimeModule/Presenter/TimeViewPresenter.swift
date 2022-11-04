@@ -6,3 +6,23 @@
 //
 
 import Foundation
+import UIKit
+
+protocol TimeViewPresenterProtocol: AnyObject {
+    
+    var timeViewControllerBackgroundColor: UIColor {get}
+    
+}
+
+class TimeViewPresenter: TimeViewPresenterProtocol {
+    
+    var timeViewControllerBackgroundColor: UIColor = .white
+    
+    weak var view: TimeViewControllerProtocol?
+    
+    required init(view: TimeViewControllerProtocol) {
+        self.view = view
+    }
+    
+    
+}

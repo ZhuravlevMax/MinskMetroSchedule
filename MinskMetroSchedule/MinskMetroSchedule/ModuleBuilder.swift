@@ -12,9 +12,12 @@ protocol BuilderProtocol {
 //    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
 //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
+    func createTimeModule() -> UIViewController
 }
 
 class ModuleBuilder: BuilderProtocol {
+    
+    
 //    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController {
 //        <#code#>
 //    }
@@ -22,6 +25,13 @@ class ModuleBuilder: BuilderProtocol {
 //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController {
 //        <#code#>
 //    }
+    
+    func createTimeModule() -> UIViewController {
+        let view = TimeViewController()
+        let presenter = TimeViewPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
     
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController {
         let view = ThirdLineViewController()

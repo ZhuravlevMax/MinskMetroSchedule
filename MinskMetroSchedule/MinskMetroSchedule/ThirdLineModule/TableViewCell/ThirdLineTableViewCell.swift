@@ -11,11 +11,15 @@ protocol ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool)
+    var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol? {get set}
+    
+    func setThirdStationViewDelegate(view: ThirdLineViewProtocol)
 }
 
 class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     static let key = "ThirdLineTableViewCell"
+    var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol?
     
     //MARK: - Create items
     private lazy var stationNameLabel: UILabel = {
@@ -108,6 +112,10 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
     }
     
+    func setThirdStationViewDelegate(view: ThirdLineViewProtocol) {
+        thirdLineTableViewControllerDelegate = view
+    }
+    
     //MARK: - Set constraints for items
     override func updateConstraints() {
         
@@ -140,6 +148,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
+        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC()
         print("На Ковальскую")
     }
     

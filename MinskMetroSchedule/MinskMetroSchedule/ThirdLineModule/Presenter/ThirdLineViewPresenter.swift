@@ -43,6 +43,14 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                                toKovalskayaStationButtonIsHidden: false,
                                toUbileinayaStationButtonIsHidden: false)
         }
+        
+        guard let view else {return}
+        cell.setThirdStationViewDelegate(view: view)
+        
+    }
+    
+    func openTimeVC() {
+        router.openTimeVC()
     }
     
 }
