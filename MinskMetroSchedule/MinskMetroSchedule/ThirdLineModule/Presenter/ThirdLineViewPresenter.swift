@@ -16,6 +16,7 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
+    var stationNamesArray = ["Ковальская слобода", "Вокзальная", "Пл.Франтишка Богушевича", "Юбилейная площадь"]
     var thirdViewControllerBackgroundColor: UIColor = .white
     
     weak var view: ThirdLineViewProtocol?
@@ -26,8 +27,22 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         self.router = router
     }
     
-    func configureThirdLineTableViewCell(indexPath: IndexPath, cell: UITableViewCell) {
+    func configureThirdLineTableViewCell(indexPath: IndexPath, cell: ThirdLineTableViewCellProtocol) {
         
+        switch indexPath.row {
+        case 0:
+            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
+                               toKovalskayaStationButtonIsHidden: true,
+                               toUbileinayaStationButtonIsHidden: false)
+        case 3:
+            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
+                               toKovalskayaStationButtonIsHidden: false,
+                               toUbileinayaStationButtonIsHidden: true)
+        default:
+            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
+                               toKovalskayaStationButtonIsHidden: false,
+                               toUbileinayaStationButtonIsHidden: false)
+        }
     }
     
 }

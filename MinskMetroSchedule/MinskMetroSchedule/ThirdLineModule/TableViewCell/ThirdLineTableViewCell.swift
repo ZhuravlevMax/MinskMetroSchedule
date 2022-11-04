@@ -8,13 +8,16 @@
 import UIKit
 
 protocol ThirdLineTableViewCellProtocol {
-    func configureCell()
+    func configureCell(stationNameText: String,
+                       toKovalskayaStationButtonIsHidden: Bool,
+                       toUbileinayaStationButtonIsHidden: Bool)
 }
 
 class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     static let key = "ThirdLineTableViewCell"
     
+    //MARK: - Create items
     private lazy var stationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
@@ -66,8 +69,6 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         return button
     }()
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -76,6 +77,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //MARK: - Add items to contentsView
         contentView.addSubview(stationNameLabel)
         contentView.addSubview(toKovalskayaStationButton)
         contentView.addSubview(toUbileinayaStationButton)
@@ -98,10 +100,15 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         
     }
     
-    func configureCell() {
-        
+    func configureCell(stationNameText: String,
+                       toKovalskayaStationButtonIsHidden: Bool,
+                       toUbileinayaStationButtonIsHidden: Bool) {
+        stationNameLabel.text = stationNameText
+        toKovalskayaStationButton.isHidden = toKovalskayaStationButtonIsHidden
+        toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
     }
     
+    //MARK: - Set constraints for items
     override func updateConstraints() {
         
         stationNameLabel.snp.makeConstraints {
@@ -128,21 +135,20 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
             $0.width.equalTo(contentView.frame.width * 0.5)
         }
         
-        
         super.updateConstraints()
     }
     
-    //MARK: - Действие кнопки toKovalskayaStationButton
+    //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
         print("На Ковальскую")
     }
     
-    //MARK: - Действие кнопки toUbileinayaStationButton
+    //MARK: - Action for toUbileinayaStationButton
     @objc private func toUbileinayaStationButtonPressed() {
         print("На Юбилейную")
     }
     
-    //MARK: - Действие кнопки showFullScheduleButton
+    //MARK: - Action for showFullScheduleButton
     @objc private func showFullScheduleButtonPressed() {
         print("Полное расписание")
     }

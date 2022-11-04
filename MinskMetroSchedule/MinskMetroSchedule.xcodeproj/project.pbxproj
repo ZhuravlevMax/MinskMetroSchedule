@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
+		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CD2914EC25005D6B31 /* AppDelegate.swift */; };
 		94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CF2914EC25005D6B31 /* SceneDelegate.swift */; };
 		94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669D12914EC25005D6B31 /* ThirdLineViewController.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
+		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B669CD2914EC25005D6B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94B669CF2914EC25005D6B31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9424EE82291583E300C52F42 /* TimeModule */ = {
+			isa = PBXGroup;
+			children = (
+				9424EE842915840D00C52F42 /* View */,
+				9424EE83291583FB00C52F42 /* Presenter */,
+			);
+			path = TimeModule;
+			sourceTree = "<group>";
+		};
+		9424EE83291583FB00C52F42 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				9424EE872915854000C52F42 /* TimeViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		9424EE842915840D00C52F42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9424EE852915852F00C52F42 /* TimeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		94B669C12914EC25005D6B31 = {
 			isa = PBXGroup;
 			children = (
@@ -75,11 +104,12 @@
 				94B669F829152B99005D6B31 /* Extensions */,
 				94B669CD2914EC25005D6B31 /* AppDelegate.swift */,
 				94B669CF2914EC25005D6B31 /* SceneDelegate.swift */,
+				94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */,
 				94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */,
 				94B669E12914EE31005D6B31 /* TabBarViewController.swift */,
 				94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */,
 				94B669E62914F030005D6B31 /* ThirdLineModule */,
-				94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */,
+				9424EE82291583E300C52F42 /* TimeModule */,
 				94B669D62914EC29005D6B31 /* Assets.xcassets */,
 				94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */,
 				94B669DB2914EC29005D6B31 /* Info.plist */,
@@ -215,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
+				9424EE862915853000C52F42 /* TimeViewController.swift in Sources */,
 				94B669EB2914F08D005D6B31 /* ThirdLineRouter.swift in Sources */,
 				94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */,
 				94B669E22914EE31005D6B31 /* TabBarViewController.swift in Sources */,
@@ -225,6 +256,7 @@
 				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
 				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,
 				94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */,
+				9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
