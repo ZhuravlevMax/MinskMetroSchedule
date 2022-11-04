@@ -10,9 +10,13 @@ import UIKit
 
 protocol ThirdLineViewPresenterProtocol: AnyObject {
     
+    var thirdViewControllerBackgroundColor: UIColor {get}
+    
 }
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
+    
+    var thirdViewControllerBackgroundColor: UIColor = .white
     
     weak var view: ThirdLineViewProtocol?
     private(set) var router: ThirdLineRouterProtocol
@@ -20,6 +24,10 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     required init(view: ThirdLineViewProtocol, router: ThirdLineRouterProtocol) {
         self.view = view
         self.router = router
+    }
+    
+    func configureThirdLineTableViewCell(indexPath: IndexPath, cell: UITableViewCell) {
+        
     }
     
 }

@@ -18,6 +18,9 @@
 		94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EC2914F0A6005D6B31 /* ThirdLineViewPresenter.swift */; };
 		94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */; };
 		94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */; };
+		94B669F4291502DF005D6B31 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 94B669F3291502DF005D6B31 /* SnapKit */; };
+		94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F629152279005D6B31 /* ThirdLineTableViewCell.swift */; };
+		94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F929152BC5005D6B31 /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,8 @@
 		94B669EC2914F0A6005D6B31 /* ThirdLineViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdLineViewPresenter.swift; sourceTree = "<group>"; };
 		94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulRouter.swift; sourceTree = "<group>"; };
 		94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerRouter.swift; sourceTree = "<group>"; };
+		94B669F629152279005D6B31 /* ThirdLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdLineTableViewCell.swift; sourceTree = "<group>"; };
+		94B669F929152BC5005D6B31 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B669F4291502DF005D6B31 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,16 +72,17 @@
 		94B669CC2914EC25005D6B31 /* MinskMetroSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				94B669F829152B99005D6B31 /* Extensions */,
 				94B669CD2914EC25005D6B31 /* AppDelegate.swift */,
 				94B669CF2914EC25005D6B31 /* SceneDelegate.swift */,
 				94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */,
 				94B669E12914EE31005D6B31 /* TabBarViewController.swift */,
 				94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */,
+				94B669E62914F030005D6B31 /* ThirdLineModule */,
 				94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */,
 				94B669D62914EC29005D6B31 /* Assets.xcassets */,
 				94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */,
 				94B669DB2914EC29005D6B31 /* Info.plist */,
-				94B669E62914F030005D6B31 /* ThirdLineModule */,
 			);
 			path = MinskMetroSchedule;
 			sourceTree = "<group>";
@@ -91,6 +98,7 @@
 		94B669E62914F030005D6B31 /* ThirdLineModule */ = {
 			isa = PBXGroup;
 			children = (
+				94B669F529152250005D6B31 /* TableViewCell */,
 				94B669E92914F059005D6B31 /* Router */,
 				94B669E82914F04C005D6B31 /* Presenter */,
 				94B669E52914F013005D6B31 /* View */,
@@ -114,6 +122,22 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		94B669F529152250005D6B31 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				94B669F629152279005D6B31 /* ThirdLineTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		94B669F829152B99005D6B31 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				94B669F929152BC5005D6B31 /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -130,6 +154,9 @@
 			dependencies = (
 			);
 			name = MinskMetroSchedule;
+			packageProductDependencies = (
+				94B669F3291502DF005D6B31 /* SnapKit */,
+			);
 			productName = MinskMetroSchedule;
 			productReference = 94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +185,9 @@
 				Base,
 			);
 			mainGroup = 94B669C12914EC25005D6B31;
+			packageReferences = (
+				94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 94B669CB2914EC25005D6B31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,9 +214,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
 				94B669EB2914F08D005D6B31 /* ThirdLineRouter.swift in Sources */,
 				94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */,
 				94B669E22914EE31005D6B31 /* TabBarViewController.swift in Sources */,
+				94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */,
 				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
 				94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */,
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
@@ -400,6 +432,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		94B669F3291502DF005D6B31 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94B669C22914EC25005D6B31 /* Project object */;
 }
