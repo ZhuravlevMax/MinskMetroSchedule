@@ -9,19 +9,31 @@
 /* Begin PBXBuildFile section */
 		94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CD2914EC25005D6B31 /* AppDelegate.swift */; };
 		94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CF2914EC25005D6B31 /* SceneDelegate.swift */; };
-		94B669D22914EC25005D6B31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669D12914EC25005D6B31 /* ViewController.swift */; };
+		94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669D12914EC25005D6B31 /* ThirdLineViewController.swift */; };
 		94B669D72914EC29005D6B31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B669D62914EC29005D6B31 /* Assets.xcassets */; };
 		94B669DA2914EC29005D6B31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */; };
+		94B669E22914EE31005D6B31 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669E12914EE31005D6B31 /* TabBarViewController.swift */; };
+		94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */; };
+		94B669EB2914F08D005D6B31 /* ThirdLineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EA2914F08D005D6B31 /* ThirdLineRouter.swift */; };
+		94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EC2914F0A6005D6B31 /* ThirdLineViewPresenter.swift */; };
+		94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */; };
+		94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B669CD2914EC25005D6B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94B669CF2914EC25005D6B31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		94B669D12914EC25005D6B31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		94B669D12914EC25005D6B31 /* ThirdLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdLineViewController.swift; sourceTree = "<group>"; };
 		94B669D62914EC29005D6B31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94B669D92914EC29005D6B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94B669DB2914EC29005D6B31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94B669E12914EE31005D6B31 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		94B669EA2914F08D005D6B31 /* ThirdLineRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdLineRouter.swift; sourceTree = "<group>"; };
+		94B669EC2914F0A6005D6B31 /* ThirdLineViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdLineViewPresenter.swift; sourceTree = "<group>"; };
+		94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulRouter.swift; sourceTree = "<group>"; };
+		94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +68,50 @@
 			children = (
 				94B669CD2914EC25005D6B31 /* AppDelegate.swift */,
 				94B669CF2914EC25005D6B31 /* SceneDelegate.swift */,
-				94B669D12914EC25005D6B31 /* ViewController.swift */,
+				94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */,
+				94B669E12914EE31005D6B31 /* TabBarViewController.swift */,
+				94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */,
+				94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */,
 				94B669D62914EC29005D6B31 /* Assets.xcassets */,
 				94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */,
 				94B669DB2914EC29005D6B31 /* Info.plist */,
+				94B669E62914F030005D6B31 /* ThirdLineModule */,
 			);
 			path = MinskMetroSchedule;
+			sourceTree = "<group>";
+		};
+		94B669E52914F013005D6B31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94B669D12914EC25005D6B31 /* ThirdLineViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94B669E62914F030005D6B31 /* ThirdLineModule */ = {
+			isa = PBXGroup;
+			children = (
+				94B669E92914F059005D6B31 /* Router */,
+				94B669E82914F04C005D6B31 /* Presenter */,
+				94B669E52914F013005D6B31 /* View */,
+			);
+			path = ThirdLineModule;
+			sourceTree = "<group>";
+		};
+		94B669E82914F04C005D6B31 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				94B669EC2914F0A6005D6B31 /* ThirdLineViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		94B669E92914F059005D6B31 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				94B669EA2914F08D005D6B31 /* ThirdLineRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +184,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94B669D22914EC25005D6B31 /* ViewController.swift in Sources */,
+				94B669EB2914F08D005D6B31 /* ThirdLineRouter.swift in Sources */,
+				94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */,
+				94B669E22914EE31005D6B31 /* TabBarViewController.swift in Sources */,
+				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
 				94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */,
+				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
+				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
+				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,
 				94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

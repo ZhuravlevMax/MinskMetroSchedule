@@ -7,7 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol ThirdLineViewProtocol: AnyObject {
+    //ViewController methods here
+}
+
+class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
+    
+    var presenter: ThirdLineViewPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
