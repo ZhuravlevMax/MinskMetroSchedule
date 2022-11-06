@@ -44,7 +44,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     private lazy var nextTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Следующий: "
+        label.text = "Следующий поезд в: "
         return label
     }()
     
@@ -56,7 +56,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     private lazy var InTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Через"
+        label.text = "Через: "
         return label
     }()
     
@@ -103,6 +103,19 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
+        
+        nextTimeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.left.equalToSuperview().inset(10)
+            $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
+        }
+        
+        InTimeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.left.equalToSuperview().inset(10)
+            $0.top.equalTo(nextTimeLabel.snp.bottom).offset(10)
+        }
+        
         super.updateViewConstraints()
     }
     

@@ -25,7 +25,10 @@ class ThirdLineRouter: ThirdLineRouterProtocol {
     
     func openTimeVC(fromStationName: String,
                     toStationName: String) {
-        guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName, toStationName: toStationName), let timeVC = viewController?.navigationController else {return}
+        guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName,
+                                                         toStationName: toStationName),
+              let timeVC = viewController?.navigationController else {return}
+        
         timeVC.pushViewController(timeModule, animated: true)
     }
 }
