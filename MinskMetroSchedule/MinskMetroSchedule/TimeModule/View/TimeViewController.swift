@@ -11,7 +11,8 @@ import SnapKit
 protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
-    func setItem(nameLabel: String)
+    func setItems(fromStationName: String,
+                  toStationName: String)
 
 }
 
@@ -20,13 +21,15 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     var presenter: TimeViewPresenter?
     
     //MARK: - Create items
-    private lazy var fromStation: UILabel = {
+    private lazy var fromStationLabel: UILabel = {
         let label = UILabel()
         label.text = "from"
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
-    private lazy var toStation: UILabel = {
+    private lazy var toStationLabel: UILabel = {
         let label = UILabel()
         label.text = "to"
         return label
@@ -39,25 +42,25 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         return imageView
     }()
     
-    private lazy var nextTime: UILabel = {
+    private lazy var nextTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Следующий: "
         return label
     }()
     
-    private lazy var nextTimeValue: UILabel = {
+    private lazy var nextTimeValueLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00"
         return label
     }()
     
-    private lazy var InTime: UILabel = {
+    private lazy var InTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Через"
         return label
     }()
     
-    private lazy var InTimeValue: UILabel = {
+    private lazy var InTimeValueLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00"
         return label
@@ -69,13 +72,13 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         super.viewDidLoad()
         
         //MARK: - Добавление элементов на экран
-        view.addSubview(fromStation)
-        view.addSubview(toStation)
+        view.addSubview(fromStationLabel)
+        view.addSubview(toStationLabel)
         view.addSubview(arrowImageView)
-        view.addSubview(nextTime)
-        view.addSubview(nextTimeValue)
-        view.addSubview(InTime)
-        view.addSubview(InTimeValue)
+        view.addSubview(nextTimeLabel)
+        view.addSubview(nextTimeValueLabel)
+        view.addSubview(InTimeLabel)
+        view.addSubview(InTimeValueLabel)
         
         view.backgroundColor = .white
 
@@ -84,15 +87,15 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     //MARK: - Работа с констрейнтами
     override func updateViewConstraints() {
         
-        fromStation.snp.makeConstraints {
+        fromStationLabel.snp.makeConstraints {
             $0.left.equalToSuperview().inset(10)
-            $0.width.equalTo(view.frame.width * 0.3)
+            $0.width.equalTo(view.frame.width * 0.4)
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         
-        toStation.snp.makeConstraints {
+        toStationLabel.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
-            $0.width.equalTo(view.frame.width * 0.3)
+            $0.width.equalTo(view.frame.width * 0.4)
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         
@@ -103,8 +106,10 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         super.updateViewConstraints()
     }
     
-    func setItem(nameLabel: String) {
-        fromStation.text = nameLabel
+    func setItems(fromStationName: String,
+                  toStationName: String) {
+        fromStationLabel.text = fromStationName
+        toStationLabel.text = toStationName
     }
 
 }
