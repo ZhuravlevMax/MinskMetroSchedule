@@ -10,6 +10,7 @@
 		22EC59AD0939A6ABB3C00C40 /* Pods_MinskMetroSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */; };
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
+		9424EE8A2919877900C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE892919877900C52F42 /* GoogleService-Info.plist */; };
 		94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CD2914EC25005D6B31 /* AppDelegate.swift */; };
 		94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CF2914EC25005D6B31 /* SceneDelegate.swift */; };
 		94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669D12914EC25005D6B31 /* ThirdLineViewController.swift */; };
@@ -32,6 +33,7 @@
 		5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinskMetroSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
+		9424EE892919877900C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B669CD2914EC25005D6B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94B669CF2914EC25005D6B31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				94B669D62914EC29005D6B31 /* Assets.xcassets */,
 				94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */,
 				94B669DB2914EC29005D6B31 /* Info.plist */,
+				9424EE892919877900C52F42 /* GoogleService-Info.plist */,
 			);
 			path = MinskMetroSchedule;
 			sourceTree = "<group>";
@@ -181,7 +184,6 @@
 				37978E185FC32BFABA356FCD /* Pods-MinskMetroSchedule.debug.xcconfig */,
 				2664B21E6AD2B2AC1F828DE1 /* Pods-MinskMetroSchedule.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,7 +245,7 @@
 			);
 			mainGroup = 94B669C12914EC25005D6B31;
 			packageReferences = (
-				94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 94B669CB2914EC25005D6B31 /* Products */;
 			projectDirPath = "";
@@ -261,6 +263,7 @@
 			files = (
 				94B669DA2914EC29005D6B31 /* LaunchScreen.storyboard in Resources */,
 				94B669D72914EC29005D6B31 /* Assets.xcassets in Resources */,
+				9424EE8A2919877900C52F42 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +540,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -550,7 +553,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		94B669F3291502DF005D6B31 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
