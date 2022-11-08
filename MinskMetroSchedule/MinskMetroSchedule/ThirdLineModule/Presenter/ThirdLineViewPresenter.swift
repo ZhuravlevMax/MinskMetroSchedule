@@ -12,13 +12,17 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
     
     var thirdViewControllerBackgroundColor: UIColor {get}
     func openTimeVC(fromStationName: String,
-                    toStationName: String)
+                    toStationName: String,
+                    stationName: String)
     
 }
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
-    var stationNamesArray = ["Ковальская слобода", "Вокзальная", "Пл.Франтишка Богушевича", "Юбилейная площадь"]
+    var stationNamesArray = [StationNamesEnum.kovalskaya.rawValue,
+                             StationNamesEnum.vokzalnaya.rawValue,
+                             StationNamesEnum.bogushevicha.rawValue,
+                             StationNamesEnum.ubileynaya.rawValue]
     var thirdViewControllerBackgroundColor: UIColor = .white
     
     weak var view: ThirdLineViewProtocol?
@@ -52,9 +56,36 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func openTimeVC(fromStationName: String,
-                    toStationName: String) {
-        router.openTimeVC(fromStationName: fromStationName,
-                          toStationName: toStationName )
+                    toStationName: String,
+                    stationName: String) {
+        
+        FireBaseManager.shared.getMultipleAll(collection: "\(FireBaseCollectionsEnum.stations)") { [weak self] models in
+            guard let self else {return}
+            let model = models.first { model in
+               let modelName = FireBaseManager.shared.getModelName(model: model)
+                return modelName == stationName
+            }
+            
+            switch toStationName {
+            case directionsEnum.toKovalskaya.rawValue:
+                guard let model, let nextTime = FireBaseManager.shared.getScheduleToKovalskaya(model: model).first else {return}
+                let nextTimeValue = "\(nextTime)"
+                self.router.openTimeVC(fromStationName: fromStationName,
+                                  toStationName: toStationName, nextTimeValue: nextTimeValue )
+                
+            case directionsEnum.toUbileynaya.rawValue:
+                guard let model, let nextTime = FireBaseManager.shared.getScheduleToUbileynya(model: model).first else {return}
+                let nextTimeValue = "\(nextTime)"
+                self.router.openTimeVC(fromStationName: fromStationName,
+                                  toStationName: toStationName, nextTimeValue: nextTimeValue )
+            default:
+                return
+            }
+            
+            
+        }
+        
+        
     }
     
 }

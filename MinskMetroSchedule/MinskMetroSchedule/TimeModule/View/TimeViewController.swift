@@ -12,7 +12,8 @@ protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
     func setItems(fromStationName: String,
-                  toStationName: String)
+                  toStationName: String,
+                  nextTimeValue: String)
 
 }
 
@@ -105,8 +106,12 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         }
         
         nextTimeLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().inset(10)
+            $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
+        }
+        
+        nextTimeValueLabel.snp.makeConstraints {
+            $0.left.equalTo(nextTimeLabel.snp.right).offset(10)
             $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
         }
         
@@ -116,13 +121,17 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.top.equalTo(nextTimeLabel.snp.bottom).offset(10)
         }
         
+        
+        
         super.updateViewConstraints()
     }
     
     func setItems(fromStationName: String,
-                  toStationName: String) {
+                  toStationName: String,
+                  nextTimeValue: String) {
         fromStationLabel.text = fromStationName
         toStationLabel.text = toStationName
+        nextTimeValueLabel.text = nextTimeValue
         
     }
 

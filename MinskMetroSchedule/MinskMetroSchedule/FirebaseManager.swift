@@ -13,10 +13,13 @@ import FirebaseDatabase
 import FirebaseFirestore
 
 protocol FirebaseManagerProtocol {
-    func getSchedule()
+    func getMultipleAll(collection: String, completion: @escaping ([QueryDocumentSnapshot]) -> Void)
+    func getScheduleToKovalskaya(model: QueryDocumentSnapshot) -> [Int]
+    func getScheduleToUbileynya(model: QueryDocumentSnapshot) -> [Int]
+    func getModelName(model: QueryDocumentSnapshot) -> String
 }
 
-class FireBaseManager {
+class FireBaseManager: FirebaseManagerProtocol {
     
     //MARK: - Объявление переменных
     static let shared = FireBaseManager(settings: FirestoreSettings())
@@ -42,17 +45,43 @@ class FireBaseManager {
     }
     
     //MARK: - метод для получения массива ссылок объекта
-    func getSchedule(model: QueryDocumentSnapshot) -> [Int] {
+    func getScheduleToUbileynya(model: QueryDocumentSnapshot) -> [Int] {
         let modelData = model.data()
         
         let imagesDict = modelData.first { key, value in
-            return key.contains("\(FireBaseFieldsEnum.timeSheet)")
+            return key.contains("\(FireBaseFieldsEnum.toUbileynaya)")
         }
         
         if let imagesDictUnwrapped = imagesDict, let imageUrls = imagesDictUnwrapped.value as? [Int] {
             return imageUrls
         }
         return [0]
+    }
+    
+    //MARK: - метод для получения массива ссылок объекта
+    func getScheduleToKovalskaya(model: QueryDocumentSnapshot) -> [Int] {
+        let modelData = model.data()
+        
+        let imagesDict = modelData.first { key, value in
+            return key.contains("\(FireBaseFieldsEnum.toKovalskaya)")
+        }
+        
+        if let imagesDictUnwrapped = imagesDict, let imageUrls = imagesDictUnwrapped.value as? [Int] {
+            return imageUrls
+        }
+        return [0]
+    }
+    
+    //MARK: - метод для получения названия станции
+    func getModelName(model: QueryDocumentSnapshot) -> String {
+        let modelData = model.data()
+        let nameDict = modelData.first { key, value in
+            return key.contains("\(FireBaseFieldsEnum.stationName)")
+        }
+        if let nameDictUnwrapped = nameDict, let name = nameDictUnwrapped.value as? String {
+            return name
+        }
+        return ""
     }
 }
 

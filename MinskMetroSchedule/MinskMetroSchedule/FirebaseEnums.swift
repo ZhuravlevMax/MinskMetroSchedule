@@ -8,9 +8,13 @@
 import Foundation
 
 enum FireBaseCollectionsEnum {
-    case timeSheet
+    case stations
 }
 
 enum FireBaseFieldsEnum {
-    case timeSheet
+    case stationName
+    case toKovalskaya
+    case toUbileynaya
 }
+
+

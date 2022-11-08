@@ -11,6 +11,7 @@
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
+		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
 		94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CD2914EC25005D6B31 /* AppDelegate.swift */; };
 		94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CF2914EC25005D6B31 /* SceneDelegate.swift */; };
 		94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669D12914EC25005D6B31 /* ThirdLineViewController.swift */; };
@@ -36,6 +37,7 @@
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B669CD2914EC25005D6B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94B669CF2914EC25005D6B31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */,
 				94FBA6CB29199AF300510979 /* FirebaseManager.swift */,
 				94FBA6CD291A257000510979 /* FirebaseEnums.swift */,
+				947FDDA5291A8473007DE286 /* StationNamesEnum.swift */,
 				94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */,
 				94B669E12914EE31005D6B31 /* TabBarViewController.swift */,
 				94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */,
@@ -334,6 +337,7 @@
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
 				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
 				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,
+				947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */,
 				94FBA6CE291A257100510979 /* FirebaseEnums.swift in Sources */,
 				94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */,
 				9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */,

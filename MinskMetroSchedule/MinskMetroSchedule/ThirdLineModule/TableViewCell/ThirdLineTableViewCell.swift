@@ -148,16 +148,16 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text else {return}
-        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName)
+        guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text, let stationName = stationNameLabel.text else {return}
+        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationName)
         
         print("На Ковальскую")
     }
     
     //MARK: - Action for toUbileinayaStationButton
     @objc private func toUbileinayaStationButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = toUbileinayaStationButton.titleLabel?.text else {return}
-        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName)
+        guard let fromStationName = stationNameLabel.text, let toStationName = toUbileinayaStationButton.titleLabel?.text, let stationName = stationNameLabel.text else {return}
+        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationName)
         print("На Юбилейную")
     }
     
