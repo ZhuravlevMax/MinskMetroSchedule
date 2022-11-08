@@ -150,6 +150,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     @objc private func toKovalskayaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text else {return}
         thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName)
+        
         print("На Ковальскую")
     }
     

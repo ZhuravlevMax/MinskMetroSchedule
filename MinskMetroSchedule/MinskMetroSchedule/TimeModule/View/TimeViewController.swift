@@ -123,6 +123,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
                   toStationName: String) {
         fromStationLabel.text = fromStationName
         toStationLabel.text = toStationName
+        
     }
 
 }
