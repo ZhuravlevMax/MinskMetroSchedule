@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22EC59AD0939A6ABB3C00C40 /* Pods_MinskMetroSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */; };
+		9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5C4291C401A008D4D33 /* Int+Extension.swift */; };
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
@@ -34,6 +35,7 @@
 		2664B21E6AD2B2AC1F828DE1 /* Pods-MinskMetroSchedule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinskMetroSchedule.release.xcconfig"; path = "Target Support Files/Pods-MinskMetroSchedule/Pods-MinskMetroSchedule.release.xcconfig"; sourceTree = "<group>"; };
 		37978E185FC32BFABA356FCD /* Pods-MinskMetroSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinskMetroSchedule.debug.xcconfig"; path = "Target Support Files/Pods-MinskMetroSchedule/Pods-MinskMetroSchedule.debug.xcconfig"; sourceTree = "<group>"; };
 		5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinskMetroSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9422C5C4291C401A008D4D33 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -70,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9422C5C3291BE06C008D4D33 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				94FBA6CD291A257000510979 /* FirebaseEnums.swift */,
+				947FDDA5291A8473007DE286 /* StationNamesEnum.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		9424EE82291583E300C52F42 /* TimeModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,11 +132,10 @@
 				94B669CF2914EC25005D6B31 /* SceneDelegate.swift */,
 				94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */,
 				94FBA6CB29199AF300510979 /* FirebaseManager.swift */,
-				94FBA6CD291A257000510979 /* FirebaseEnums.swift */,
-				947FDDA5291A8473007DE286 /* StationNamesEnum.swift */,
 				94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */,
 				94B669E12914EE31005D6B31 /* TabBarViewController.swift */,
 				94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */,
+				9422C5C3291BE06C008D4D33 /* Enums */,
 				94B669E62914F030005D6B31 /* ThirdLineModule */,
 				9424EE82291583E300C52F42 /* TimeModule */,
 				94B669D62914EC29005D6B31 /* Assets.xcassets */,
@@ -183,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				94B669F929152BC5005D6B31 /* UIView+Extension.swift */,
+				9422C5C4291C401A008D4D33 /* Int+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -328,6 +339,7 @@
 				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
 				9424EE862915853000C52F42 /* TimeViewController.swift in Sources */,
 				94FBA6CC29199AF300510979 /* FirebaseManager.swift in Sources */,
+				9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */,
 				94B669EB2914F08D005D6B31 /* ThirdLineRouter.swift in Sources */,
 				94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */,
 				94B669E22914EE31005D6B31 /* TabBarViewController.swift in Sources */,

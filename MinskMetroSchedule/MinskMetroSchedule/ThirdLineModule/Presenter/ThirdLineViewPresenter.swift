@@ -28,12 +28,14 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     weak var view: ThirdLineViewProtocol?
     private(set) var router: ThirdLineRouterProtocol
     
-    required init(view: ThirdLineViewProtocol, router: ThirdLineRouterProtocol) {
+    required init(view: ThirdLineViewProtocol,
+                  router: ThirdLineRouterProtocol) {
         self.view = view
         self.router = router
     }
     
-    func configureThirdLineTableViewCell(indexPath: IndexPath, cell: ThirdLineTableViewCellProtocol) {
+    func configureThirdLineTableViewCell(indexPath: IndexPath,
+                                         cell: ThirdLineTableViewCellProtocol) {
         
         guard let stationName = StationNamesNumEnum(rawValue: indexPath.row) else {return}
         
@@ -66,9 +68,25 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                     stationName: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName) else {return}
         let directionString = "\(direction)"
-        FireBaseManager.shared.getTimeSheet(stationName: stationName, direction: directionString) { timeSheet in
-            guard let timeSheetFirst = timeSheet.first else {return}
-            self.router.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, nextTimeValue: "\(timeSheetFirst)" )
+        FireBaseManager.shared.getTimeSheet(stationName: stationName,
+                                            direction: directionString) { timeSheet in
+
+            let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+            
+            var nextTime = timeSheet.first { $0 > currentTimeFromStartDay }
+            
+            guard var nextTime else {return}
+            
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.hour, .minute, .second]
+            formatter.unitsStyle = .positional
+            
+            let formattedString = formatter.string(from: TimeInterval(nextTime))
+            guard let formattedString else {return}
+            
+            self.router.openTimeVC(fromStationName: fromStationName,
+                                   toStationName: toStationName,
+                                   nextTimeValue: formattedString )
         }
         
         
