@@ -33,7 +33,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     private lazy var toKovalskayaStationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green
-        button.setTitle("На Ковальскую", for: .normal)
+        button.setTitle("\(FireBaseFieldsEnum.toKovalskayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
@@ -48,7 +48,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     private lazy var toUbileinayaStationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green
-        button.setTitle("На Юбилейную", for: .normal)
+        button.setTitle("\(FireBaseFieldsEnum.toUbileynayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)

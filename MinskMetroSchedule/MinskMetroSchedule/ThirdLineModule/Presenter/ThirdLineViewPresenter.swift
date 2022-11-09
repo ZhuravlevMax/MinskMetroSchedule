@@ -64,34 +64,9 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     stationName: String) {
-        
-//        FireBaseManager.shared.getMultipleAll(collection: "\(FireBaseCollectionsEnum.stations)") { [weak self] models in
-//            guard let self else {return}
-//            let model = models.first { model in
-//               let modelName = FireBaseManager.shared.getModelName(model: model)
-//                return modelName == stationName
-//            }
-//
-//            switch toStationName {
-//            case directionsEnum.toKovalskaya.rawValue:
-//                guard let model, let nextTime = FireBaseManager.shared.getScheduleToKovalskaya(model: model).first else {return}
-//                let nextTimeValue = "\(nextTime)"
-//                self.router.openTimeVC(fromStationName: fromStationName,
-//                                  toStationName: toStationName, nextTimeValue: nextTimeValue )
-//
-//            case directionsEnum.toUbileynaya.rawValue:
-//                guard let model, let nextTime = FireBaseManager.shared.getScheduleToUbileynya(model: model).first else {return}
-//                let nextTimeValue = "\(nextTime)"
-//                self.router.openTimeVC(fromStationName: fromStationName,
-//                                  toStationName: toStationName, nextTimeValue: nextTimeValue )
-//            default:
-//                return
-//            }
-//
-//
-//        }
-        
-        FireBaseManager.shared.getTimeSheet(stationName: stationName) { timeSheet in
+        guard let direction = FireBaseFieldsEnum(rawValue: toStationName) else {return}
+        let directionString = "\(direction)"
+        FireBaseManager.shared.getTimeSheet(stationName: stationName, direction: directionString) { timeSheet in
             guard let timeSheetFirst = timeSheet.first else {return}
             self.router.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, nextTimeValue: "\(timeSheetFirst)" )
         }

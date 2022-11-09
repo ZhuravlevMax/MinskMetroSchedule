@@ -11,10 +11,10 @@ enum FireBaseCollectionsEnum {
     case stations
 }
 
-enum FireBaseFieldsEnum {
+enum FireBaseFieldsEnum: String {
     case stationName
-    case toKovalskaya
-    case toUbileynaya
+    case toKovalskayaTimeSheet = "На Ковальскую"
+    case toUbileynayaTimeSheet = "На Юбилейную"
 }
 
 

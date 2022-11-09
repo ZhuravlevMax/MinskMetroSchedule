@@ -14,11 +14,6 @@ enum StationNamesEnum: String {
     case ubileynaya = "Юбилейная площадь"
 }
 
-enum directionsEnum: String {
-    case toKovalskaya = "На Ковальскую"
-    case toUbileynaya = "На Юбилейную"
-}
-
 enum StationNamesNumEnum: Int {
     case kovalskaya = 0
     case vokzalnaya
