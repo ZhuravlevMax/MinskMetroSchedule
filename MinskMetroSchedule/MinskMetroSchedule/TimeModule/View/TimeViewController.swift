@@ -14,6 +14,7 @@ protocol TimeViewControllerProtocol: AnyObject {
     func setItems(fromStationName: String,
                   toStationName: String,
                   nextTimeValue: String)
+    func setNextTimeLabel(nextTime: String)
 
 }
 
@@ -51,7 +52,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     private lazy var nextTimeValueLabel: UILabel = {
         let label = UILabel()
-        label.text = "00:00"
+        label.text = "--:--"
         return label
     }()
     
@@ -82,6 +83,9 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.addSubview(InTimeValueLabel)
         
         view.backgroundColor = .white
+        
+        guard let toStationLabelText = toStationLabel.text, let stationName = fromStationLabel.text else {return}
+        presenter?.setNextTime(toStationName: toStationLabelText, stationName: stationName)
 
     }
     
@@ -133,6 +137,10 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         toStationLabel.text = toStationName
         nextTimeValueLabel.text = nextTimeValue
         
+    }
+    
+    func setNextTimeLabel(nextTime: String) {
+        nextTimeValueLabel.text = nextTime
     }
 
 }
