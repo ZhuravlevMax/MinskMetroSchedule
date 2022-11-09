@@ -10,7 +10,8 @@ import UIKit
 protocol ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
-                       toUbileinayaStationButtonIsHidden: Bool)
+                       toUbileinayaStationButtonIsHidden: Bool,
+                       stationNameValue: String)
     var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol? {get set}
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol)
@@ -20,6 +21,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     static let key = "ThirdLineTableViewCell"
     var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol?
+    var stationName: String?
     
     //MARK: - Create items
     private lazy var stationNameLabel: UILabel = {
@@ -106,10 +108,12 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
-                       toUbileinayaStationButtonIsHidden: Bool) {
+                       toUbileinayaStationButtonIsHidden: Bool,
+                       stationNameValue: String) {
         stationNameLabel.text = stationNameText
         toKovalskayaStationButton.isHidden = toKovalskayaStationButtonIsHidden
         toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
+        stationName = stationNameValue
     }
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol) {
@@ -148,21 +152,22 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text, let stationName = stationNameLabel.text else {return}
-        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationName)
+        guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped)
         
         print("На Ковальскую")
     }
     
     //MARK: - Action for toUbileinayaStationButton
     @objc private func toUbileinayaStationButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = toUbileinayaStationButton.titleLabel?.text, let stationName = stationNameLabel.text else {return}
-        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationName)
+        guard let fromStationName = stationNameLabel.text, let toStationName = toUbileinayaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped)
         print("На Юбилейную")
     }
     
     //MARK: - Action for showFullScheduleButton
     @objc private func showFullScheduleButtonPressed() {
+        //FireBaseManager.shared.getStationName()
         print("Полное расписание")
     }
 }
