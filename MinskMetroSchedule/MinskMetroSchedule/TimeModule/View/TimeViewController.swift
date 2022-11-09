@@ -12,8 +12,7 @@ protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
     func setItems(fromStationName: String,
-                  toStationName: String,
-                  nextTimeValue: String)
+                  toStationName: String)
     func setNextTimeLabel(nextTime: String)
 
 }
@@ -84,8 +83,8 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         
         view.backgroundColor = .white
         
-        guard let toStationLabelText = toStationLabel.text, let stationName = fromStationLabel.text else {return}
-        presenter?.setNextTime(toStationName: toStationLabelText, stationName: stationName)
+        guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
+        presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
 
     }
     
@@ -131,11 +130,9 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     }
     
     func setItems(fromStationName: String,
-                  toStationName: String,
-                  nextTimeValue: String) {
+                  toStationName: String) {
         fromStationLabel.text = fromStationName
         toStationLabel.text = toStationName
-        nextTimeValueLabel.text = nextTimeValue
         
     }
     

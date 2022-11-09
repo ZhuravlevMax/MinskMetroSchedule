@@ -27,7 +27,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func setNextTime(toStationName: String, stationName: String ) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName) else {return}
         let directionString = "\(direction)"
-        
+
         FireBaseManager.shared.getTimeSheet(stationName: stationName,
                                             direction: directionString) { [weak self] timeSheet in
 

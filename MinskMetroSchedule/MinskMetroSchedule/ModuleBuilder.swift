@@ -13,8 +13,7 @@ protocol BuilderProtocol {
 //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
-                          toStationName: String,
-                          nextTimeValue: String) -> UIViewController
+                          toStationName: String) -> UIViewController
 }
 
 class ModuleBuilder: BuilderProtocol {
@@ -29,12 +28,10 @@ class ModuleBuilder: BuilderProtocol {
 //    }
     
     func createTimeModule(fromStationName: String,
-                          toStationName: String,
-                          nextTimeValue: String) -> UIViewController {
+                          toStationName: String) -> UIViewController {
         let view = TimeViewController()
         view.setItems(fromStationName: fromStationName,
-                      toStationName: toStationName,
-                      nextTimeValue: nextTimeValue)
+                      toStationName: toStationName)
         let presenter = TimeViewPresenter(view: view)
         view.presenter = presenter
         return view
