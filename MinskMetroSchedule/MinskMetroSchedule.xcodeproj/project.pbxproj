@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		22EC59AD0939A6ABB3C00C40 /* Pods_MinskMetroSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */; };
 		9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5C4291C401A008D4D33 /* Int+Extension.swift */; };
+		9422C5C7291D0A78008D4D33 /* UserDefaultsKeysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5C6291D0A78008D4D33 /* UserDefaultsKeysEnum.swift */; };
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
@@ -36,6 +37,7 @@
 		37978E185FC32BFABA356FCD /* Pods-MinskMetroSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinskMetroSchedule.debug.xcconfig"; path = "Target Support Files/Pods-MinskMetroSchedule/Pods-MinskMetroSchedule.debug.xcconfig"; sourceTree = "<group>"; };
 		5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinskMetroSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9422C5C4291C401A008D4D33 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		9422C5C6291D0A78008D4D33 /* UserDefaultsKeysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeysEnum.swift; sourceTree = "<group>"; };
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				94FBA6CD291A257000510979 /* FirebaseEnums.swift */,
 				947FDDA5291A8473007DE286 /* StationNamesEnum.swift */,
+				9422C5C6291D0A78008D4D33 /* UserDefaultsKeysEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,
 				947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */,
 				94FBA6CE291A257100510979 /* FirebaseEnums.swift in Sources */,
+				9422C5C7291D0A78008D4D33 /* UserDefaultsKeysEnum.swift in Sources */,
 				94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */,
 				9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */,
 			);
