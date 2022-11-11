@@ -14,6 +14,8 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     stationName: String)
+    func configureThirdLineTableViewCell(indexPath: IndexPath,
+                                         cell: ThirdLineTableViewCellProtocol)
     
 }
 

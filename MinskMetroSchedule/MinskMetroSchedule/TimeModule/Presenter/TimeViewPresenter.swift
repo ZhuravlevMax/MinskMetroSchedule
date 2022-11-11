@@ -11,6 +11,7 @@ import UIKit
 protocol TimeViewPresenterProtocol: AnyObject {
     
     var timeViewControllerBackgroundColor: UIColor {get}
+    func configureTimeSheetTableViewCell(indexPath: IndexPath, cell: TimeSheetTableViewCellProtocol)
     
 }
 
@@ -19,6 +20,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     var timeViewControllerBackgroundColor: UIColor = .white
     
     weak var view: TimeViewControllerProtocol?
+    
     
     required init(view: TimeViewControllerProtocol) {
         self.view = view
@@ -50,5 +52,8 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
     }
     
+    func configureTimeSheetTableViewCell(indexPath: IndexPath, cell: TimeSheetTableViewCellProtocol) {
+        
+    }
     
 }

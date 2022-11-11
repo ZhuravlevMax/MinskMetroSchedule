@@ -10,6 +10,7 @@
 		22EC59AD0939A6ABB3C00C40 /* Pods_MinskMetroSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */; };
 		9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5C4291C401A008D4D33 /* Int+Extension.swift */; };
 		9422C5C7291D0A78008D4D33 /* UserDefaultsKeysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5C6291D0A78008D4D33 /* UserDefaultsKeysEnum.swift */; };
+		9422C5CC291E568F008D4D33 /* TimeSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5CB291E568F008D4D33 /* TimeSheetTableViewCell.swift */; };
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
@@ -38,6 +39,7 @@
 		5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinskMetroSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9422C5C4291C401A008D4D33 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		9422C5C6291D0A78008D4D33 /* UserDefaultsKeysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeysEnum.swift; sourceTree = "<group>"; };
+		9422C5CB291E568F008D4D33 /* TimeSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSheetTableViewCell.swift; sourceTree = "<group>"; };
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -84,9 +86,18 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		9422C5C8291E423E008D4D33 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9422C5CB291E568F008D4D33 /* TimeSheetTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
 		9424EE82291583E300C52F42 /* TimeModule */ = {
 			isa = PBXGroup;
 			children = (
+				9422C5C8291E423E008D4D33 /* TableViewCell */,
 				9424EE842915840D00C52F42 /* View */,
 				9424EE83291583FB00C52F42 /* Presenter */,
 			);
@@ -349,6 +360,7 @@
 				94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */,
 				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
 				94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */,
+				9422C5CC291E568F008D4D33 /* TimeSheetTableViewCell.swift in Sources */,
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
 				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
 				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,
