@@ -27,6 +27,9 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         label.text = "from"
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 30,
+                                        weight: .bold)
+        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
         return label
     }()
     
@@ -43,15 +46,25 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         return imageView
     }()
     
+    private lazy var viewForNextTime: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private lazy var nextTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Следующий поезд в: "
+        label.font = UIFont.systemFont(ofSize: 20,
+                                        weight: .bold)
         return label
     }()
     
     private lazy var nextTimeValueLabel: UILabel = {
         let label = UILabel()
         label.text = "--:--"
+        label.font = UIFont.systemFont(ofSize: 40,
+                                        weight: .bold)
+        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
         return label
     }()
     
@@ -81,14 +94,16 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         navigationItem.compactAppearance = appearance
         navigationController?.navigationBar.tintColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
         
+        
         //MARK: - Добавление элементов на экран
         view.addSubview(fromStationLabel)
-        view.addSubview(toStationLabel)
-        view.addSubview(arrowImageView)
-        view.addSubview(nextTimeLabel)
-        view.addSubview(nextTimeValueLabel)
-        view.addSubview(InTimeLabel)
-        view.addSubview(InTimeValueLabel)
+        //view.addSubview(toStationLabel)
+        //view.addSubview(arrowImageView)
+        view.addSubview(viewForNextTime)
+        viewForNextTime.addSubview(nextTimeLabel)
+        viewForNextTime.addSubview(nextTimeValueLabel)
+//        view.addSubview(InTimeLabel)
+//        view.addSubview(InTimeValueLabel)
         
         view.backgroundColor = .white
         
@@ -101,37 +116,45 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     override func updateViewConstraints() {
         
         fromStationLabel.snp.makeConstraints {
-            $0.left.equalToSuperview().inset(10)
-            $0.width.equalTo(view.frame.width * 0.4)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
-        }
-        
-        toStationLabel.snp.makeConstraints {
-            $0.right.equalToSuperview().inset(10)
-            $0.width.equalTo(view.frame.width * 0.4)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
-        }
-        
-        arrowImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(view.frame.width * 0.9)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        
+//        toStationLabel.snp.makeConstraints {
+//            $0.right.equalToSuperview().inset(10)
+//            $0.width.equalTo(view.frame.width * 0.4)
+//            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+//        }
+        
+//        arrowImageView.snp.makeConstraints {
+//            $0.centerX.equalToSuperview()
+//            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+//        }
+        
+        viewForNextTime.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
+            $0.height.equalTo(60)
         }
         
         nextTimeLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().inset(10)
-            $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
+            //$0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
         }
         
         nextTimeValueLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
             $0.left.equalTo(nextTimeLabel.snp.right).offset(10)
-            $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
+           // $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
         }
         
-        InTimeLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.left.equalToSuperview().inset(10)
-            $0.top.equalTo(nextTimeLabel.snp.bottom).offset(10)
-        }
+//        InTimeLabel.snp.makeConstraints {
+//            $0.centerX.equalToSuperview()
+//            $0.left.equalToSuperview().inset(10)
+//            $0.top.equalTo(nextTimeLabel.snp.bottom).offset(10)
+//        }
         
         
         
