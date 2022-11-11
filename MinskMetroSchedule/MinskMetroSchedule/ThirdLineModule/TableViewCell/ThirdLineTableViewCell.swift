@@ -27,6 +27,8 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     private lazy var stationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
+        label.font = UIFont.systemFont(ofSize: 20,
+                                       weight: .bold)
         return label
     }()
     
@@ -87,7 +89,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         contentView.addSubview(stationNameLabel)
         contentView.addSubview(toKovalskayaStationButton)
         contentView.addSubview(toUbileinayaStationButton)
-        contentView.addSubview(showFullScheduleButton)
+        //contentView.addSubview(showFullScheduleButton)
         
         updateConstraints()
     }
@@ -132,20 +134,23 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
             $0.left.equalToSuperview().inset(10)
             $0.top.equalTo(stationNameLabel.snp.bottom).offset(10)
             $0.width.equalTo(contentView.frame.width * 0.5)
+            $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().inset(10)
         }
         
         toUbileinayaStationButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
             $0.top.equalTo(stationNameLabel.snp.bottom).offset(10)
             $0.width.equalTo(contentView.frame.width * 0.5)
+            $0.height.equalTo(50)
         }
         
-        showFullScheduleButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(toKovalskayaStationButton.snp.bottom).offset(20)
-            $0.bottom.equalToSuperview().inset(10)
-            $0.width.equalTo(contentView.frame.width * 0.5)
-        }
+//        showFullScheduleButton.snp.makeConstraints {
+//            $0.centerX.equalToSuperview()
+//            $0.top.equalTo(toKovalskayaStationButton.snp.bottom).offset(20)
+//            $0.bottom.equalToSuperview().inset(10)
+//            $0.width.equalTo(contentView.frame.width * 0.5)
+//        }
         
         super.updateConstraints()
     }

@@ -8,7 +8,8 @@
 import UIKit
 
 protocol TimeSheetTableViewCellProtocol {
-    func configureCell()
+    func configureCell(hourValue: String,
+                       minutesValue: String)
 }
 
 class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
@@ -19,6 +20,8 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
     private lazy var hourLabel: UILabel = {
         let label = UILabel()
         label.text = "Hour"
+        label.font = UIFont.systemFont(ofSize: 20,
+                                       weight: .bold)
         return label
     }()
     
@@ -53,8 +56,11 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
         // Configure the view for the selected state
     }
     
-    func configureCell() {
+    func configureCell(hourValue: String,
+                       minutesValue: String) {
         
+        hourLabel.text = hourValue
+        minutesLabel.text = minutesValue
     }
     
     //MARK: - Set constraints for items

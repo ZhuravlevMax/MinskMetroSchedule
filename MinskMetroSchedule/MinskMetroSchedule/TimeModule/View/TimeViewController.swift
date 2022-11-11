@@ -172,7 +172,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.top.equalTo(viewForNextTime.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
         
@@ -196,12 +196,15 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
 
 extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let toStationName = toStationLabel.text, let stationName = fromStationLabel.text else {return UITableViewCell()}
+        
         if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
-            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell)
+            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName)
             return cell
         }
         return UITableViewCell()
@@ -214,7 +217,7 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.text = "Следующее время поездов:"
+        label.text = "Полное расписание поездов:"
         label.font = UIFont.systemFont(ofSize: 16,
                                        weight: .bold)
         label.textColor = .black
