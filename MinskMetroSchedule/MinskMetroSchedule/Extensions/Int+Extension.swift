@@ -11,6 +11,7 @@ extension Int {
     func decoderDt(format: String) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.timeZone = .gmt
         dayTimePeriodFormatter.dateFormat = format
         return dayTimePeriodFormatter.string(from: date as Date)
     }

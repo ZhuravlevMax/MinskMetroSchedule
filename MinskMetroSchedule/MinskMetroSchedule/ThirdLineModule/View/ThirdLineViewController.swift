@@ -77,6 +77,7 @@ extension ThirdLineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = thirdLineTableView.dequeueReusableCell(withIdentifier: ThirdLineTableViewCell.key, for: indexPath) as? ThirdLineTableViewCell {
+            cell.selectionStyle = .none
             presenter?.configureThirdLineTableViewCell(indexPath: indexPath, cell: cell)
             return cell
         }
