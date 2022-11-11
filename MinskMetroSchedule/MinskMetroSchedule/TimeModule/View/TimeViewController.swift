@@ -72,6 +72,15 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 124/255, green: 252/255, blue: 0/255, alpha: 1)
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)]
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
+        navigationController?.navigationBar.tintColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
+        
         //MARK: - Добавление элементов на экран
         view.addSubview(fromStationLabel)
         view.addSubview(toStationLabel)
@@ -94,18 +103,18 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         fromStationLabel.snp.makeConstraints {
             $0.left.equalToSuperview().inset(10)
             $0.width.equalTo(view.frame.width * 0.4)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
         toStationLabel.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
             $0.width.equalTo(view.frame.width * 0.4)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
         arrowImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
         nextTimeLabel.snp.makeConstraints {
@@ -133,6 +142,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
                   toStationName: String) {
         fromStationLabel.text = fromStationName
         toStationLabel.text = toStationName
+        title = toStationName
         
     }
     
