@@ -171,7 +171,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(viewForNextTime.snp.bottom).offset(10)
+            $0.top.equalTo(viewForNextTime.snp.bottom)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
@@ -196,7 +196,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
 
 extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        20
+        21
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

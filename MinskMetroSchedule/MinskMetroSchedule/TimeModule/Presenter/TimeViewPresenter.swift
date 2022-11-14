@@ -64,26 +64,37 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
               let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationNameValue)\(direction)") as? [Int] else {return}
         
         let hoursArray = timeSheet.map {$0 / 3600}
-        let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        var hourModify: [Int] = []
         
+        for hour in hours {
+            
+            if hour > 23 {
+                let newHour = hour - 24
+                hourModify.append(newHour)
+            } else {
+                hourModify.append(hour)
+            }
+        }
+        
+        //let hourModifyString = hourModify.map { String($0) }
         let minutesArray = timeSheet.map {($0 % 3600) / 60}
         print(minutesArray)
         
         var minutesAll: [[Int]] = []
         
-        for i in hoursArray {
+        for _ in hoursArray {
             var minutes = timeSheet.filter { return $0 / 3600 == indexPath.row + 5}
             minutes = minutes.map {($0 % 3600) / 60}
             
             minutesAll.append(minutes)
         }
         
+        let minutesAllString = minutesAll[indexPath.row].map { (String(format: "%02d", arguments: [$0]))}
+        let minutesString = minutesAllString.joined(separator:" ")
         
-        
-        print(minutesAll)
-        
-        cell.configureCell(hourValue: "\(hours[indexPath.row]):",
-                           minutesValue: "\(minutesAll[indexPath.row])")
+        cell.configureCell(hourValue: "\(String(format: "%02d", arguments: [hourModify[indexPath.row]])):",
+                           minutesValue: minutesString)
         
     }
     

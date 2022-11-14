@@ -29,6 +29,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         label.text = "Name"
         label.font = UIFont.systemFont(ofSize: 20,
                                        weight: .bold)
+        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
         return label
     }()
     
@@ -132,7 +133,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         
         toKovalskayaStationButton.snp.makeConstraints {
             $0.left.equalToSuperview().inset(10)
-            $0.top.equalTo(stationNameLabel.snp.bottom).offset(10)
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
             $0.height.equalTo(50)
             $0.bottom.equalToSuperview().inset(10)
@@ -140,7 +141,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         
         toUbileinayaStationButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
-            $0.top.equalTo(stationNameLabel.snp.bottom).offset(10)
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
             $0.height.equalTo(50)
         }
