@@ -11,7 +11,8 @@ protocol ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String)
+                       stationNameValue: String,
+                       backgroundColorValue: UIColor)
     var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol? {get set}
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol)
@@ -112,11 +113,14 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String) {
+                       stationNameValue: String,
+                       backgroundColorValue: UIColor) {
         stationNameLabel.text = stationNameText
         toKovalskayaStationButton.isHidden = toKovalskayaStationButtonIsHidden
         toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
         stationName = stationNameValue
+        backgroundColor = backgroundColorValue
+        
     }
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol) {

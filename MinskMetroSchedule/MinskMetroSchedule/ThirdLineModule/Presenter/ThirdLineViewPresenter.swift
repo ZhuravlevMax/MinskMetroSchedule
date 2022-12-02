@@ -10,7 +10,7 @@ import UIKit
 
 protocol ThirdLineViewPresenterProtocol: AnyObject {
     
-    var thirdViewControllerBackgroundColor: UIColor {get}
+    //var thirdViewControllerBackgroundColor: UIColor {get}
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     stationName: String)
@@ -25,7 +25,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                              StationNamesEnum.vokzalnaya.rawValue,
                              StationNamesEnum.bogushevicha.rawValue,
                              StationNamesEnum.ubileynaya.rawValue]
-    var thirdViewControllerBackgroundColor: UIColor = .white
+    //var thirdViewControllerBackgroundColor: UIColor = .white
     
     weak var view: ThirdLineViewProtocol?
     private(set) var router: ThirdLineRouterProtocol
@@ -39,7 +39,8 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol) {
         
-        guard let stationName = StationNamesNumEnum(rawValue: indexPath.row) else {return}
+        guard let stationName = StationNamesNumEnum(rawValue: indexPath.row),
+        let backgroundColorForCell = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)") else {return}
         
         switch indexPath.row {
             
@@ -47,17 +48,20 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: true,
                                toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)")
+                               stationNameValue: "\(stationName)",
+                               backgroundColorValue: backgroundColorForCell)
         case 3:
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: false,
                                toUbileinayaStationButtonIsHidden: true,
-                               stationNameValue: "\(stationName)")
+                               stationNameValue: "\(stationName)",
+                               backgroundColorValue: backgroundColorForCell)
         default:
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: false,
                                toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)")
+                               stationNameValue: "\(stationName)",
+                               backgroundColorValue: backgroundColorForCell)
         }
         
         guard let view else {return}

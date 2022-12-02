@@ -14,6 +14,8 @@
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
+		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
+		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
 		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
 		94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CD2914EC25005D6B31 /* AppDelegate.swift */; };
 		94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669CF2914EC25005D6B31 /* SceneDelegate.swift */; };
@@ -26,7 +28,6 @@
 		94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EC2914F0A6005D6B31 /* ThirdLineViewPresenter.swift */; };
 		94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669EE2914F0D3005D6B31 /* BaseModulRouter.swift */; };
 		94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */; };
-		94B669F4291502DF005D6B31 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 94B669F3291502DF005D6B31 /* SnapKit */; };
 		94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F629152279005D6B31 /* ThirdLineTableViewCell.swift */; };
 		94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B669F929152BC5005D6B31 /* UIView+Extension.swift */; };
 		94FBA6CC29199AF300510979 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FBA6CB29199AF300510979 /* FirebaseManager.swift */; };
@@ -43,6 +44,7 @@
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B669CD2914EC25005D6B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,8 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94B669F4291502DF005D6B31 /* SnapKit in Frameworks */,
 				22EC59AD0939A6ABB3C00C40 /* Pods_MinskMetroSchedule.framework in Frameworks */,
+				9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +84,7 @@
 				94FBA6CD291A257000510979 /* FirebaseEnums.swift */,
 				947FDDA5291A8473007DE286 /* StationNamesEnum.swift */,
 				9422C5C6291D0A78008D4D33 /* UserDefaultsKeysEnum.swift */,
+				9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -248,7 +251,7 @@
 			);
 			name = MinskMetroSchedule;
 			packageProductDependencies = (
-				94B669F3291502DF005D6B31 /* SnapKit */,
+				9475B7D529374E2100D6D4D3 /* SnapKit */,
 			);
 			productName = MinskMetroSchedule;
 			productReference = 94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */;
@@ -279,7 +282,7 @@
 			);
 			mainGroup = 94B669C12914EC25005D6B31;
 			packageReferences = (
-				94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				9475B7D429374E2100D6D4D3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 94B669CB2914EC25005D6B31 /* Products */;
 			projectDirPath = "";
@@ -360,6 +363,7 @@
 				94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */,
 				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
 				94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */,
+				9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */,
 				9422C5CC291E568F008D4D33 /* TimeSheetTableViewCell.swift in Sources */,
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
 				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
@@ -580,7 +584,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		9475B7D429374E2100D6D4D3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -591,9 +595,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		94B669F3291502DF005D6B31 /* SnapKit */ = {
+		9475B7D529374E2100D6D4D3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 94B669F2291502DF005D6B31 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 9475B7D429374E2100D6D4D3 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

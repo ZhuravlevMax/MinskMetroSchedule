@@ -22,6 +22,7 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         tableView.register(ThirdLineTableViewCell.self, forCellReuseIdentifier: ThirdLineTableViewCell.key)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
@@ -51,7 +52,7 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
         
-        view.backgroundColor = presenter.thirdViewControllerBackgroundColor
+        view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateViewConstraints()
         
