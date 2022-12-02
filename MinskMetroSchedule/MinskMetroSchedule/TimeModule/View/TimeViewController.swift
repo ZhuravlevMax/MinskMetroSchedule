@@ -88,6 +88,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68
+        tableView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         return tableView
     }()
     
@@ -118,7 +119,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         //        view.addSubview(InTimeValueLabel)
         view.addSubview(timeSheetTableView)
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
@@ -213,14 +214,14 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
         label.text = "Полное расписание поездов:"
         label.font = UIFont.systemFont(ofSize: 16,
                                        weight: .bold)
-        label.textColor = .black
+        //label.textColor = .black
         
         headerView.addSubview(label)
         

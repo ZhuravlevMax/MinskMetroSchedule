@@ -42,6 +42,7 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
         //MARK: - Add items to contentsView
         contentView.addSubview(hourLabel)
         contentView.addSubview(minutesLabel)
+        contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateConstraints()
     }

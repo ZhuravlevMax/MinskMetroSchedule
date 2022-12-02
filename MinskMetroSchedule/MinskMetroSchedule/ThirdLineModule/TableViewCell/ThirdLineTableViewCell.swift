@@ -39,7 +39,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         button.setTitle("\(FireBaseFieldsEnum.toKovalskayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1), for: .normal)
         button.setTitleColor(.green, for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
@@ -54,7 +54,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         button.setTitle("\(FireBaseFieldsEnum.toUbileynayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1), for: .normal)
         button.setTitleColor(.green, for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
