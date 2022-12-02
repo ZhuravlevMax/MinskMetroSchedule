@@ -29,18 +29,18 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         label.text = "Name"
         label.font = UIFont.systemFont(ofSize: 20,
                                        weight: .bold)
-        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         return label
     }()
     
     private lazy var toKovalskayaStationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("\(FireBaseFieldsEnum.toKovalskayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1), for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
                          action: #selector(self.toKovalskayaStationButtonPressed),
@@ -50,12 +50,12 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     private lazy var toUbileinayaStationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("\(FireBaseFieldsEnum.toUbileynayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1), for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
                          action: #selector(self.toUbileinayaStationButtonPressed),
@@ -65,12 +65,12 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     private lazy var showFullScheduleButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("Полное расписание", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
                          action: #selector(self.showFullScheduleButtonPressed),

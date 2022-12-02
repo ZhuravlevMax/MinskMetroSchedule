@@ -29,7 +29,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30,
                                        weight: .bold)
-        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         return label
     }()
     
@@ -64,7 +64,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         label.text = "--:--"
         label.font = UIFont.systemFont(ofSize: 40,
                                        weight: .bold)
-        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         return label
     }()
     
@@ -100,12 +100,12 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         //MARK: - Внешний вид navigationController
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 124/255, green: 252/255, blue: 0/255, alpha: 1)
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)]
+        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")]
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
-        navigationController?.navigationBar.tintColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
+        navigationController?.navigationBar.tintColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         
         
         //MARK: - Добавление элементов на экран
