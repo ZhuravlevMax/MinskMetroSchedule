@@ -39,8 +39,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol) {
         
-        guard let stationName = StationNamesNumEnum(rawValue: indexPath.row),
-        let backgroundColorForCell = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)") else {return}
+        guard let stationName = StationNamesNumEnum(rawValue: indexPath.row) else {return}
         
         switch indexPath.row {
             
@@ -48,20 +47,17 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: true,
                                toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)",
-                               backgroundColorValue: backgroundColorForCell)
+                               stationNameValue: "\(stationName)")
         case 3:
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: false,
                                toUbileinayaStationButtonIsHidden: true,
-                               stationNameValue: "\(stationName)",
-                               backgroundColorValue: backgroundColorForCell)
+                               stationNameValue: "\(stationName)")
         default:
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: false,
                                toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)",
-                               backgroundColorValue: backgroundColorForCell)
+                               stationNameValue: "\(stationName)")
         }
         
         guard let view else {return}

@@ -11,8 +11,7 @@ protocol ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String,
-                       backgroundColorValue: UIColor)
+                       stationNameValue: String)
     var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol? {get set}
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol)
@@ -92,6 +91,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         contentView.addSubview(toKovalskayaStationButton)
         contentView.addSubview(toUbileinayaStationButton)
         //contentView.addSubview(showFullScheduleButton)
+        contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateConstraints()
     }
@@ -113,14 +113,11 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String,
-                       backgroundColorValue: UIColor) {
+                       stationNameValue: String) {
         stationNameLabel.text = stationNameText
         toKovalskayaStationButton.isHidden = toKovalskayaStationButtonIsHidden
         toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
         stationName = stationNameValue
-        backgroundColor = backgroundColorValue
-        
     }
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol) {
