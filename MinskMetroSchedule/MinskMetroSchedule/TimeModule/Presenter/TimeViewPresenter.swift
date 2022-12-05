@@ -15,6 +15,9 @@ protocol TimeViewPresenterProtocol: AnyObject {
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String)
+    func setNumberOfRow(stationName: String,
+                        toStation: String,
+                        timeSheetTableViewValue: UITableView)
     
 }
 
@@ -27,6 +30,23 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     
     required init(view: TimeViewControllerProtocol) {
         self.view = view
+    
+    }
+    
+    func setNumberOfRow(stationName: String,
+                        toStation: String,
+                        timeSheetTableViewValue: UITableView) {
+        guard let direction = FireBaseFieldsEnum(rawValue: toStation),
+              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationName)\(direction)") as? [Int] else {return}
+        
+        var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+        
+        let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
+        
+        let hoursArray = hoursArrayNext.map {$0 / 3600}
+        var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        view?.numberOfRow = hours.count
+        timeSheetTableViewValue.reloadData()
     }
     
     func setNextTime(toStationName: String, stationName: String ) {
@@ -63,7 +83,10 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationNameValue)\(direction)") as? [Int] else {return}
         
-        let hoursArray = timeSheet.map {$0 / 3600}
+        var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+        
+        let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
+        let hoursArray = hoursArrayNext.map {$0 / 3600}
         var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
         var hourModify: [Int] = []
         

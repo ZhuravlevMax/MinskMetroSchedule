@@ -73,8 +73,6 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             self.router.openTimeVC(fromStationName: fromStationName,
                                    toStationName: toStationName)
         
-        
-        
     }
     
 }

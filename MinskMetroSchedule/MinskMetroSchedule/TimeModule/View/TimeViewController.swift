@@ -11,6 +11,7 @@ import SnapKit
 protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
+    var numberOfRow: Int {get set}
     func setItems(fromStationName: String,
                   toStationName: String)
     func setNextTimeLabel(nextTime: String)
@@ -19,6 +20,7 @@ protocol TimeViewControllerProtocol: AnyObject {
 
 class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
+    var numberOfRow: Int = 0
     var presenter: TimeViewPresenter?
     
     //MARK: - Create items
@@ -124,6 +126,8 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
         
+        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
+        
     }
     
     //MARK: - Работа с констрейнтами
@@ -197,7 +201,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
 
 extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        21
+        numberOfRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
