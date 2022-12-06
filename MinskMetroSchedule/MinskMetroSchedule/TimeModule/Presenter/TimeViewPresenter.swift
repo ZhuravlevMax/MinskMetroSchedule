@@ -87,7 +87,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
         let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
         let hoursArray = hoursArrayNext.map {$0 / 3600}
-        var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
         var hourModify: [Int] = []
         
         for hour in hours {
@@ -107,7 +107,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         var minutesAll: [[Int]] = []
         
         for _ in hoursArray {
-            var minutes = timeSheet.filter { return $0 / 3600 == indexPath.row + 5}
+            var minutes = hoursArrayNext.filter { return $0 / 3600 == hours[indexPath.row]}
             minutes = minutes.map {($0 % 3600) / 60}
             
             minutesAll.append(minutes)
