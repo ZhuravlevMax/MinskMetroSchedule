@@ -14,6 +14,8 @@ protocol BuilderProtocol {
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
                           toStationName: String) -> UIViewController
+    func createWeekdayModule(fromStationName: String,
+                             toStationName: String) -> UIViewController
 }
 
 class ModuleBuilder: BuilderProtocol {
@@ -32,7 +34,9 @@ class ModuleBuilder: BuilderProtocol {
         let view = TimeViewController()
         view.setItems(fromStationName: fromStationName,
                       toStationName: toStationName)
-        let presenter = TimeViewPresenter(view: view)
+        
+        let router = TimeRouter(builder: self, viewController: view)
+        let presenter = TimeViewPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
@@ -47,5 +51,14 @@ class ModuleBuilder: BuilderProtocol {
         return view
     }
     
+    func createWeekdayModule(fromStationName: String,
+                             toStationName: String) -> UIViewController {
+        let view = WeekdayViewController()
+        view.setItems(fromStationName: fromStationName, toStationName: toStationName)
+        let presenter = WeekdayPresenter(view: view)
+        view.presenter = presenter
+        
+        return view
+    }
     
 }

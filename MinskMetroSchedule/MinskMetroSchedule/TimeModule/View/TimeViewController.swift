@@ -150,18 +150,13 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         
         //MARK: - Добавление элементов на экран
         view.addSubview(fromStationLabel)
-        //view.addSubview(toStationLabel)
-        //view.addSubview(arrowImageView)
         view.addSubview(viewForNextTime)
         viewForNextTime.addSubview(nextTimeLabel)
         viewForNextTime.addSubview(nextTimeValueLabel)
-        //        view.addSubview(InTimeLabel)
-        //        view.addSubview(InTimeValueLabel)
         view.addSubview(timeSheetTableView)
         view.addSubview(fullScheduleLabel)
         view.addSubview(showWeekdaysButton)
         view.addSubview(showWeekendButton)
-        
         
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
@@ -180,18 +175,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.width.equalTo(view.frame.width * 0.9)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
-        
-        //        toStationLabel.snp.makeConstraints {
-        //            $0.right.equalToSuperview().inset(10)
-        //            $0.width.equalTo(view.frame.width * 0.4)
-        //            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
-        //        }
-        
-        //        arrowImageView.snp.makeConstraints {
-        //            $0.centerX.equalToSuperview()
-        //            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
-        //        }
-        
+
         viewForNextTime.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
@@ -201,21 +185,13 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         nextTimeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().inset(10)
-            //$0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
         }
         
         nextTimeValueLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalTo(nextTimeLabel.snp.right).offset(10)
-            // $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
         }
-        
-        //        InTimeLabel.snp.makeConstraints {
-        //            $0.centerX.equalToSuperview()
-        //            $0.left.equalToSuperview().inset(10)
-        //            $0.top.equalTo(nextTimeLabel.snp.bottom).offset(10)
-        //        }
-        
+
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.top.equalTo(viewForNextTime.snp.bottom)
@@ -298,6 +274,10 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Action for toKovalskayaStationButton
     @objc private func showWeekdaysButtonPressed() {
+        
+        guard  let fromStationName = fromStationLabel.text, let toStationName = toStationLabel.text else {return}
+        
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName)
         
         print("На Ковальскую")
     }

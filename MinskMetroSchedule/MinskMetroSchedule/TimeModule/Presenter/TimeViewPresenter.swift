@@ -19,6 +19,8 @@ protocol TimeViewPresenterProtocol: AnyObject {
                         toStation: String,
                         timeSheetTableViewValue: UITableView)
     
+    func openWeekdayVC(fromStationName: String,
+                       toStationName: String)
 }
 
 class TimeViewPresenter: TimeViewPresenterProtocol {
@@ -26,11 +28,13 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     var timeViewControllerBackgroundColor: UIColor = .white
     
     weak var view: TimeViewControllerProtocol?
+    private(set) var router: TimeRouterProtocol
     
     
-    required init(view: TimeViewControllerProtocol) {
+    required init(view: TimeViewControllerProtocol,
+                  router: TimeRouterProtocol) {
         self.view = view
-        
+        self.router = router
     }
     
     func setNumberOfRow(stationName: String,
@@ -119,6 +123,13 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         cell.configureCell(hourValue: "\(String(format: "%02d", arguments: [hourModify[indexPath.row]])):",
                            minutesValue: minutesString)
         
+    }
+    
+    func openWeekdayVC(fromStationName: String,
+                       toStationName: String) {
+        
+        router.openWeekdayVC(fromStationName: fromStationName,
+                             toStationName: toStationName)
     }
     
 }

@@ -147,13 +147,6 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
             $0.height.equalTo(50)
         }
         
-//        showFullScheduleButton.snp.makeConstraints {
-//            $0.centerX.equalToSuperview()
-//            $0.top.equalTo(toKovalskayaStationButton.snp.bottom).offset(20)
-//            $0.bottom.equalToSuperview().inset(10)
-//            $0.width.equalTo(contentView.frame.width * 0.5)
-//        }
-        
         super.updateConstraints()
     }
     
