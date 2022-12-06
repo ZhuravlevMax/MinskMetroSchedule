@@ -20,7 +20,7 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
     private lazy var hourLabel: UILabel = {
         let label = UILabel()
         label.text = "Hour"
-        label.font = UIFont.systemFont(ofSize: 20,
+        label.font = UIFont.systemFont(ofSize: 16,
                                        weight: .bold)
         return label
     }()
@@ -28,6 +28,8 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
     private lazy var minutesLabel: UILabel = {
         let label = UILabel()
         label.text = "minutes"
+        label.font = UIFont.systemFont(ofSize: 13,
+                                       weight: .light)
         return label
     }()
 

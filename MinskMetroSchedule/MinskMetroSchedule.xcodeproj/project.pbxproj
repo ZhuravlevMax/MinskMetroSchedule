@@ -91,16 +91,8 @@
 			children = (
 				94026A94293F313000E766F2 /* View */,
 				94026A93293F312A00E766F2 /* Presenter */,
-				94026A92293F311F00E766F2 /* TableViewCell */,
 			);
 			path = WeekdayModule;
-			sourceTree = "<group>";
-		};
-		94026A92293F311F00E766F2 /* TableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		94026A93293F312A00E766F2 /* Presenter */ = {
