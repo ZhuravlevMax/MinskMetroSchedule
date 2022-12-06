@@ -30,7 +30,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     
     required init(view: TimeViewControllerProtocol) {
         self.view = view
-    
+        
     }
     
     func setNumberOfRow(stationName: String,

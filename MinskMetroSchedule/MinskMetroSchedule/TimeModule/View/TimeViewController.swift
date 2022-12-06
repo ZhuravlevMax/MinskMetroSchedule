@@ -94,6 +94,44 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         return tableView
     }()
     
+    private lazy var fullScheduleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Полное расписание"
+        label.font = UIFont.systemFont(ofSize: 16,
+                                       weight: .bold)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
+        return label
+    }()
+    
+    private lazy var showWeekdaysButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
+        button.setTitle("Будние дни", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.layer.cornerRadius = 2
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
+        button.dropShadow()
+        button.addTarget(self,
+                         action: #selector(self.showWeekdaysButtonPressed),
+                         for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var showWeekendButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
+        button.setTitle("Выходные дни", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.layer.cornerRadius = 2
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
+        button.dropShadow()
+        button.addTarget(self,
+                         action: #selector(self.showWeekdaysButtonPressed),
+                         for: .touchUpInside)
+        return button
+    }()
     
     
     override func viewDidLoad() {
@@ -120,6 +158,10 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         //        view.addSubview(InTimeLabel)
         //        view.addSubview(InTimeValueLabel)
         view.addSubview(timeSheetTableView)
+        view.addSubview(fullScheduleLabel)
+        view.addSubview(showWeekdaysButton)
+        view.addSubview(showWeekendButton)
+        
         
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
@@ -177,10 +219,27 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.top.equalTo(viewForNextTime.snp.bottom)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
         }
         
+        fullScheduleLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(timeSheetTableView.snp.bottom).offset(10)
+        }
         
+        showWeekdaysButton.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(20)
+            $0.top.equalTo(fullScheduleLabel.snp.bottom).offset(20)
+            $0.width.equalTo(view.frame.width * 0.3)
+            $0.height.equalTo(50)
+        }
+        
+        showWeekendButton.snp.makeConstraints {
+            $0.right.equalToSuperview().inset(20)
+            $0.top.equalTo(fullScheduleLabel.snp.bottom).offset(20)
+            $0.width.equalTo(view.frame.width * 0.3)
+            $0.height.equalTo(50)
+        }
         
         super.updateViewConstraints()
     }
@@ -222,10 +281,11 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.text = "Полное расписание поездов:"
+        label.text = "Cледующие поезда сегодня:"
         label.font = UIFont.systemFont(ofSize: 16,
                                        weight: .bold)
-        //label.textColor = .black
+        
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         
         headerView.addSubview(label)
         
@@ -234,6 +294,12 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    
+    //MARK: - Action for toKovalskayaStationButton
+    @objc private func showWeekdaysButtonPressed() {
+        
+        print("На Ковальскую")
     }
     
     
