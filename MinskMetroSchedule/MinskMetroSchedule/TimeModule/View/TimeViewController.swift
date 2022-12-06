@@ -272,12 +272,12 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         return 50
     }
     
-    //MARK: - Action for toKovalskayaStationButton
+    //MARK: - Action for showWeekdaysButton
     @objc private func showWeekdaysButtonPressed() {
         
         guard  let fromStationName = fromStationLabel.text, let toStationName = toStationLabel.text else {return}
         
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName)
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: DayTypeEnum.weekday)
         
         print("На Ковальскую")
     }

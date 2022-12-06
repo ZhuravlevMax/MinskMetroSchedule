@@ -11,7 +11,8 @@ import UIKit
 protocol TimeRouterProtocol: BaseModulRouterProtocol {
     
     func openWeekdayVC(fromStationName: String,
-                       toStationName: String)
+                       toStationName: String,
+                       dayTypeValue: DayTypeEnum)
     
 }
 
@@ -26,9 +27,11 @@ class TimeRouter: TimeRouterProtocol {
     }
     
     func openWeekdayVC(fromStationName: String,
-                       toStationName: String) {
+                       toStationName: String,
+                       dayTypeValue: DayTypeEnum) {
         guard let weekdayModule = builder?.createWeekdayModule(fromStationName: fromStationName,
-                                                               toStationName: toStationName) else {return}
+                                                               toStationName: toStationName,
+                                                               dayTypeValue: dayTypeValue) else {return}
         
         guard let weekdayVC = viewController else {return}
         

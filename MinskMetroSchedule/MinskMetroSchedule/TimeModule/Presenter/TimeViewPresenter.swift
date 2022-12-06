@@ -20,7 +20,8 @@ protocol TimeViewPresenterProtocol: AnyObject {
                         timeSheetTableViewValue: UITableView)
     
     func openWeekdayVC(fromStationName: String,
-                       toStationName: String)
+                       toStationName: String,
+                       dayTypeValue: DayTypeEnum)
 }
 
 class TimeViewPresenter: TimeViewPresenterProtocol {
@@ -126,10 +127,12 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     }
     
     func openWeekdayVC(fromStationName: String,
-                       toStationName: String) {
+                       toStationName: String,
+                       dayTypeValue: DayTypeEnum) {
         
         router.openWeekdayVC(fromStationName: fromStationName,
-                             toStationName: toStationName)
+                             toStationName: toStationName,
+                             dayTypeValue: dayTypeValue)
     }
     
 }
