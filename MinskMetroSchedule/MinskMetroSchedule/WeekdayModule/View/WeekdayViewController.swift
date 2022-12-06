@@ -60,7 +60,8 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 10
-        tableView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
+        //tableView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -78,6 +79,9 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
         print(fromStation)
         print(toStation)
         print(dayType)
+        
+        //view.addGradientBackground(firstColor: .green, secondColor: .white)
+        
         
         guard let toStationLabelText = toStationNameLabel.text, let stationNameText = stationNameLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
@@ -134,6 +138,7 @@ extension WeekdayViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
             presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName)
+            cell.backgroundColor = .clear
             return cell
         }
         return UITableViewCell()

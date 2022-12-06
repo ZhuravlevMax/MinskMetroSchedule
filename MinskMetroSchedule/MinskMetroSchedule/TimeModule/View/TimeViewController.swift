@@ -245,6 +245,7 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
             presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName)
+            cell.backgroundColor = .clear
             return cell
         }
         return UITableViewCell()
