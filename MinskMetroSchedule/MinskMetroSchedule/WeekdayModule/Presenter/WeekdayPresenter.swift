@@ -39,6 +39,9 @@ class WeekdayPresenter: WeekdayPresenterProtocol {
         
         //let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
         
+        var currentDay = Int(Date().timeIntervalSince1970)
+        currentDay.decoderDt(format: "EEEE")
+        
         let hoursArray = timeSheet.map {$0 / 3600}
         var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
         view?.setNumberOfRow(rowNumber: hours.count)

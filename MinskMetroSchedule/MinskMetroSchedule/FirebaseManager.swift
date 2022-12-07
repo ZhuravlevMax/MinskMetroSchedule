@@ -28,6 +28,12 @@ class FireBaseManager: FirebaseManagerProtocol {
     
     func getTimeSheet(stationName: String, direction: String, completion: @escaping ([Int]) -> Void) {
         ref.child("stations").child("\(stationName)").getData { [weak self] error, snapshot in
+            
+            if error != nil {
+                print("ERROR")
+                print("\(error!._code)")
+            }
+            
             guard let dict = snapshot?.value as? [String:Any],
                   let timeSheet = dict["\(direction)"] as? [Int]
             else {return}
