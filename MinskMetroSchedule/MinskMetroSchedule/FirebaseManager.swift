@@ -13,7 +13,7 @@ import FirebaseDatabase
 import FirebaseFirestore
 
 protocol FirebaseManagerProtocol {
-    func getTimeSheet(stationName: String, direction: String, completion: @escaping ([Int]) -> Void)
+    func getTimeSheet(stationName: String, direction: String, completion: @escaping (Result<[Int], Error>) -> Void)
 }
 
 class FireBaseManager: FirebaseManagerProtocol {
@@ -26,20 +26,21 @@ class FireBaseManager: FirebaseManagerProtocol {
  
     }
     
-    func getTimeSheet(stationName: String, direction: String, completion: @escaping ([Int]) -> Void) {
+    func getTimeSheet(stationName: String, direction: String, completion: @escaping (Result<[Int], Error>) -> Void) {
         ref.child("stations").child("\(stationName)").getData { [weak self] error, snapshot in
-            
+ 
             if error != nil {
                 print("ERROR")
                 print("\(error!._code)")
+                guard let error else {return}
+                completion(.failure(error))
+            } else {
+                guard let dict = snapshot?.value as? [String:Any],
+                      let timeSheet = dict["\(direction)"] as? [Int]
+                else {return}
+                print(timeSheet)
+                completion(.success(timeSheet))
             }
-            
-            guard let dict = snapshot?.value as? [String:Any],
-                  let timeSheet = dict["\(direction)"] as? [Int]
-            else {return}
-            print(timeSheet)
-            completion(timeSheet)
-            
         }
     }
     
