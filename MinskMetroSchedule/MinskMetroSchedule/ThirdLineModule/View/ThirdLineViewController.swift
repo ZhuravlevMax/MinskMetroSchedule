@@ -15,7 +15,7 @@ protocol ThirdLineViewProtocol: AnyObject {
 
 }
 
-class ThirdLineViewController: UIViewController, ThirdLineViewProtocol, AlertProtocol {
+class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
     
     //MARK: - Cоздание элементов UI
 
@@ -73,9 +73,6 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol, AlertPro
         
         super.updateViewConstraints()
     }
-    
-    
-    
 
 }
 

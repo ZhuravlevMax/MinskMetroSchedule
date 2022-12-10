@@ -82,6 +82,12 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         return label
     }()
     
+    private lazy var dayOfWeek: UILabel = {
+        let label = UILabel()
+        label.text = "day"
+        return label
+    }()
+    
     private lazy var timeSheetTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -153,6 +159,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.addSubview(viewForNextTime)
         viewForNextTime.addSubview(nextTimeLabel)
         viewForNextTime.addSubview(nextTimeValueLabel)
+        view.addSubview(dayOfWeek)
         view.addSubview(timeSheetTableView)
         view.addSubview(fullScheduleLabel)
         view.addSubview(showWeekdaysButton)
@@ -191,10 +198,15 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.centerY.equalToSuperview()
             $0.left.equalTo(nextTimeLabel.snp.right).offset(10)
         }
+        
+        dayOfWeek.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(viewForNextTime.snp.bottom).offset(3)
+        }
 
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(viewForNextTime.snp.bottom)
+            $0.top.equalTo(dayOfWeek.snp.bottom)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
         }
         
