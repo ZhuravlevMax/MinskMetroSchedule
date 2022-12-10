@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Network
 
 protocol ThirdLineViewProtocol: AnyObject {
     //ViewController methods here
@@ -14,7 +15,7 @@ protocol ThirdLineViewProtocol: AnyObject {
 
 }
 
-class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
+class ThirdLineViewController: UIViewController, ThirdLineViewProtocol, AlertProtocol {
     
     //MARK: - Cоздание элементов UI
 
@@ -56,6 +57,11 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         
         updateViewConstraints()
         
+        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)") == nil {
+            presenter.downloadAllData(view:self)
+        }
+        presenter.checkConnection(view: self)
+ 
     }
     
     //MARK: - Работа с констрейнтами
@@ -67,6 +73,8 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         
         super.updateViewConstraints()
     }
+    
+    
     
 
 }
@@ -90,3 +98,5 @@ extension ThirdLineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+

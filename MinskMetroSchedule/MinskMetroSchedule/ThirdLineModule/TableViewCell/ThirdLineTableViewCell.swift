@@ -153,7 +153,9 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        
         thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped)
+        
         
         print("На Ковальскую")
     }
@@ -161,6 +163,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     //MARK: - Action for toUbileinayaStationButton
     @objc private func toUbileinayaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toUbileinayaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+
         thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped)
         print("На Юбилейную")
     }
