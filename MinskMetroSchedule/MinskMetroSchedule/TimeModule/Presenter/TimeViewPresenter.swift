@@ -137,8 +137,19 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     }
     
     func checkDayOfWeek() {
+        let currentDay = Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE")
+        UserDefaults.standard.set(currentDay, forKey: "\(UserDefaultsKeysEnum.currentDay)")
         
-        view?.setDayOfWeek(dayOfWeekValue: Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE"))
+        var dayOfWeek = ""
+        switch currentDay {
+        case "Saturday", "Sunday":
+            dayOfWeek = "Расписание выходного дня"
+        default:
+            dayOfWeek = "Расписание буднего дня"
+        }
+        
+        UserDefaults.standard.set(dayOfWeek, forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        view?.setDayOfWeek(dayOfWeekValue: dayOfWeek)
     }
     
 }

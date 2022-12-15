@@ -73,8 +73,9 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
             numberOfRow = UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)")
         }
         
-        presenter.checkConnection(view: self)
- 
+        if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
+            presenter.checkConnection(view: self)
+        }
     }
     
     //MARK: - Работа с констрейнтами

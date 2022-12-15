@@ -16,4 +16,5 @@ enum UserDefaultsKeysEnum {
     case ubileynayatoKovalskayaTimeSheet
     case childCount
     case dayOfWeek
+    case currentDay
 }
