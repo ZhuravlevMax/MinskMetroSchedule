@@ -15,13 +15,15 @@ protocol TimeViewControllerProtocol: AnyObject {
     func setItems(fromStationName: String,
                   toStationName: String)
     func setNextTimeLabel(nextTime: String)
-    
+    func setDayOfWeek(dayOfWeekValue: String)
+
 }
 
 class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     var numberOfRow: Int = 0
     var presenter: TimeViewPresenter?
+
     
     //MARK: - Create items
     private lazy var fromStationLabel: UILabel = {
@@ -82,7 +84,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         return label
     }()
     
-    private lazy var dayOfWeek: UILabel = {
+    private lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.text = "day"
         return label
@@ -159,7 +161,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.addSubview(viewForNextTime)
         viewForNextTime.addSubview(nextTimeLabel)
         viewForNextTime.addSubview(nextTimeValueLabel)
-        view.addSubview(dayOfWeek)
+        view.addSubview(dayOfWeekLabel)
         view.addSubview(timeSheetTableView)
         view.addSubview(fullScheduleLabel)
         view.addSubview(showWeekdaysButton)
@@ -171,7 +173,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
         
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
-        
+        presenter?.checkDayOfWeek()
     }
     
     //MARK: - Работа с констрейнтами
@@ -199,14 +201,14 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.left.equalTo(nextTimeLabel.snp.right).offset(10)
         }
         
-        dayOfWeek.snp.makeConstraints {
+        dayOfWeekLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(viewForNextTime.snp.bottom).offset(3)
         }
 
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(dayOfWeek.snp.bottom)
+            $0.top.equalTo(dayOfWeekLabel.snp.bottom)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
         }
         
@@ -237,11 +239,14 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         fromStationLabel.text = fromStationName
         toStationLabel.text = toStationName
         title = toStationName
-        
     }
     
     func setNextTimeLabel(nextTime: String) {
         nextTimeValueLabel.text = nextTime
+    }
+    
+    func setDayOfWeek(dayOfWeekValue: String) {
+        dayOfWeekLabel.text = dayOfWeekValue
     }
     
 }

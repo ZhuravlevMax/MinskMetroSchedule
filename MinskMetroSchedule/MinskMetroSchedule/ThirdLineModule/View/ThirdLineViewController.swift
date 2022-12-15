@@ -73,7 +73,6 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
             numberOfRow = UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)")
         }
         
-        
         presenter.checkConnection(view: self)
  
     }

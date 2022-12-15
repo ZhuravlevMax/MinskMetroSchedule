@@ -22,6 +22,7 @@ protocol TimeViewPresenterProtocol: AnyObject {
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayTypeValue: DayTypeEnum)
+    func checkDayOfWeek()
 }
 
 class TimeViewPresenter: TimeViewPresenterProtocol {
@@ -133,6 +134,11 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         router.openWeekdayVC(fromStationName: fromStationName,
                              toStationName: toStationName,
                              dayTypeValue: dayTypeValue)
+    }
+    
+    func checkDayOfWeek() {
+        
+        view?.setDayOfWeek(dayOfWeekValue: Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE"))
     }
     
 }
