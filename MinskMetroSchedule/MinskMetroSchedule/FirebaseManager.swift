@@ -44,5 +44,20 @@ class FireBaseManager: FirebaseManagerProtocol {
         }
     }
     
+    func getChildCount(completion: @escaping (Result<Int, Error>) -> Void) {
+        ref.child("stations").getData { error, snapshot in
+            if error != nil {
+                print("ERROR")
+                print("\(error!._code)")
+                guard let error else {return}
+                completion(.failure(error))
+            } else {
+                guard let childCount = snapshot?.childrenCount else {return}
+                print(childCount)
+                completion(.success(Int(childCount)))
+            }
+        }
+    }
+    
 }
 

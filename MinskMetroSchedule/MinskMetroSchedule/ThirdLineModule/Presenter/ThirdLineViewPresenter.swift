@@ -164,7 +164,9 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
     func showSuccessAlert(view: UIViewController) {
         let errorAlertController = UIAlertController(title: "Успех!", message: "Актуальное расписание загружено", preferredStyle: .alert)
-        let okButtonAction = UIAlertAction(title: "Ok", style: .default)
+        let okButtonAction = UIAlertAction(title: "Ok", style: .default) { [self] _ in
+            setNumberOfRow()
+        }
         errorAlertController.addAction(okButtonAction)
         view.present(errorAlertController, animated: true)
     }
@@ -182,4 +184,17 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         }
     }
     
+    func setNumberOfRow() {
+        if UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)") == 0 {
+            FireBaseManager.shared.getChildCount { result in
+                switch result {
+                case .success(let childCount):
+                    self.view?.numberOfRow = childCount
+                    UserDefaults.standard.set(childCount, forKey: "\(UserDefaultsKeysEnum.childCount)")
+                case .failure(_):
+                    return
+                }
+            }
+        }
+    }
 }

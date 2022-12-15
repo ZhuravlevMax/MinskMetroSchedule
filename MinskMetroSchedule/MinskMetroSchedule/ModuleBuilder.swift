@@ -49,6 +49,7 @@ class ModuleBuilder: BuilderProtocol {
         let router = ThirdLineRouter(builder: self, viewController: view)
         let presenter = ThirdLineViewPresenter(view: view, router: router)
         view.presenter = presenter
+        presenter.setNumberOfRow()
         return view
     }
     

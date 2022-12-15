@@ -12,6 +12,7 @@ import Network
 protocol ThirdLineViewProtocol: AnyObject {
     //ViewController methods here
     var presenter: ThirdLineViewPresenter? {get}
+    var numberOfRow: Int {get set}
 
 }
 
@@ -33,6 +34,11 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
     
     //MARK: - Создание переменных
     var presenter: ThirdLineViewPresenter?
+    var numberOfRow: Int = 0 {
+        didSet {
+            thirdLineTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +66,14 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)") == nil {
             presenter.downloadAllData(view:self)
         }
+        
+        if UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)") == 0 {
+            presenter.setNumberOfRow()
+        } else {
+            numberOfRow = UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)")
+        }
+        
+        
         presenter.checkConnection(view: self)
  
     }
@@ -78,7 +92,8 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
 
 extension ThirdLineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        //4
+        numberOfRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
