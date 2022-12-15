@@ -11,7 +11,9 @@ protocol ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String)
+                       stationNameValue: String,
+                       transferName: String,
+                       transferColor: UIColor)
     var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol? {get set}
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol)
@@ -28,6 +30,15 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         let label = UILabel()
         label.text = "Name"
         label.font = UIFont.systemFont(ofSize: 20,
+                                       weight: .bold)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
+        return label
+    }()
+    
+    private lazy var transferLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 13,
                                        weight: .bold)
         label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         return label
@@ -78,6 +89,8 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         return button
     }()
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -91,6 +104,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         contentView.addSubview(toKovalskayaStationButton)
         contentView.addSubview(toUbileinayaStationButton)
         //contentView.addSubview(showFullScheduleButton)
+        contentView.addSubview(transferLabel)
         contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateConstraints()
@@ -113,11 +127,16 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String) {
+                       stationNameValue: String,
+                       transferName: String,
+                       transferColor: UIColor) {
         stationNameLabel.text = stationNameText
         toKovalskayaStationButton.isHidden = toKovalskayaStationButtonIsHidden
         toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
         stationName = stationNameValue
+        transferLabel.text = transferName
+        transferLabel.textColor = transferColor
+        
     }
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol) {
@@ -132,9 +151,14 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
             $0.top.equalToSuperview().inset(10)
         }
         
+        transferLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(5)
+        }
+        
         toKovalskayaStationButton.snp.makeConstraints {
             $0.left.equalToSuperview().inset(10)
-            $0.top.equalTo(stationNameLabel.snp.bottom).offset(20)
+            $0.top.equalTo(transferLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
             $0.height.equalTo(50)
             $0.bottom.equalToSuperview().inset(10)
@@ -142,7 +166,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         
         toUbileinayaStationButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
-            $0.top.equalTo(stationNameLabel.snp.bottom).offset(20)
+            $0.top.equalTo(transferLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
             $0.height.equalTo(50)
         }

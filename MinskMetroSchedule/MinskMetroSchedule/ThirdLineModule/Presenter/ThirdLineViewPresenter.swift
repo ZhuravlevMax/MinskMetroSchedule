@@ -46,21 +46,35 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         
         switch indexPath.row {
             
-        case 0:
+        case 0://Ковальская
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: true,
                                toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)")
-        case 3:
-            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
-                               toKovalskayaStationButtonIsHidden: false,
-                               toUbileinayaStationButtonIsHidden: true,
-                               stationNameValue: "\(stationName)")
-        default:
+                               stationNameValue: "\(stationName)",
+                               transferName: "",
+                               transferColor: .white)
+        case 1://Вокзальная
             cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
                                toKovalskayaStationButtonIsHidden: false,
                                toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)")
+                               stationNameValue: "\(stationName)",
+                               transferName: "Переход на Ленина",
+                               transferColor: .blue)
+            
+        case 3://Юбилейная
+            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
+                               toKovalskayaStationButtonIsHidden: false,
+                               toUbileinayaStationButtonIsHidden: true,
+                               stationNameValue: "\(stationName)",
+                               transferName: "Переход на Фрунзенскую",
+                               transferColor: .red)
+        default://Богущевича
+            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
+                               toKovalskayaStationButtonIsHidden: false,
+                               toUbileinayaStationButtonIsHidden: false,
+                               stationNameValue: "\(stationName)",
+                               transferName: "",
+                               transferColor: .white)
         }
         
         guard let view else {return}
@@ -71,10 +85,10 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     stationName: String) {
-       
-            
-            self.router.openTimeVC(fromStationName: fromStationName,
-                                   toStationName: toStationName)
+        
+        
+        self.router.openTimeVC(fromStationName: fromStationName,
+                               toStationName: toStationName)
         
     }
     
