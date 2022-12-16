@@ -148,7 +148,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
             dayOfWeek = "Расписание буднего дня"
         }
         
-        UserDefaults.standard.set(dayOfWeek, forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        //UserDefaults.standard.set(dayOfWeek, forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         view?.setDayOfWeek(dayOfWeekValue: dayOfWeek)
     }
     

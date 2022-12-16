@@ -63,8 +63,10 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         
         updateViewConstraints()
         
-        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)") == nil {
-            presenter.downloadAllData(view:self)
+        //UserDefaults.standard.set(Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE"), forKey: "\(UserDefaultsKeysEnum.currentDay)")
+        
+        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)") == nil, let dayOfWeekValue = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") {
+            presenter.downloadAllData(dayOfWeek: dayOfWeekValue, view:self)
         }
         
         if UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)") == 0 {
@@ -73,8 +75,8 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
             numberOfRow = UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)")
         }
         
-        if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
-            presenter.checkConnection(view: self)
+        if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE"), let dayOfWeekValue = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") {
+            presenter.checkConnection(dayOfWeek: dayOfWeekValue, view: self)
         }
     }
     

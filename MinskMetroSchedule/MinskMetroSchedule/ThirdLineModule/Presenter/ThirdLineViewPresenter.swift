@@ -17,9 +17,9 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
                     stationName: String)
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol)
-    func showErrorAlert(view: UIViewController)
+    func showErrorAlert(dayOfWeek:String, view: UIViewController)
     func showSuccessAlert(view: UIViewController)
-    func checkConnection(view: UIViewController)
+    func checkConnection(dayOfWeek: String, view: UIViewController)
 }
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
@@ -92,8 +92,8 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         
     }
     
-    func downloadAllData(view: UIViewController) {
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.kovalskaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
+    func downloadAllData(dayOfWeek: String, view: UIViewController) {
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.kovalskaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
             
             switch result {
             case .success(let timeSheetArray):
@@ -105,12 +105,12 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                 //print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)"))
                 
             case .failure(_):
-                self.showErrorAlert(view: view)
+                self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
             }
             
         }
         
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
             
             switch result {
             case .success(let timeSheetArray):
@@ -121,7 +121,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             
         }
         
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
             
             switch result {
             case .success(let timeSheetArray):
@@ -132,7 +132,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             
         }
         
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
             
             switch result {
             case .success(let timeSheetArray):
@@ -143,7 +143,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             
         }
         
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
             
             switch result {
             case .success(let timeSheetArray):
@@ -154,7 +154,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             
         }
         
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.ubileynaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.ubileynaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
             
             switch result {
             case .success(let timeSheetArray):
@@ -167,10 +167,10 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         
     }
     
-    func showErrorAlert(view: UIViewController) {
+    func showErrorAlert(dayOfWeek: String, view: UIViewController) {
         let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение", preferredStyle: .alert)
         let okButtonAction = UIAlertAction(title: "Повторить", style: .default) { [self] _ in
-            downloadAllData(view: view)
+            downloadAllData(dayOfWeek:dayOfWeek, view: view)
         }
         errorAlertController.addAction(okButtonAction)
         view.present(errorAlertController, animated: true)
@@ -185,12 +185,12 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         view.present(errorAlertController, animated: true)
     }
     
-    func checkConnection(view: UIViewController) {
+    func checkConnection(dayOfWeek: String, view: UIViewController) {
         let monitor = NWPathMonitor()
         monitor.start(queue: DispatchQueue(label: "NetworkMonitor"))
         monitor.pathUpdateHandler = { (path) in
             if path.status == .satisfied {
-                self.downloadAllData(view: view)
+                self.downloadAllData(dayOfWeek: dayOfWeek, view: view)
                 print("Connected")
             } else {
                 print("Not Connected")

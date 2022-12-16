@@ -86,7 +86,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     private lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
-        label.text = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        //label.text = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)")
         label.font = UIFont.systemFont(ofSize: 20,
                                        weight: .bold)
         return label
@@ -176,9 +176,9 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
         
-        if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
+       // if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
             presenter?.checkDayOfWeek()
-        }
+        
     }
     
     //MARK: - Работа с констрейнтами
