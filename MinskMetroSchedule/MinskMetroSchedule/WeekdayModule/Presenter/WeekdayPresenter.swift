@@ -56,6 +56,7 @@ class WeekdayPresenter: WeekdayPresenterProtocol {
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationNameValue)\(direction)") as? [Int] else {return}
         
+        
         //var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
         
         //let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
