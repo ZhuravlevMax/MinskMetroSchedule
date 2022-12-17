@@ -93,78 +93,6 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func downloadAllData(dayOfWeek: String, view: UIViewController) {
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.kovalskaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
-            
-            switch result {
-            case .success(let timeSheetArray):
-                if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)") == nil {
-                    self.showSuccessAlert(view: view)
-                }
-                
-                UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)")
-                //print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)"))
-                
-            case .failure(_):
-                self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
-            }
-            
-        }
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
-            
-            switch result {
-            case .success(let timeSheetArray):
-                UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.vokzalnayatoKovalskayaTimeSheet)")
-            case .failure(_):
-                return
-            }
-            
-        }
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
-            
-            switch result {
-            case .success(let timeSheetArray):
-                UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.vokzalnayatoUbileynayaTimeSheet)")
-            case .failure(_):
-                return
-            }
-            
-        }
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
-            
-            switch result {
-            case .success(let timeSheetArray):
-                UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.bogushevichatoKovalskayaTimeSheet)")
-            case .failure(_):
-                return
-            }
-            
-        }
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { result in
-            
-            switch result {
-            case .success(let timeSheetArray):
-                UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.bogushevichatoUbileynayaTimeSheet)")
-            case .failure(_):
-                return
-            }
-            
-        }
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(StationNamesEnum.ubileynaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { result in
-            
-            switch result {
-            case .success(let timeSheetArray):
-                UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.ubileynayatoKovalskayaTimeSheet)")
-            case .failure(_):
-                return
-            }
-            
-        }
-        
     }
     
     func showErrorAlert(dayOfWeek: String, view: UIViewController) {
@@ -199,18 +127,17 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func setNumberOfRow() {
-        if UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)") == 0 {
+        
             FireBaseManager.shared.getChildCount { result in
                 switch result {
                 case .success(let childCount):
                     self.view?.numberOfRow = childCount
-                    UserDefaults.standard.set(childCount, forKey: "\(UserDefaultsKeysEnum.childCount)")
                 case .failure(_):
                     return
                 }
             }
         }
-    }
+    
     
     
 }

@@ -35,15 +35,8 @@ class WeekdayPresenter: WeekdayPresenterProtocol {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
               let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationName)\(direction)") as? [Int] else {return}
         
-        //var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
-        
-        //let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
-        
-        var currentDay = Int(Date().timeIntervalSince1970)
-        currentDay.decoderDt(format: "EEEE")
-        
         let hoursArray = timeSheet.map {$0 / 3600}
-        var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
         view?.setNumberOfRow(rowNumber: hours.count)
         timeSheetTableViewValue.reloadData()
     }

@@ -16,14 +16,14 @@ protocol TimeViewControllerProtocol: AnyObject {
                   toStationName: String)
     func setNextTimeLabel(nextTime: String)
     func setDayOfWeek(dayOfWeekValue: String)
-
+    
 }
 
 class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     var numberOfRow: Int = 0
     var presenter: TimeViewPresenter?
-
+    
     
     //MARK: - Create items
     private lazy var fromStationLabel: UILabel = {
@@ -86,7 +86,6 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     private lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
-        //label.text = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)")
         label.font = UIFont.systemFont(ofSize: 20,
                                        weight: .bold)
         return label
@@ -176,8 +175,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
         
-       // if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
-            presenter?.checkDayOfWeek()
+        presenter?.checkDayOfWeek()
         
     }
     
@@ -189,7 +187,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.width.equalTo(view.frame.width * 0.9)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
-
+        
         viewForNextTime.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.equalTo(fromStationLabel.snp.bottom).offset(10)
@@ -210,7 +208,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(viewForNextTime.snp.bottom).offset(3)
         }
-
+        
         timeSheetTableView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.top.equalTo(dayOfWeekLabel.snp.bottom)

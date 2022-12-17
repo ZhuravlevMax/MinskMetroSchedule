@@ -43,41 +43,64 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                         toStation: String,
                         timeSheetTableViewValue: UITableView) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationName)\(direction)") as? [Int] else {return}
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        else {return}
         
-        var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: stationName, direction: "\(direction)") { [weak self] result in
+            
+            guard let self else {return}
+            print(result)
+            switch result {
+            case .success(let timeSheet):
+                let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+                
+                let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
+                
+                let hoursArray = hoursArrayNext.map {$0 / 3600}
+                let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+                self.view?.numberOfRow = hours.count
+                timeSheetTableViewValue.reloadData()
+            case .failure(_):
+                return
+            }
+        }
         
-        let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
         
-        let hoursArray = hoursArrayNext.map {$0 / 3600}
-        var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
-        view?.numberOfRow = hours.count
-        timeSheetTableViewValue.reloadData()
     }
     
     func setNextTime(toStationName: String, stationName: String ) {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationName)\(direction)") as? [Int] else {return}
+        let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") else {return}
         
-        var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
-        
-        // Здесь добавил условие, чтобы исправить баг со временем, когда пользователь смотрит расписание после 00:00
-        if currentTimeFromStartDay < 1500 {
-            currentTimeFromStartDay += 86400
+        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: stationName, direction: "\(direction)") { result in
+            print(result)
+            switch result {
+            case .success(let timeSheet):
+                var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+                
+                // Здесь добавил условие, чтобы исправить баг со временем, когда пользователь смотрит расписание после 00:00
+                if currentTimeFromStartDay < 1500 {
+                    currentTimeFromStartDay += 86400
+                }
+                
+                let nextTime = timeSheet.first { $0 > currentTimeFromStartDay }
+                
+                guard var nextTime else {return}
+                
+                //Здесь условие, для того чтобы у пользователя отображалось время не 24:00, а 00:00
+                if currentTimeFromStartDay > 86400 {
+                    nextTime -= 86400
+                }
+                
+                let formattedString = nextTime.decoderDt(format: "HH:mm")
+                self.view?.setNextTimeLabel(nextTime: formattedString)
+            case .failure(_):
+                return
+            }
         }
         
-        let nextTime = timeSheet.first { $0 > currentTimeFromStartDay }
         
-        guard var nextTime else {return}
-        
-        //Здесь условие, для того чтобы у пользователя отображалось время не 24:00, а 00:00
-        if currentTimeFromStartDay > 86400 {
-            nextTime -= 86400
-        }
-        
-        let formattedString = nextTime.decoderDt(format: "HH:mm")
-        self.view?.setNextTimeLabel(nextTime: formattedString)
         
     }
     
@@ -87,11 +110,8 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                                          toStation: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
               let stationNameValue = StationNamesEnum(rawValue: stationName),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationNameValue)\(direction)") as? [Int],
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         else {return}
-        
-        
         
         FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(stationNameValue)", direction: "\(direction)") { result in
             print(result)
@@ -161,8 +181,6 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         default:
             dayOfWeek = "Расписание буднего дня"
         }
-        
-        //UserDefaults.standard.set(dayOfWeek, forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         view?.setDayOfWeek(dayOfWeekValue: dayOfWeek)
     }
     

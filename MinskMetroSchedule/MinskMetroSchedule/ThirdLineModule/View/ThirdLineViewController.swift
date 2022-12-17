@@ -62,22 +62,8 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateViewConstraints()
-        
-        //UserDefaults.standard.set(Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE"), forKey: "\(UserDefaultsKeysEnum.currentDay)")
-        
-        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)") == nil, let dayOfWeekValue = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") {
-            presenter.downloadAllData(dayOfWeek: dayOfWeekValue, view:self)
-        }
-        
-        if UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)") == 0 {
-            presenter.setNumberOfRow()
-        } else {
-            numberOfRow = UserDefaults.standard.integer(forKey: "\(UserDefaultsKeysEnum.childCount)")
-        }
-        
-        if UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") != Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE"), let dayOfWeekValue = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") {
-            presenter.checkConnection(dayOfWeek: dayOfWeekValue, view: self)
-        }
+ 
+        presenter.setNumberOfRow()
     }
     
     //MARK: - Работа с констрейнтами
