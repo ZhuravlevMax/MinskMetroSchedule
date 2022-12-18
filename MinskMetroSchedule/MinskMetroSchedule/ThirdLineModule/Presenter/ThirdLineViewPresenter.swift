@@ -93,7 +93,21 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func downloadAllData(dayOfWeek: String, view: UIViewController) {
-    }
+        FireBaseManager.shared.getAllData(dayOfWeek: dayOfWeek, completion: { [weak self] result in
+                guard let self else {return}
+                switch result {
+                case .success(let dailyData):
+                    UserDefaults.standard.set(dailyData, forKey: "\(UserDefaultsKeysEnum.allDayData)")
+                    print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
+                    self.showSuccessAlert(view: view)
+                case .failure(_):
+                    print("FAIL")
+                    self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
+                    return
+                }
+            })
+        }
+    
     
     func showErrorAlert(dayOfWeek: String, view: UIViewController) {
         let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение", preferredStyle: .alert)
@@ -105,7 +119,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func showSuccessAlert(view: UIViewController) {
-        let errorAlertController = UIAlertController(title: "Успех!", message: "Актуальное расписание загружено", preferredStyle: .alert)
+        let errorAlertController = UIAlertController(title: "Успешно!", message: "Актуальное расписание загружено", preferredStyle: .alert)
         let okButtonAction = UIAlertAction(title: "Ok", style: .default) { [self] _ in
             setNumberOfRow()
         }
@@ -128,15 +142,23 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
     func setNumberOfRow() {
         
-            FireBaseManager.shared.getChildCount { result in
-                switch result {
-                case .success(let childCount):
-                    self.view?.numberOfRow = childCount
-                case .failure(_):
-                    return
-                }
-            }
-        }
+        //        FireBaseManager.shared.getChildCount { result in
+        //            switch result {
+        //            case .success(let childCount):
+        //                self.view?.numberOfRow = childCount
+        //            case .failure(_):
+        //                return
+        //            }
+        //        }
+        //                UserDefaults.standard.set(dict, forKey: "\(UserDefaultsKeysEnum.allDayData)")
+        //                let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as! [String:Any]
+        //                let station = allData["vokzalnaya"] as! [String:Any]
+        //                let stationName = station["stationName"] as? String
+        
+        guard let allTimesheet = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any] else {return}
+        print(allTimesheet.count)
+        view?.numberOfRow = allTimesheet.count
+    }
     
     
     

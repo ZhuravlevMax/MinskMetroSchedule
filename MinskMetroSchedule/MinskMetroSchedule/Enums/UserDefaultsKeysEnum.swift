@@ -17,4 +17,5 @@ enum UserDefaultsKeysEnum {
     case childCount
     case dayOfWeek
     case currentDay
+    case allDayData
 }

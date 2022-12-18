@@ -38,7 +38,11 @@ class FireBaseManager: FirebaseManagerProtocol {
                 guard let dict = snapshot?.value as? [String:Any],
                       let timeSheet = dict["\(direction)"] as? [Int]
                 else {return}
+                UserDefaults.standard.set(dict, forKey: "\(UserDefaultsKeysEnum.allDayData)")
+                let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)")
+                //allData?.value
                 print(timeSheet)
+                
                 completion(.success(timeSheet))
             }
         }
@@ -52,9 +56,33 @@ class FireBaseManager: FirebaseManagerProtocol {
                 guard let error else {return}
                 completion(.failure(error))
             } else {
-                guard let childCount = snapshot?.childrenCount else {return}
+                guard let childCount = snapshot?.childrenCount
+                //let dict = snapshot?.value as? [String:Any]
+                else {return}
+                
+//                UserDefaults.standard.set(dict, forKey: "\(UserDefaultsKeysEnum.allDayData)")
+//                let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as! [String:Any]
+//                let station = allData["vokzalnaya"] as! [String:Any]
+//                let stationName = station["stationName"] as? String
                 print(childCount)
                 completion(.success(Int(childCount)))
+                
+            }
+        }
+    }
+    
+    func getAllData(dayOfWeek: String, completion: @escaping (Result<[String:Any], Error>) -> Void) {
+        ref.child("\(dayOfWeek)").getData { error, snapshot in
+            if error != nil {
+                print("ERROR")
+                print("\(error!._code)")
+                guard let error else {return}
+                completion(.failure(error))
+            } else {
+                guard let dailyData = snapshot?.value as? [String:Any] else {return}
+                print(dailyData)
+                completion(.success(dailyData))
+                
             }
         }
     }

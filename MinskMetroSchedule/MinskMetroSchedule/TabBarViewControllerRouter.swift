@@ -42,7 +42,7 @@ class TabBarControllerRouter: ViewsRouterProtocol {
         default:
             UserDefaults.standard.set("stations", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         }
-        
+
         tabBarController.viewControllers = [thirdLineViewController]
     }
     
