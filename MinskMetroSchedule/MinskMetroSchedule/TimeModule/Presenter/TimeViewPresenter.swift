@@ -42,8 +42,11 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func setNumberOfRow(stationName: String,
                         toStation: String,
                         timeSheetTableViewValue: UITableView) {
-        guard let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+        
+        guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let stations = allData["\(dayOfWeek)"] as? [String:Any],
+              let direction = FireBaseFieldsEnum(rawValue: toStation),
               let station = stations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
         else {return}
@@ -62,8 +65,9 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func setNextTime(toStationName: String, stationName: String ) {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
-              
-                let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let stations = allData["\(dayOfWeek)"] as? [String:Any],
               let station = stations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int] else {return}
         
@@ -93,7 +97,9 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                                          stationName: String,
                                          toStation: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let stations = allData["\(dayOfWeek)"] as? [String:Any],
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let station = stations["\(stationNameValue)"] as? [String:Any],
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
