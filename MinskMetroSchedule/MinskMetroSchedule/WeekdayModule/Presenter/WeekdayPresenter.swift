@@ -33,7 +33,10 @@ class WeekdayPresenter: WeekdayPresenterProtocol {
                         toStation: String,
                         timeSheetTableViewValue: UITableView) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationName)\(direction)") as? [Int] else {return}
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let station = stations[stationName] as? [String:Any],
+              let timeSheet = station["\(direction)"] as? [Int]
+        else {return}
         
         let hoursArray = timeSheet.map {$0 / 3600}
         let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
@@ -46,8 +49,12 @@ class WeekdayPresenter: WeekdayPresenterProtocol {
                                          stationName: String,
                                          toStation: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let stationNameValue = StationNamesEnum(rawValue: stationName),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationNameValue)\(direction)") as? [Int] else {return}
+                  let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+                  let stationNameValue = StationNamesEnum(rawValue: stationName),
+                  let station = stations["\(stationNameValue)"] as? [String:Any],
+                  let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+                  let timeSheet = station["\(direction)"] as? [Int]
+        else {return}
         
         
         //var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)

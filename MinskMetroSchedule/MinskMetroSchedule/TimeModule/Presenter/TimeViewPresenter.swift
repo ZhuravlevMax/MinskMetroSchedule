@@ -21,7 +21,7 @@ protocol TimeViewPresenterProtocol: AnyObject {
     
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
-                       dayTypeValue: DayTypeEnum)
+                       dayTypeValue: String)
     func checkDayOfWeek()
 }
 
@@ -142,11 +142,18 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
-                       dayTypeValue: DayTypeEnum) {
+                       dayTypeValue: String) {
         
+        var dayOfWeek = ""
+        switch dayTypeValue {
+        case "Saturday", "Sunday":
+            dayOfWeek = "Расписание выходного дня"
+        default:
+            dayOfWeek = "Расписание буднего дня"
+        }
         router.openWeekdayVC(fromStationName: fromStationName,
                              toStationName: toStationName,
-                             dayTypeValue: dayTypeValue)
+                             dayTypeValue: dayOfWeek)
     }
     
     func checkDayOfWeek() {

@@ -16,7 +16,7 @@ protocol BuilderProtocol {
                           toStationName: String) -> UIViewController
     func createWeekdayModule(fromStationName: String,
                              toStationName: String,
-                             dayTypeValue: DayTypeEnum) -> UIViewController
+                             dayTypeValue: String) -> UIViewController
 }
 
 class ModuleBuilder: BuilderProtocol {
@@ -54,12 +54,11 @@ class ModuleBuilder: BuilderProtocol {
     
     func createWeekdayModule(fromStationName: String,
                              toStationName: String,
-                             dayTypeValue: DayTypeEnum) -> UIViewController {
+                             dayTypeValue: String) -> UIViewController {
         let view = WeekdayViewController()
         view.setItems(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayTypeValue)
         let presenter = WeekdayPresenter(view: view)
         view.presenter = presenter
-        
         return view
     }
     

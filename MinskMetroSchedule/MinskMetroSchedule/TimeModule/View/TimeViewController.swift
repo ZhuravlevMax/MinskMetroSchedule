@@ -297,9 +297,12 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     //MARK: - Action for showWeekdaysButton
     @objc private func showWeekdaysButtonPressed() {
         
-        guard  let fromStationName = fromStationLabel.text, let toStationName = toStationLabel.text else {return}
+        guard  let fromStationName = fromStationLabel.text,
+               let toStationName = toStationLabel.text,
+               let dayType = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") else {return}
         
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: DayTypeEnum.weekday)
+        
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayType)
         
         print("На Ковальскую")
     }

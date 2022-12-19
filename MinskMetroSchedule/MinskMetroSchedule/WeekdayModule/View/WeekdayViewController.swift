@@ -14,7 +14,7 @@ protocol WeekdayViewControllerProtocol: AnyObject {
     
     func setItems(fromStationName: String,
                   toStationName: String,
-                  dayTypeValue: DayTypeEnum)
+                  dayTypeValue: String)
     
     func setNumberOfRow(rowNumber: Int)
     
@@ -89,10 +89,10 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
     
     func setItems(fromStationName: String,
                   toStationName: String,
-                  dayTypeValue: DayTypeEnum) {
+                  dayTypeValue: String) {
         stationNameLabel.text = fromStationName
         toStationNameLabel.text = toStationName
-        dayTypeLabel.text = dayTypeValue.rawValue
+        dayTypeLabel.text = dayTypeValue
     }
     
     func setNumberOfRow(rowNumber: Int) {
