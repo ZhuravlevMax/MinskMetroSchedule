@@ -92,10 +92,10 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
             switch result {
             case .success(let dailyData):
                 UserDefaults.standard.set(dailyData, forKey: "\(UserDefaultsKeysEnum.allDayData)")
-                print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
+                //print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
                 self.showSuccessAlert(view: view)
             case .failure(_):
-                print("FAIL")
+                //print("FAIL")
                 self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
                 return
             }

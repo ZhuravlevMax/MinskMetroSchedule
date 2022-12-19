@@ -69,7 +69,7 @@ class WeekdayPresenter: WeekdayPresenterProtocol {
         
         //let hourModifyString = hourModify.map { String($0) }
         let minutesArray = timeSheet.map {($0 % 3600) / 60}
-        print(minutesArray)
+        //print(minutesArray)
         
         var minutesAll: [[Int]] = []
         

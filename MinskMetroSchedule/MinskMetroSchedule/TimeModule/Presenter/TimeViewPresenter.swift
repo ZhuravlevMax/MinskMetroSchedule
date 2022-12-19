@@ -49,7 +49,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: stationName, direction: "\(direction)") { [weak self] result in
             
             guard let self else {return}
-            print(result)
+            //print(result)
             switch result {
             case .success(let timeSheet):
                 let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
@@ -71,12 +71,10 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func setNextTime(toStationName: String, stationName: String ) {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
-        let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") else {return}
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: stationName, direction: "\(direction)") { result in
-            print(result)
-            switch result {
-            case .success(let timeSheet):
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let station = stations[stationName] as? [String:Any],
+        let timeSheet = station["\(direction)"] as? [Int] else {return}
+
                 var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
                 
                 // Здесь добавил условие, чтобы исправить баг со временем, когда пользователь смотрит расписание после 00:00
@@ -95,13 +93,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                 
                 let formattedString = nextTime.decoderDt(format: "HH:mm")
                 self.view?.setNextTimeLabel(nextTime: formattedString)
-            case .failure(_):
-                return
-            }
-        }
-        
-        
-        
+
     }
     
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
@@ -114,7 +106,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         else {return}
         
         FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(stationNameValue)", direction: "\(direction)") { result in
-            print(result)
+            // print(result)
             switch result {
             case .success(let timeSheet):
                 let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
@@ -136,7 +128,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                 
                 //let hourModifyString = hourModify.map { String($0) }
                 let minutesArray = timeSheet.map {($0 % 3600) / 60}
-                print(minutesArray)
+                // print(minutesArray)
                 
                 var minutesAll: [[Int]] = []
                 

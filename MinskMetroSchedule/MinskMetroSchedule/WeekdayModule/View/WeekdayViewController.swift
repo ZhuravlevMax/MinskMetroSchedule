@@ -76,9 +76,9 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
         view.addSubview(toStationNameLabel)
         view.addSubview(timeSheetTableView)
         
-        print(fromStation)
-        print(toStation)
-        print(dayType)
+//        print(fromStation)
+//        print(toStation)
+//        print(dayType)
         
         //view.addGradientBackground(firstColor: .green, secondColor: .white)
         
