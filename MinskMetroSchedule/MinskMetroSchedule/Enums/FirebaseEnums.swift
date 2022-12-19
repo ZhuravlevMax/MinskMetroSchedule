@@ -9,6 +9,7 @@ import Foundation
 
 enum FireBaseCollectionsEnum {
     case stations
+    case timeSheetWeekday
 }
 
 enum FireBaseFieldsEnum: String {

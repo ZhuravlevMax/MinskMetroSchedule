@@ -71,8 +71,8 @@ class FireBaseManager: FirebaseManagerProtocol {
         }
     }
     
-    func getAllData(dayOfWeek: String, completion: @escaping (Result<[String:Any], Error>) -> Void) {
-        ref.child("\(dayOfWeek)").getData { error, snapshot in
+    func getAllData(completion: @escaping (Result<[String:Any], Error>) -> Void) {
+        ref.getData { error, snapshot in
             if error != nil {
                 //print("ERROR")
                 //print("\(error!._code)")

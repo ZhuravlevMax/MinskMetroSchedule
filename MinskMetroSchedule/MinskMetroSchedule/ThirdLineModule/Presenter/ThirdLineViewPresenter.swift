@@ -17,9 +17,9 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
                     stationName: String)
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol)
-    func showErrorAlert(dayOfWeek:String, view: UIViewController)
+    func showErrorAlert(view: UIViewController)
     func showSuccessAlert(view: UIViewController)
-    func checkConnection(dayOfWeek: String, view: UIViewController)
+    func checkConnection(view: UIViewController)
 }
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
@@ -42,8 +42,9 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol) {
         
-        guard let stationNameValue = StationNamesNumEnum(rawValue: indexPath.row),
-              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+        guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let stations = allData["\(FireBaseCollectionsEnum.stations)"] as? [String:Any],
+              let stationNameValue = StationNamesNumEnum(rawValue: indexPath.row),
               let station = stations["\(stationNameValue)"] as? [String:Any],
               let stationNameText = station["\(FireBaseFieldsEnum.stationName)"] as? String,
               let transferName = station["\(FireBaseFieldsEnum.transferName)"] as? String,
@@ -86,27 +87,27 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         
     }
     
-    func downloadAllData(dayOfWeek: String, view: UIViewController) {
-        FireBaseManager.shared.getAllData(dayOfWeek: dayOfWeek, completion: { [weak self] result in
+    func downloadAllData(view: UIViewController) {
+        FireBaseManager.shared.getAllData(completion: { [weak self] result in
             guard let self else {return}
             switch result {
-            case .success(let dailyData):
-                UserDefaults.standard.set(dailyData, forKey: "\(UserDefaultsKeysEnum.allDayData)")
+            case .success(let allData):
+                UserDefaults.standard.set(allData, forKey: "\(UserDefaultsKeysEnum.allData)")
                 //print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
                 self.showSuccessAlert(view: view)
             case .failure(_):
                 //print("FAIL")
-                self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
+                self.showErrorAlert(view: view)
                 return
             }
         })
     }
     
     
-    func showErrorAlert(dayOfWeek: String, view: UIViewController) {
+    func showErrorAlert(view: UIViewController) {
         let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение", preferredStyle: .alert)
         let okButtonAction = UIAlertAction(title: "Повторить", style: .default) { [self] _ in
-            downloadAllData(dayOfWeek:dayOfWeek, view: view)
+            downloadAllData(view: view)
         }
         errorAlertController.addAction(okButtonAction)
         view.present(errorAlertController, animated: true)
@@ -121,12 +122,12 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         view.present(errorAlertController, animated: true)
     }
     
-    func checkConnection(dayOfWeek: String, view: UIViewController) {
+    func checkConnection(view: UIViewController) {
         let monitor = NWPathMonitor()
         monitor.start(queue: DispatchQueue(label: "NetworkMonitor"))
         monitor.pathUpdateHandler = { (path) in
             if path.status == .satisfied {
-                self.downloadAllData(dayOfWeek: dayOfWeek, view: view)
+                self.downloadAllData(view: view)
                 print("Connected")
             } else {
                 print("Not Connected")
@@ -149,7 +150,8 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         //                let station = allData["vokzalnaya"] as! [String:Any]
         //                let stationName = station["stationName"] as? String
         
-        guard let allTimesheet = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any] else {return}
+        guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let allTimesheet = allData["\(FireBaseCollectionsEnum.timeSheetWeekday)"] as? [String:Any] else {return}
         print(allTimesheet.count)
         view?.numberOfRow = allTimesheet.count
     }
