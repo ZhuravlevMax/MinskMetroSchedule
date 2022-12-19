@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>987272970471-b68ji3g8qf284h7a9puic8vhoi1ite3e.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.987272970471-b68ji3g8qf284h7a9puic8vhoi1ite3e</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCijDQj0Fcgwkw8Z1pYaXrzCi7GJkboh0M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>987272970471</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Zhuravlev.MinskMetroSchedule</string>
+	<key>PROJECT_ID</key>
+	<string>minskmetroschedule-94c01</string>
+	<key>STORAGE_BUCKET</key>
+	<string>minskmetroschedule-94c01.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:987272970471:ios:b23deb635db34b1fb82242</string>
+</dict>
+</plist>
