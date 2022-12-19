@@ -71,6 +71,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func setNextTime(toStationName: String, stationName: String ) {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
+              
               let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
               let station = stations[stationName] as? [String:Any],
         let timeSheet = station["\(direction)"] as? [Int] else {return}
@@ -101,14 +102,13 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                                          stationName: String,
                                          toStation: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
               let stationNameValue = StationNamesEnum(rawValue: stationName),
-              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+              let station = stations["\(stationNameValue)"] as? [String:Any],
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let timeSheet = station["\(direction)"] as? [Int]
         else {return}
-        
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: "\(stationNameValue)", direction: "\(direction)") { result in
-            // print(result)
-            switch result {
-            case .success(let timeSheet):
+
                 let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
                 
                 let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
@@ -144,11 +144,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                 
                 cell.configureCell(hourValue: "\(String(format: "%02d", arguments: [hourModify[indexPath.row]])):",
                                    minutesValue: minutesString)
-                
-            case .failure(_):
-                return
-            }
-        }
+
         
         
     }
