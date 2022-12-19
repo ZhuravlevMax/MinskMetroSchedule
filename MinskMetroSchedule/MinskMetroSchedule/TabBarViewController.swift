@@ -13,7 +13,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.tintColor = .green
+        tabBar.tintColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         tabBar.unselectedItemTintColor = .black
     }
 }

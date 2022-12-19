@@ -11,7 +11,9 @@ protocol ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String)
+                       stationNameValue: String,
+                       transferName: String,
+                       transferColor: UIColor)
     var thirdLineTableViewControllerDelegate: ThirdLineViewProtocol? {get set}
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol)
@@ -29,18 +31,27 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         label.text = "Name"
         label.font = UIFont.systemFont(ofSize: 20,
                                        weight: .bold)
-        label.textColor = UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
+        return label
+    }()
+    
+    private lazy var transferLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 13,
+                                       weight: .bold)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
         return label
     }()
     
     private lazy var toKovalskayaStationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("\(FireBaseFieldsEnum.toKovalskayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
                          action: #selector(self.toKovalskayaStationButtonPressed),
@@ -50,12 +61,12 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     private lazy var toUbileinayaStationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("\(FireBaseFieldsEnum.toUbileynayaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
                          action: #selector(self.toUbileinayaStationButtonPressed),
@@ -65,18 +76,20 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     
     private lazy var showFullScheduleButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("Полное расписание", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
                          action: #selector(self.showFullScheduleButtonPressed),
                          for: .touchUpInside)
         return button
     }()
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -91,6 +104,8 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         contentView.addSubview(toKovalskayaStationButton)
         contentView.addSubview(toUbileinayaStationButton)
         //contentView.addSubview(showFullScheduleButton)
+        contentView.addSubview(transferLabel)
+        contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateConstraints()
     }
@@ -112,11 +127,16 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     func configureCell(stationNameText: String,
                        toKovalskayaStationButtonIsHidden: Bool,
                        toUbileinayaStationButtonIsHidden: Bool,
-                       stationNameValue: String) {
+                       stationNameValue: String,
+                       transferName: String,
+                       transferColor: UIColor) {
         stationNameLabel.text = stationNameText
         toKovalskayaStationButton.isHidden = toKovalskayaStationButtonIsHidden
         toUbileinayaStationButton.isHidden = toUbileinayaStationButtonIsHidden
         stationName = stationNameValue
+        transferLabel.text = transferName
+        transferLabel.textColor = transferColor
+        
     }
     
     func setThirdStationViewDelegate(view: ThirdLineViewProtocol) {
@@ -131,9 +151,14 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
             $0.top.equalToSuperview().inset(10)
         }
         
+        transferLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(5)
+        }
+        
         toKovalskayaStationButton.snp.makeConstraints {
             $0.left.equalToSuperview().inset(10)
-            $0.top.equalTo(stationNameLabel.snp.bottom).offset(20)
+            $0.top.equalTo(transferLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
             $0.height.equalTo(50)
             $0.bottom.equalToSuperview().inset(10)
@@ -141,17 +166,10 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
         
         toUbileinayaStationButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
-            $0.top.equalTo(stationNameLabel.snp.bottom).offset(20)
+            $0.top.equalTo(transferLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
             $0.height.equalTo(50)
         }
-        
-//        showFullScheduleButton.snp.makeConstraints {
-//            $0.centerX.equalToSuperview()
-//            $0.top.equalTo(toKovalskayaStationButton.snp.bottom).offset(20)
-//            $0.bottom.equalToSuperview().inset(10)
-//            $0.width.equalTo(contentView.frame.width * 0.5)
-//        }
         
         super.updateConstraints()
     }
@@ -159,7 +177,9 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     //MARK: - Action for toKovalskayaStationButton
     @objc private func toKovalskayaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toKovalskayaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        
         thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped)
+        
         
         print("На Ковальскую")
     }
@@ -167,6 +187,7 @@ class ThirdLineTableViewCell: UITableViewCell, ThirdLineTableViewCellProtocol {
     //MARK: - Action for toUbileinayaStationButton
     @objc private func toUbileinayaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toUbileinayaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+
         thirdLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped)
         print("На Юбилейную")
     }

@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
+import Network
 
 protocol ThirdLineViewProtocol: AnyObject {
     //ViewController methods here
     var presenter: ThirdLineViewPresenter? {get}
+    var numberOfRow: Int {get set}
 
 }
 
@@ -22,6 +24,7 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         tableView.register(ThirdLineTableViewCell.self, forCellReuseIdentifier: ThirdLineTableViewCell.key)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
@@ -31,6 +34,11 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
     
     //MARK: - Создание переменных
     var presenter: ThirdLineViewPresenter?
+    var numberOfRow: Int = 0 {
+        didSet {
+            thirdLineTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +53,20 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         navigationController?.navigationBar.prefersLargeTitles = true
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 124/255, green: 252/255, blue: 0/255, alpha: 1)
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(red: 19/255, green: 185/255, blue: 86/255, alpha: 1)]
+        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")]
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
         
-        view.backgroundColor = presenter.thirdViewControllerBackgroundColor
+        view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateViewConstraints()
+ 
+        guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") else {return}
         
+        presenter.downloadAllData(dayOfWeek: dayOfWeek, view: self)
+        presenter.setNumberOfRow()
     }
     
     //MARK: - Работа с констрейнтами
@@ -66,13 +78,13 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         
         super.updateViewConstraints()
     }
-    
 
 }
 
 extension ThirdLineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        //4
+        numberOfRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,3 +101,5 @@ extension ThirdLineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+

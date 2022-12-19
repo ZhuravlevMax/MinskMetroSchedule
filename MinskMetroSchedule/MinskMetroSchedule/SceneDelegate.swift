@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let builder = ModuleBuilder()
         let router = TabBarControllerRouter(tabBarController: tabBarController, builder: builder)
         router.initViewControllers()
-        router.downloadAllData()
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }

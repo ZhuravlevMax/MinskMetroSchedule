@@ -18,7 +18,7 @@ protocol BaseTabBarContollerRouter {
 protocol ViewsRouterProtocol: BaseTabBarContollerRouter {
     
     func initViewControllers()
-    func downloadAllData()
+    //func downloadAllData()
     
 }
 
@@ -32,39 +32,17 @@ class TabBarControllerRouter: ViewsRouterProtocol {
         self.builder = builder
     }
     
-    func downloadAllData() {
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.kovalskaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { timeSheetArray in
-            UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)")
-            print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.kovalskayatoUbileynayaTimeSheet)"))
-        }
-        
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { timeSheetArray in
-            UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.vokzalnayatoKovalskayaTimeSheet)")
-        }
-        
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.vokzalnaya)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { timeSheetArray in
-            UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.vokzalnayatoUbileynayaTimeSheet)")
-        }
-        
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { timeSheetArray in
-            UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.bogushevichatoKovalskayaTimeSheet)")
-        }
-        
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.bogushevicha)", direction: "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)") { timeSheetArray in
-            UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.bogushevichatoUbileynayaTimeSheet)")
-        }
-        
-        FireBaseManager.shared.getTimeSheet(stationName: "\(StationNamesEnum.ubileynaya)", direction: "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)") { timeSheetArray in
-            UserDefaults.standard.set(timeSheetArray, forKey: "\(UserDefaultsKeysEnum.ubileynayatoKovalskayaTimeSheet)")
-            print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.ubileynayatoKovalskayaTimeSheet)"))
-        }
-        
-    }
-    
     func initViewControllers() {
         guard let builder = builder, let tabBarController = tabBarController else {return}
         let thirdLineViewController = UINavigationController(rootViewController: builder.createThirdLineModule(title: "3 Линия", image: UIImage(systemName: "m.circle")))
-        
+    
+        switch Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
+        case "Saturday", "Sunday":
+            UserDefaults.standard.set("timeSheetWeekday", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        default:
+            UserDefaults.standard.set("stations", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        }
+
         tabBarController.viewControllers = [thirdLineViewController]
     }
     

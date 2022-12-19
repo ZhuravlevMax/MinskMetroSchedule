@@ -15,7 +15,14 @@ protocol TimeViewPresenterProtocol: AnyObject {
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String)
+    func setNumberOfRow(stationName: String,
+                        toStation: String,
+                        timeSheetTableViewValue: UITableView)
     
+    func openWeekdayVC(fromStationName: String,
+                       toStationName: String,
+                       dayTypeValue: DayTypeEnum)
+    func checkDayOfWeek()
 }
 
 class TimeViewPresenter: TimeViewPresenterProtocol {
@@ -23,16 +30,42 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     var timeViewControllerBackgroundColor: UIColor = .white
     
     weak var view: TimeViewControllerProtocol?
+    private(set) var router: TimeRouterProtocol
     
     
-    required init(view: TimeViewControllerProtocol) {
+    required init(view: TimeViewControllerProtocol,
+                  router: TimeRouterProtocol) {
         self.view = view
+        self.router = router
+    }
+    
+    func setNumberOfRow(stationName: String,
+                        toStation: String,
+                        timeSheetTableViewValue: UITableView) {
+        guard let direction = FireBaseFieldsEnum(rawValue: toStation),
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let station = stations[stationName] as? [String:Any],
+              let timeSheet = station["\(direction)"] as? [Int]
+        else {return}
+        
+        let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+        
+        let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
+        
+        let hoursArray = hoursArrayNext.map {$0 / 3600}
+        let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        self.view?.numberOfRow = hours.count
+        timeSheetTableViewValue.reloadData()
+        
     }
     
     func setNextTime(toStationName: String, stationName: String ) {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationName)\(direction)") as? [Int] else {return}
+              
+                let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let station = stations[stationName] as? [String:Any],
+              let timeSheet = station["\(direction)"] as? [Int] else {return}
         
         var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
         
@@ -60,11 +93,18 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                                          stationName: String,
                                          toStation: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
               let stationNameValue = StationNamesEnum(rawValue: stationName),
-              let timeSheet: [Int] = UserDefaults.standard.object(forKey: "\(stationNameValue)\(direction)") as? [Int] else {return}
+              let station = stations["\(stationNameValue)"] as? [String:Any],
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let timeSheet = station["\(direction)"] as? [Int]
+        else {return}
         
-        let hoursArray = timeSheet.map {$0 / 3600}
-        var hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+        
+        let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
+        let hoursArray = hoursArrayNext.map {$0 / 3600}
+        let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
         var hourModify: [Int] = []
         
         for hour in hours {
@@ -79,12 +119,12 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
         //let hourModifyString = hourModify.map { String($0) }
         let minutesArray = timeSheet.map {($0 % 3600) / 60}
-        print(minutesArray)
+        // print(minutesArray)
         
         var minutesAll: [[Int]] = []
         
         for _ in hoursArray {
-            var minutes = timeSheet.filter { return $0 / 3600 == indexPath.row + 5}
+            var minutes = hoursArrayNext.filter { return $0 / 3600 == hours[indexPath.row]}
             minutes = minutes.map {($0 % 3600) / 60}
             
             minutesAll.append(minutes)
@@ -96,6 +136,31 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         cell.configureCell(hourValue: "\(String(format: "%02d", arguments: [hourModify[indexPath.row]])):",
                            minutesValue: minutesString)
         
+        
+        
+    }
+    
+    func openWeekdayVC(fromStationName: String,
+                       toStationName: String,
+                       dayTypeValue: DayTypeEnum) {
+        
+        router.openWeekdayVC(fromStationName: fromStationName,
+                             toStationName: toStationName,
+                             dayTypeValue: dayTypeValue)
+    }
+    
+    func checkDayOfWeek() {
+        let currentDay = Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE")
+        UserDefaults.standard.set(currentDay, forKey: "\(UserDefaultsKeysEnum.currentDay)")
+        
+        var dayOfWeek = ""
+        switch currentDay {
+        case "Saturday", "Sunday":
+            dayOfWeek = "Расписание выходного дня"
+        default:
+            dayOfWeek = "Расписание буднего дня"
+        }
+        view?.setDayOfWeek(dayOfWeekValue: dayOfWeek)
     }
     
 }

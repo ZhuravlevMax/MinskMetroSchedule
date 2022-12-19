@@ -19,15 +19,17 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
     //MARK: - Create items
     private lazy var hourLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hour"
-        label.font = UIFont.systemFont(ofSize: 20,
+        label.text = "-"
+        label.font = UIFont.systemFont(ofSize: 16,
                                        weight: .bold)
         return label
     }()
     
     private lazy var minutesLabel: UILabel = {
         let label = UILabel()
-        label.text = "minutes"
+        label.text = "-"
+        label.font = UIFont.systemFont(ofSize: 13,
+                                       weight: .light)
         return label
     }()
 
@@ -42,7 +44,8 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
         //MARK: - Add items to contentsView
         contentView.addSubview(hourLabel)
         contentView.addSubview(minutesLabel)
-        
+        contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
+       // contentView.backgroundColor = .clear
         updateConstraints()
     }
     
@@ -61,6 +64,7 @@ class TimeSheetTableViewCell: UITableViewCell, TimeSheetTableViewCellProtocol {
         
         hourLabel.text = hourValue
         minutesLabel.text = minutesValue
+        
     }
     
     //MARK: - Set constraints for items
