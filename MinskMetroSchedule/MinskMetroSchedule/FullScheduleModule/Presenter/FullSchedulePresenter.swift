@@ -17,7 +17,8 @@ protocol FullSchedulePresenterProtocol: AnyObject {
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
-                                         toStation: String)
+                                         toStation: String,
+                                         dayOfWeek: String)
     
 }
 
@@ -49,10 +50,11 @@ class FullSchedulePresenter: FullSchedulePresenterProtocol {
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
-                                         toStation: String) {
-        guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+                                         toStation: String,
+                                         dayOfWeek: String) {
+        guard let dayOfWeekValue = DayTypeEnum(rawValue: dayOfWeek),
               let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let stations = allData["\(dayOfWeek)"] as? [String:Any],
+              let stations = allData["\(dayOfWeekValue)"] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let station = stations["\(stationNameValue)"] as? [String:Any],

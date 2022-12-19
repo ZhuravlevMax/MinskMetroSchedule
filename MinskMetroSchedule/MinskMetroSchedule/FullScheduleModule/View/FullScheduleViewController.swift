@@ -14,7 +14,7 @@ protocol FullScheduleViewControllerProtocol: AnyObject {
     
     func setItems(fromStationName: String,
                   toStationName: String,
-                  dayTypeValue: String)
+                  dayOfWeek: String)
     
     func setNumberOfRow(rowNumber: Int)
     
@@ -56,7 +56,7 @@ class FullScheduleViewController: UIViewController, FullScheduleViewControllerPr
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TimeSheetTableViewCell.self, forCellReuseIdentifier: TimeSheetTableViewCell.key)
+        tableView.register(FullScheduleTableViewCell.self, forCellReuseIdentifier: FullScheduleTableViewCell.key)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 10
@@ -76,9 +76,9 @@ class FullScheduleViewController: UIViewController, FullScheduleViewControllerPr
         view.addSubview(toStationNameLabel)
         view.addSubview(timeSheetTableView)
         
-//        print(fromStation)
-//        print(toStation)
-//        print(dayType)
+        //        print(fromStation)
+        //        print(toStation)
+        //        print(dayType)
         
         //view.addGradientBackground(firstColor: .green, secondColor: .white)
         
@@ -89,10 +89,10 @@ class FullScheduleViewController: UIViewController, FullScheduleViewControllerPr
     
     func setItems(fromStationName: String,
                   toStationName: String,
-                  dayTypeValue: String) {
+                  dayOfWeek: String) {
         stationNameLabel.text = fromStationName
         toStationNameLabel.text = toStationName
-        dayTypeLabel.text = "\(dayTypeValue)"
+        dayTypeLabel.text = dayOfWeek
     }
     
     func setNumberOfRow(rowNumber: Int) {
@@ -134,10 +134,11 @@ extension FullScheduleViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let toStationName = toStationNameLabel.text, let stationName = stationNameLabel.text else {return UITableViewCell()}
+        guard let toStationName = toStationNameLabel.text, let stationName = stationNameLabel.text,
+        let dayOfWeek = dayTypeLabel.text else {return UITableViewCell()}
         
-        if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
-            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName)
+        if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: FullScheduleTableViewCell.key, for: indexPath) as? FullScheduleTableViewCell {
+            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName, dayOfWeek: dayOfWeek)
             cell.backgroundColor = .clear
             return cell
         }

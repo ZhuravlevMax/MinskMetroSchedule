@@ -18,6 +18,7 @@
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
 		944C49C62950E11500EA0B56 /* FullScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49C52950E11400EA0B56 /* FullScheduleViewController.swift */; };
 		944C49C82950E13500EA0B56 /* FullSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49C72950E13500EA0B56 /* FullSchedulePresenter.swift */; };
+		944C49CD2950EFB600EA0B56 /* FullScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49CC2950EFB600EA0B56 /* FullScheduleTableViewCell.swift */; };
 		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
 		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
 		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
@@ -52,6 +53,7 @@
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		944C49C52950E11400EA0B56 /* FullScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScheduleViewController.swift; sourceTree = "<group>"; };
 		944C49C72950E13500EA0B56 /* FullSchedulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSchedulePresenter.swift; sourceTree = "<group>"; };
+		944C49CC2950EFB600EA0B56 /* FullScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 		944C49C22950E0AD00EA0B56 /* FullScheduleModule */ = {
 			isa = PBXGroup;
 			children = (
+				944C49C92950EF5400EA0B56 /* TableViewCell */,
 				944C49C32950E0BC00EA0B56 /* View */,
 				944C49C42950E0C200EA0B56 /* Presenter */,
 			);
@@ -164,6 +167,14 @@
 				944C49C72950E13500EA0B56 /* FullSchedulePresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		944C49C92950EF5400EA0B56 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				944C49CC2950EFB600EA0B56 /* FullScheduleTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		94B669C12914EC25005D6B31 = {
@@ -412,6 +423,7 @@
 				944C49C62950E11500EA0B56 /* FullScheduleViewController.swift in Sources */,
 				9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */,
 				9422C5CC291E568F008D4D33 /* TimeSheetTableViewCell.swift in Sources */,
+				944C49CD2950EFB600EA0B56 /* FullScheduleTableViewCell.swift in Sources */,
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
 				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
 				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,

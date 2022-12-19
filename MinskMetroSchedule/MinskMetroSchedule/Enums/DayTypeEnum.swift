@@ -8,6 +8,6 @@
 import Foundation
 
 enum DayTypeEnum: String {
-    case weekday = "Будние дни"
-    case weekend = "Выходные дни"
+    case stations = "Будние дни"
+    case timeSheetWeekday = "Выходные дни"
 }

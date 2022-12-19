@@ -21,7 +21,8 @@ protocol TimeViewPresenterProtocol: AnyObject {
     
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
-                       dayTypeValue: String)
+                       dayOfWeek: String,
+                       dayType: String)
     func checkDayOfWeek()
 }
 
@@ -102,7 +103,6 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
               let stations = allData["\(dayOfWeek)"] as? [String:Any],
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let station = stations["\(stationNameValue)"] as? [String:Any],
-              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
               let timeSheet = station["\(direction)"] as? [Int]
         else {return}
         
@@ -148,19 +148,21 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
-                       dayTypeValue: String) {
+                       dayOfWeek: String,
+                       dayType: String) {
         
-        var dayOfWeek = ""
-        switch dayTypeValue {
-        case "Saturday", "Sunday":
-            dayOfWeek = "Расписание выходного дня"
-        default:
-            dayOfWeek = "Расписание буднего дня"
-        }
+//        var dayOfWeekValue = ""
+//        switch dayOfWeek {
+//        case "Saturday", "Sunday":
+//            dayOfWeekValue = "Расписание выходного дня"
+//        default:
+//            dayOfWeekValue = "Расписание буднего дня"
+//        }
         
         router.openWeekdayVC(fromStationName: fromStationName,
                              toStationName: toStationName,
-                             dayTypeValue: dayOfWeek)
+                             dayTypeValue: dayType,
+                             dayOfWeek: dayOfWeek)
     }
     
     func checkDayOfWeek() {

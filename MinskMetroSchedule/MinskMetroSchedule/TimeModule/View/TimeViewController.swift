@@ -298,11 +298,12 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc private func showWeekdaysButtonPressed() {
         
         guard  let fromStationName = fromStationLabel.text,
-               let toStationName = toStationLabel.text,
-               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") else {return}
+               let toStationName = toStationLabel.text
+        else {return}
+        let dayOfWeek = DayTypeEnum.stations.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.timeSheetWeekday)"
         
-        
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayOfWeek)
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
         
         print("На Ковальскую")
     }
@@ -311,11 +312,11 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc private func showWeekendButtonPressed() {
         
         guard  let fromStationName = fromStationLabel.text,
-               let toStationName = toStationLabel.text,
-               let dayType = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") else {return}
+               let toStationName = toStationLabel.text else {return}
+        let dayOfWeek = DayTypeEnum.timeSheetWeekday.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.stations)"
         
-        
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayType)
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
         
         print("На Ковальскую")
     }

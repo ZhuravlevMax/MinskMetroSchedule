@@ -9,26 +9,27 @@ import Foundation
 import UIKit
 
 protocol BuilderProtocol {
-//    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
-//    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
+    //    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
+    //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
                           toStationName: String) -> UIViewController
     func createFullScheduleModule(fromStationName: String,
-                             toStationName: String,
-                             dayTypeValue: String) -> UIViewController
+                                  toStationName: String,
+                                  dayTypeValue: String,
+                                  dayOfWeek: String) -> UIViewController
 }
 
 class ModuleBuilder: BuilderProtocol {
     
     
-//    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController {
-//        <#code#>
-//    }
-//    
-//    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController {
-//        <#code#>
-//    }
+    //    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController {
+    //        <#code#>
+    //    }
+    //
+    //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController {
+    //        <#code#>
+    //    }
     
     func createTimeModule(fromStationName: String,
                           toStationName: String) -> UIViewController {
@@ -53,10 +54,11 @@ class ModuleBuilder: BuilderProtocol {
     }
     
     func createFullScheduleModule(fromStationName: String,
-                             toStationName: String,
-                             dayTypeValue: String) -> UIViewController {
+                                  toStationName: String,
+                                  dayTypeValue: String,
+                                  dayOfWeek: String) -> UIViewController {
         let view = FullScheduleViewController()
-        view.setItems(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayTypeValue)
+        view.setItems(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek)
         let presenter = FullSchedulePresenter(view: view)
         view.presenter = presenter
         return view
