@@ -46,7 +46,9 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
               let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
               let station = stations["\(stationNameValue)"] as? [String:Any],
               let stationNameText = station["\(FireBaseFieldsEnum.stationName)"] as? String,
-              let transferName = station["\(FireBaseFieldsEnum.transferName)"] as? String
+              let transferName = station["\(FireBaseFieldsEnum.transferName)"] as? String,
+              let colorName = station["\(FireBaseFieldsEnum.transferColor)"] as? String,
+              let transferColor = UIColor(named: colorName)
         else {return}
         
         var toKovalskayaDirectionExist: Bool = {
@@ -59,8 +61,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                 return false }
             return true
         }()
-        
-        let transferColor = UIColor.black
+    
         let stationName = "\(stationNameValue)"
         
         cell.configureCell(stationNameText: stationNameText,

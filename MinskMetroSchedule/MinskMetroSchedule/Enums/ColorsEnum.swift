@@ -15,4 +15,6 @@ enum NameColorForThemesEnum {
     case thirdLineTextColor
     case thirdLineNavBarColor
     case thirdLineButtonColor
+    case redLineColor
+    case blueLineColor
 }
