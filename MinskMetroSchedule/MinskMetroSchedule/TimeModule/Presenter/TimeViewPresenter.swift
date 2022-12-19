@@ -43,28 +43,19 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                         toStation: String,
                         timeSheetTableViewValue: UITableView) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let station = stations[stationName] as? [String:Any],
+              let timeSheet = station["\(direction)"] as? [Int]
         else {return}
         
-        FireBaseManager.shared.getTimeSheet(dayofWeek: dayOfWeek, stationName: stationName, direction: "\(direction)") { [weak self] result in
-            
-            guard let self else {return}
-            //print(result)
-            switch result {
-            case .success(let timeSheet):
-                let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
-                
-                let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
-                
-                let hoursArray = hoursArrayNext.map {$0 / 3600}
-                let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
-                self.view?.numberOfRow = hours.count
-                timeSheetTableViewValue.reloadData()
-            case .failure(_):
-                return
-            }
-        }
+        let currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
         
+        let hoursArrayNext = timeSheet.filter {$0 > currentTimeFromStartDay}
+        
+        let hoursArray = hoursArrayNext.map {$0 / 3600}
+        let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
+        self.view?.numberOfRow = hours.count
+        timeSheetTableViewValue.reloadData()
         
     }
     

@@ -171,9 +171,10 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
+        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
         
-        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
+        
         
         presenter?.checkDayOfWeek()
         
