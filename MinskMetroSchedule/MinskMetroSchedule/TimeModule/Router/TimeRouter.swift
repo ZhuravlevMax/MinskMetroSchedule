@@ -29,7 +29,7 @@ class TimeRouter: TimeRouterProtocol {
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayTypeValue: String) {
-        guard let weekdayModule = builder?.createWeekdayModule(fromStationName: fromStationName,
+        guard let weekdayModule = builder?.createFullScheduleModule(fromStationName: fromStationName,
                                                                toStationName: toStationName,
                                                                dayTypeValue: dayTypeValue) else {return}
         

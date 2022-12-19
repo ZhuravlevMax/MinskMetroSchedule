@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22EC59AD0939A6ABB3C00C40 /* Pods_MinskMetroSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */; };
-		94026A96293F315100E766F2 /* WeekdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94026A95293F315100E766F2 /* WeekdayViewController.swift */; };
-		94026A98293F316C00E766F2 /* WeekdayPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94026A97293F316C00E766F2 /* WeekdayPresenter.swift */; };
 		94026A9B293F31F600E766F2 /* TimeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94026A9A293F31F500E766F2 /* TimeRouter.swift */; };
 		94026A9D293F6B9E00E766F2 /* DayTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94026A9C293F6B9D00E766F2 /* DayTypeEnum.swift */; };
 		9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422C5C4291C401A008D4D33 /* Int+Extension.swift */; };
@@ -18,6 +16,8 @@
 		9424EE862915853000C52F42 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE852915852F00C52F42 /* TimeViewController.swift */; };
 		9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EE872915854000C52F42 /* TimeViewPresenter.swift */; };
 		9424EE8C2919909D00C52F42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */; };
+		944C49C62950E11500EA0B56 /* FullScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49C52950E11400EA0B56 /* FullScheduleViewController.swift */; };
+		944C49C82950E13500EA0B56 /* FullSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49C72950E13500EA0B56 /* FullSchedulePresenter.swift */; };
 		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
 		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
 		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
@@ -42,8 +42,6 @@
 		2664B21E6AD2B2AC1F828DE1 /* Pods-MinskMetroSchedule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinskMetroSchedule.release.xcconfig"; path = "Target Support Files/Pods-MinskMetroSchedule/Pods-MinskMetroSchedule.release.xcconfig"; sourceTree = "<group>"; };
 		37978E185FC32BFABA356FCD /* Pods-MinskMetroSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinskMetroSchedule.debug.xcconfig"; path = "Target Support Files/Pods-MinskMetroSchedule/Pods-MinskMetroSchedule.debug.xcconfig"; sourceTree = "<group>"; };
 		5A2BFACC6ED859FA691418B5 /* Pods_MinskMetroSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinskMetroSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		94026A95293F315100E766F2 /* WeekdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayViewController.swift; sourceTree = "<group>"; };
-		94026A97293F316C00E766F2 /* WeekdayPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayPresenter.swift; sourceTree = "<group>"; };
 		94026A9A293F31F500E766F2 /* TimeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRouter.swift; sourceTree = "<group>"; };
 		94026A9C293F6B9D00E766F2 /* DayTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTypeEnum.swift; sourceTree = "<group>"; };
 		9422C5C4291C401A008D4D33 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
@@ -52,6 +50,8 @@
 		9424EE852915852F00C52F42 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		9424EE872915854000C52F42 /* TimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewPresenter.swift; sourceTree = "<group>"; };
 		9424EE8B2919909D00C52F42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		944C49C52950E11400EA0B56 /* FullScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScheduleViewController.swift; sourceTree = "<group>"; };
+		944C49C72950E13500EA0B56 /* FullSchedulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSchedulePresenter.swift; sourceTree = "<group>"; };
 		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,31 +86,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		94026A91293F311000E766F2 /* WeekdayModule */ = {
-			isa = PBXGroup;
-			children = (
-				94026A94293F313000E766F2 /* View */,
-				94026A93293F312A00E766F2 /* Presenter */,
-			);
-			path = WeekdayModule;
-			sourceTree = "<group>";
-		};
-		94026A93293F312A00E766F2 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				94026A97293F316C00E766F2 /* WeekdayPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		94026A94293F313000E766F2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				94026A95293F315100E766F2 /* WeekdayViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		94026A99293F31E500E766F2 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +141,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		944C49C22950E0AD00EA0B56 /* FullScheduleModule */ = {
+			isa = PBXGroup;
+			children = (
+				944C49C32950E0BC00EA0B56 /* View */,
+				944C49C42950E0C200EA0B56 /* Presenter */,
+			);
+			path = FullScheduleModule;
+			sourceTree = "<group>";
+		};
+		944C49C32950E0BC00EA0B56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				944C49C52950E11400EA0B56 /* FullScheduleViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		944C49C42950E0C200EA0B56 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				944C49C72950E13500EA0B56 /* FullSchedulePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		94B669C12914EC25005D6B31 = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +198,7 @@
 				9422C5C3291BE06C008D4D33 /* Enums */,
 				94B669E62914F030005D6B31 /* ThirdLineModule */,
 				9424EE82291583E300C52F42 /* TimeModule */,
-				94026A91293F311000E766F2 /* WeekdayModule */,
+				944C49C22950E0AD00EA0B56 /* FullScheduleModule */,
 				94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */,
 				94B669D62914EC29005D6B31 /* Assets.xcassets */,
 				94B669DB2914EC29005D6B31 /* Info.plist */,
@@ -400,7 +400,6 @@
 				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
 				94026A9D293F6B9E00E766F2 /* DayTypeEnum.swift in Sources */,
 				9424EE862915853000C52F42 /* TimeViewController.swift in Sources */,
-				94026A96293F315100E766F2 /* WeekdayViewController.swift in Sources */,
 				94FBA6CC29199AF300510979 /* FirebaseManager.swift in Sources */,
 				9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */,
 				94B669EB2914F08D005D6B31 /* ThirdLineRouter.swift in Sources */,
@@ -409,7 +408,8 @@
 				94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */,
 				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
 				94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */,
-				94026A98293F316C00E766F2 /* WeekdayPresenter.swift in Sources */,
+				944C49C82950E13500EA0B56 /* FullSchedulePresenter.swift in Sources */,
+				944C49C62950E11500EA0B56 /* FullScheduleViewController.swift in Sources */,
 				9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */,
 				9422C5CC291E568F008D4D33 /* TimeSheetTableViewCell.swift in Sources */,
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,

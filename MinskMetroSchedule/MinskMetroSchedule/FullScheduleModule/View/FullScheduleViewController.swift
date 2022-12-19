@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-protocol WeekdayViewControllerProtocol: AnyObject {
+protocol FullScheduleViewControllerProtocol: AnyObject {
     //ViewController methods here
-    var presenter: WeekdayPresenter? {get}
+    var presenter: FullSchedulePresenter? {get}
     
     func setItems(fromStationName: String,
                   toStationName: String,
@@ -20,9 +20,9 @@ protocol WeekdayViewControllerProtocol: AnyObject {
     
 }
 
-class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
+class FullScheduleViewController: UIViewController, FullScheduleViewControllerProtocol {
     
-    var presenter: WeekdayPresenter?
+    var presenter: FullSchedulePresenter?
     private var fromStation: String?
     private var toStation: String?
     private var dayType: String?
@@ -92,7 +92,7 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
                   dayTypeValue: String) {
         stationNameLabel.text = fromStationName
         toStationNameLabel.text = toStationName
-        dayTypeLabel.text = dayTypeValue
+        dayTypeLabel.text = "\(dayTypeValue)"
     }
     
     func setNumberOfRow(rowNumber: Int) {
@@ -127,7 +127,7 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
     }
 }
 
-extension WeekdayViewController: UITableViewDelegate, UITableViewDataSource {
+extension FullScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         numberOfRow
     }

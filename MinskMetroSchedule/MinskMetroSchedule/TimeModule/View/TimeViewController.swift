@@ -137,7 +137,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
-                         action: #selector(self.showWeekdaysButtonPressed),
+                         action: #selector(self.showWeekendButtonPressed),
                          for: .touchUpInside)
         return button
     }()
@@ -299,6 +299,19 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard  let fromStationName = fromStationLabel.text,
                let toStationName = toStationLabel.text,
+               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") else {return}
+        
+        
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayOfWeek)
+        
+        print("На Ковальскую")
+    }
+    
+    //MARK: - Action for showWeekdaysButton
+    @objc private func showWeekendButtonPressed() {
+        
+        guard  let fromStationName = fromStationLabel.text,
+               let toStationName = toStationLabel.text,
                let dayType = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") else {return}
         
         
@@ -306,6 +319,5 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         
         print("На Ковальскую")
     }
-    
     
 }

@@ -14,7 +14,7 @@ protocol BuilderProtocol {
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
                           toStationName: String) -> UIViewController
-    func createWeekdayModule(fromStationName: String,
+    func createFullScheduleModule(fromStationName: String,
                              toStationName: String,
                              dayTypeValue: String) -> UIViewController
 }
@@ -52,12 +52,12 @@ class ModuleBuilder: BuilderProtocol {
         return view
     }
     
-    func createWeekdayModule(fromStationName: String,
+    func createFullScheduleModule(fromStationName: String,
                              toStationName: String,
                              dayTypeValue: String) -> UIViewController {
-        let view = WeekdayViewController()
+        let view = FullScheduleViewController()
         view.setItems(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: dayTypeValue)
-        let presenter = WeekdayPresenter(view: view)
+        let presenter = FullSchedulePresenter(view: view)
         view.presenter = presenter
         return view
     }

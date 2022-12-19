@@ -157,6 +157,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         default:
             dayOfWeek = "Расписание буднего дня"
         }
+        
         router.openWeekdayVC(fromStationName: fromStationName,
                              toStationName: toStationName,
                              dayTypeValue: dayOfWeek)
