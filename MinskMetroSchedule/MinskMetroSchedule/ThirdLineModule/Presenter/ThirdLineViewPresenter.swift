@@ -42,41 +42,34 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol) {
         
-        guard let stationName = StationNamesNumEnum(rawValue: indexPath.row) else {return}
+        guard let stationNameValue = StationNamesNumEnum(rawValue: indexPath.row),
+              let stations = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as? [String:Any],
+              let station = stations["\(stationNameValue)"] as? [String:Any],
+              let stationNameText = station["\(FireBaseFieldsEnum.stationName)"] as? String,
+              let transferName = station["\(FireBaseFieldsEnum.transferName)"] as? String
+        else {return}
         
-        switch indexPath.row {
-            
-        case 0://Ковальская
-            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
-                               toKovalskayaStationButtonIsHidden: true,
-                               toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)",
-                               transferName: "",
-                               transferColor: .white)
-        case 1://Вокзальная
-            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
-                               toKovalskayaStationButtonIsHidden: false,
-                               toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)",
-                               transferName: "Переход на Ленина",
-                               transferColor: .blue)
-            
-        case 3://Юбилейная
-            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
-                               toKovalskayaStationButtonIsHidden: false,
-                               toUbileinayaStationButtonIsHidden: true,
-                               stationNameValue: "\(stationName)",
-                               transferName: "Переход на Фрунзенскую",
-                               transferColor: .red)
-        default://Богущевича
-            cell.configureCell(stationNameText: stationNamesArray[indexPath.row],
-                               toKovalskayaStationButtonIsHidden: false,
-                               toUbileinayaStationButtonIsHidden: false,
-                               stationNameValue: "\(stationName)",
-                               transferName: "",
-                               transferColor: .white)
-        }
+        var toKovalskayaDirectionExist: Bool = {
+            if station["\(FireBaseFieldsEnum.toKovalskayaTimeSheet)"] != nil {
+                return false }
+            return true
+        }()
+        var toUbileinayaDirectionExist: Bool = {
+            if station["\(FireBaseFieldsEnum.toUbileynayaTimeSheet)"] != nil {
+                return false }
+            return true
+        }()
         
+        let transferColor = UIColor.black
+        let stationName = "\(stationNameValue)"
+        
+        cell.configureCell(stationNameText: stationNameText,
+                           toKovalskayaStationButtonIsHidden: toKovalskayaDirectionExist,
+                           toUbileinayaStationButtonIsHidden: toUbileinayaDirectionExist,
+                           stationNameValue: stationName,
+                           transferName: transferName,
+                           transferColor: transferColor)
+    
         guard let view else {return}
         cell.setThirdStationViewDelegate(view: view)
         
@@ -94,19 +87,19 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
     func downloadAllData(dayOfWeek: String, view: UIViewController) {
         FireBaseManager.shared.getAllData(dayOfWeek: dayOfWeek, completion: { [weak self] result in
-                guard let self else {return}
-                switch result {
-                case .success(let dailyData):
-                    UserDefaults.standard.set(dailyData, forKey: "\(UserDefaultsKeysEnum.allDayData)")
-                    print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
-                    self.showSuccessAlert(view: view)
-                case .failure(_):
-                    print("FAIL")
-                    self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
-                    return
-                }
-            })
-        }
+            guard let self else {return}
+            switch result {
+            case .success(let dailyData):
+                UserDefaults.standard.set(dailyData, forKey: "\(UserDefaultsKeysEnum.allDayData)")
+                print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
+                self.showSuccessAlert(view: view)
+            case .failure(_):
+                print("FAIL")
+                self.showErrorAlert(dayOfWeek: dayOfWeek, view: view)
+                return
+            }
+        })
+    }
     
     
     func showErrorAlert(dayOfWeek: String, view: UIViewController) {
