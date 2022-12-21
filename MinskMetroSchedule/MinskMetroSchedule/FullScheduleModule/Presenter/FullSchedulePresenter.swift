@@ -33,11 +33,13 @@ class FullSchedulePresenter: FullSchedulePresenterProtocol {
     func setNumberOfRow(stationName: String,
                         toStation: String,
                         timeSheetTableViewValue: UITableView) {
-        guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
-              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let stations = allData["\(dayOfWeek)"] as? [String:Any],
+        
+        let dayOfWeek = "\(FireBaseCollectionsEnum.weekday)"
+        guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let dayData = allData[dayOfWeek] as? [String:Any],
+              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let station = stations[stationName] as? [String:Any],
+              let station = thirdLineStations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
         else {return}
         
@@ -52,15 +54,18 @@ class FullSchedulePresenter: FullSchedulePresenterProtocol {
                                          stationName: String,
                                          toStation: String,
                                          dayOfWeek: String) {
-        guard let dayOfWeekValue = DayTypeEnum(rawValue: dayOfWeek),
-              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let stations = allData["\(dayOfWeekValue)"] as? [String:Any],
+        
+       
+        guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let dayOfWeekValue = DayTypeEnum(rawValue: dayOfWeek),
+              let dayData = allData["\(dayOfWeekValue)"] as? [String:Any],
+              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
               let stationNameValue = StationNamesEnum(rawValue: stationName),
-              let station = stations["\(stationNameValue)"] as? [String:Any],
+              let station = thirdLineStations["\(stationNameValue)"] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
         else {return}
-
+        
         let hoursArray = timeSheet.map {$0 / 3600}
         let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
         var hourModify: [Int] = []

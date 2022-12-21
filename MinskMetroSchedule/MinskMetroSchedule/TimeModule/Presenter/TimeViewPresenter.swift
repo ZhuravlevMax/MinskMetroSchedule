@@ -45,10 +45,11 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                         timeSheetTableViewValue: UITableView) {
         
         guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
-              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let stations = allData["\(dayOfWeek)"] as? [String:Any],
+              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let dayData = allData[dayOfWeek] as? [String:Any],
+              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
-              let station = stations[stationName] as? [String:Any],
+              let station = thirdLineStations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
         else {return}
         
@@ -67,9 +68,10 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
               let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
-              let stations = allData["\(dayOfWeek)"] as? [String:Any],
-              let station = stations[stationName] as? [String:Any],
+                    let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+                    let dayData = allData[dayOfWeek] as? [String:Any],
+                    let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
+              let station = thirdLineStations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int] else {return}
         
         var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
@@ -100,9 +102,10 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
               let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
-              let stations = allData["\(dayOfWeek)"] as? [String:Any],
+              let dayData = allData[dayOfWeek] as? [String:Any],
+              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
               let stationNameValue = StationNamesEnum(rawValue: stationName),
-              let station = stations["\(stationNameValue)"] as? [String:Any],
+              let station = thirdLineStations["\(stationNameValue)"] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
         else {return}
         
@@ -173,6 +176,8 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         switch currentDay {
         case "Saturday", "Sunday":
             dayOfWeek = "Расписание выходного дня"
+        case "Friday":
+            dayOfWeek = "Расписание для пятницы"
         default:
             dayOfWeek = "Расписание буднего дня"
         }

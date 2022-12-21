@@ -173,9 +173,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
-        
-        
-        
+
         presenter?.checkDayOfWeek()
         
     }
@@ -300,8 +298,8 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         guard  let fromStationName = fromStationLabel.text,
                let toStationName = toStationLabel.text
         else {return}
-        let dayOfWeek = DayTypeEnum.stations.rawValue
-        let dayType = "\(FireBaseCollectionsEnum.timeSheetWeekday)"
+        let dayOfWeek = DayTypeEnum.weekday.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.weekday)"
         
         presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
         
@@ -313,8 +311,8 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard  let fromStationName = fromStationLabel.text,
                let toStationName = toStationLabel.text else {return}
-        let dayOfWeek = DayTypeEnum.timeSheetWeekday.rawValue
-        let dayType = "\(FireBaseCollectionsEnum.stations)"
+        let dayOfWeek = DayTypeEnum.weekend.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.weekend)"
         
         presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
         

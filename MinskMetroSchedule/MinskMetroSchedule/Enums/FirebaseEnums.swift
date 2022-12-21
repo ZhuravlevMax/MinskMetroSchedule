@@ -8,8 +8,6 @@
 import Foundation
 
 enum FireBaseCollectionsEnum {
-    case stations
-    case timeSheetWeekday
     case friday
     case weekday
     case weekend
