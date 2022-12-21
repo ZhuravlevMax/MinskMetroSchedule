@@ -43,9 +43,11 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                                          cell: ThirdLineTableViewCellProtocol) {
         
         guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let stations = allData["\(FireBaseCollectionsEnum.stations)"] as? [String:Any],
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let dayData = allData[dayOfWeek] as? [String:Any],
+              let thirdLineData = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
               let stationNameValue = StationNamesNumEnum(rawValue: indexPath.row),
-              let station = stations["\(stationNameValue)"] as? [String:Any],
+              let station = thirdLineData["\(stationNameValue)"] as? [String:Any],
               let stationNameText = station["\(FireBaseFieldsEnum.stationName)"] as? String,
               let transferName = station["\(FireBaseFieldsEnum.transferName)"] as? String,
               let colorName = station["\(FireBaseFieldsEnum.transferColor)"] as? String,
@@ -136,26 +138,13 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func setNumberOfRow() {
-        
-        //        FireBaseManager.shared.getChildCount { result in
-        //            switch result {
-        //            case .success(let childCount):
-        //                self.view?.numberOfRow = childCount
-        //            case .failure(_):
-        //                return
-        //            }
-        //        }
-        //                UserDefaults.standard.set(dict, forKey: "\(UserDefaultsKeysEnum.allDayData)")
-        //                let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as! [String:Any]
-        //                let station = allData["vokzalnaya"] as! [String:Any]
-        //                let stationName = station["stationName"] as? String
-        
+
         guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
               let dayData = allData[dayOfWeek] as? [String:Any],
               let thirdLineData = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any]
         else {return}
-        //print(thirdLineData.count)
+  
         view?.numberOfRow = thirdLineData.count
     }
     
