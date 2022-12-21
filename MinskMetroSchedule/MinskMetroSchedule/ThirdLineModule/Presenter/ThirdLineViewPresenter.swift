@@ -151,9 +151,12 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         //                let stationName = station["stationName"] as? String
         
         guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
-              let allTimesheet = allData["\(FireBaseCollectionsEnum.timeSheetWeekday)"] as? [String:Any] else {return}
-        print(allTimesheet.count)
-        view?.numberOfRow = allTimesheet.count
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+              let dayData = allData[dayOfWeek] as? [String:Any],
+              let thirdLineData = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any]
+        else {return}
+        //print(thirdLineData.count)
+        view?.numberOfRow = thirdLineData.count
     }
     
     

@@ -38,9 +38,11 @@ class TabBarControllerRouter: ViewsRouterProtocol {
     
         switch Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
         case "Saturday", "Sunday":
-            UserDefaults.standard.set("timeSheetWeekday", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+            UserDefaults.standard.set("weekend", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+        case "Friday":
+            UserDefaults.standard.set("friday", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         default:
-            UserDefaults.standard.set("stations", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
+            UserDefaults.standard.set("weekday", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         }
 
         tabBarController.viewControllers = [thirdLineViewController]
