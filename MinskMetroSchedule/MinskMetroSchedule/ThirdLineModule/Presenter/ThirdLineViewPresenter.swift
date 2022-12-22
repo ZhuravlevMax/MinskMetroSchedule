@@ -48,7 +48,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
               let dayData = allData[dayOfWeek] as? [String:Any],
               let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
-              let stationNameValue = StationNamesNumEnum(rawValue: indexPath.row),
+              let stationNameValue = thirdStationIndexEnum(rawValue: indexPath.row),
               let station = thirdLineStations["\(stationNameValue)"] as? [String:Any],
               let stationNameText = station["\(FireBaseFieldsEnum.stationName)"] as? String,
               let transferName = station["\(FireBaseFieldsEnum.transferName)"] as? String,
