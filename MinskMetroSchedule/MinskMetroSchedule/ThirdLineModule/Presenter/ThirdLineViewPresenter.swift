@@ -17,9 +17,11 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
                     stationName: String)
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol)
+    func downloadAllData(view: UIViewController)
     func showErrorAlert(view: UIViewController)
     func showSuccessAlert(view: UIViewController)
     func checkConnection(view: UIViewController)
+    func setNumberOfRow()
 }
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {

@@ -19,6 +19,9 @@ protocol TimeViewPresenterProtocol: AnyObject {
                         toStation: String,
                         timeSheetTableViewValue: UITableView)
     
+    func setNextTime(toStationName: String,
+                     stationName: String )
+    
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayOfWeek: String,
@@ -44,8 +47,8 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                         toStation: String,
                         timeSheetTableViewValue: UITableView) {
         
-        guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
-              let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
+        guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
+              let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
               let dayData = allData[dayOfWeek] as? [String:Any],
               let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
@@ -126,10 +129,6 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
             }
         }
         
-        //let hourModifyString = hourModify.map { String($0) }
-        let minutesArray = timeSheet.map {($0 % 3600) / 60}
-        // print(minutesArray)
-        
         var minutesAll: [[Int]] = []
         
         for _ in hoursArray {
@@ -144,24 +143,14 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
         cell.configureCell(hourValue: "\(String(format: "%02d", arguments: [hourModify[indexPath.row]])):",
                            minutesValue: minutesString)
-        
-        
-        
+
     }
     
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayOfWeek: String,
                        dayType: String) {
-        
-//        var dayOfWeekValue = ""
-//        switch dayOfWeek {
-//        case "Saturday", "Sunday":
-//            dayOfWeekValue = "Расписание выходного дня"
-//        default:
-//            dayOfWeekValue = "Расписание буднего дня"
-//        }
-        
+ 
         router.openWeekdayVC(fromStationName: fromStationName,
                              toStationName: toStationName,
                              dayTypeValue: dayType,
