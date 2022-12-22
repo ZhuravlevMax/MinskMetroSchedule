@@ -158,8 +158,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     }
     
     func checkDayOfWeek() {
-        let currentDay = Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE")
-        UserDefaults.standard.set(currentDay, forKey: "\(UserDefaultsKeysEnum.currentDay)")
+        let currentDay = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)")
         
         var dayOfWeek = ""
         switch currentDay {

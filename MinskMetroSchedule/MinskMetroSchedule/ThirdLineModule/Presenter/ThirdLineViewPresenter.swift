@@ -109,7 +109,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
     
     func showErrorAlert(view: UIViewController) {
-        let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение", preferredStyle: .alert)
+        let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение.", preferredStyle: .alert)
         let okButtonAction = UIAlertAction(title: "Повторить", style: .default) { [self] _ in
             downloadAllData(view: view)
         }
@@ -118,7 +118,7 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     }
     
     func showSuccessAlert(view: UIViewController) {
-        let errorAlertController = UIAlertController(title: "Успешно!", message: "Актуальное расписание загружено", preferredStyle: .alert)
+        let errorAlertController = UIAlertController(title: "Успешно!", message: "Актуальное расписание загружено. Расписание обновляется раз в день при наличии интернет соединения.", preferredStyle: .alert)
         let okButtonAction = UIAlertAction(title: "Ok", style: .default) { [self] _ in
             setNumberOfRow()
         }

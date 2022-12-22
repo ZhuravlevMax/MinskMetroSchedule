@@ -36,7 +36,9 @@ class TabBarControllerRouter: ViewsRouterProtocol {
         guard let builder = builder, let tabBarController = tabBarController else {return}
         let thirdLineViewController = UINavigationController(rootViewController: builder.createThirdLineModule(title: "3 Линия", image: UIImage(systemName: "m.circle")))
     
-        switch Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") {
+        let currentDay = Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE")
+        UserDefaults.standard.set(currentDay, forKey: "\(UserDefaultsKeysEnum.currentDay)")
+        switch currentDay {
         case "Saturday", "Sunday":
             UserDefaults.standard.set("weekend", forKey: "\(UserDefaultsKeysEnum.dayOfWeek)")
         case "Friday":

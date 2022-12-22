@@ -63,7 +63,14 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         
         updateViewConstraints()
         
-        presenter.downloadAllData(view: self)
+        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") == nil {
+            presenter.downloadAllData(view: self)
+        }
+        
+        if Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") != UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") {
+            presenter.checkConnection(view: self)
+        }
+        
         presenter.setNumberOfRow()
     }
     
