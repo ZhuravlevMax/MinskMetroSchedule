@@ -8,7 +8,9 @@
 import Foundation
 
 enum FireBaseCollectionsEnum {
-    case stations
+    case friday
+    case weekday
+    case weekend
 }
 
 enum FireBaseFieldsEnum: String {
@@ -17,6 +19,10 @@ enum FireBaseFieldsEnum: String {
     case toUbileynayaTimeSheet = "На Юбилейную"
     case transferName
     case transferColor
+    case firstLine
+    case secondLine
+    case thirdLine
+
 }
 
 

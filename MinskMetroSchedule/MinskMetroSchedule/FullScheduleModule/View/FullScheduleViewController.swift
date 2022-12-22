@@ -8,21 +8,21 @@
 import UIKit
 import SnapKit
 
-protocol WeekdayViewControllerProtocol: AnyObject {
+protocol FullScheduleViewControllerProtocol: AnyObject {
     //ViewController methods here
-    var presenter: WeekdayPresenter? {get}
+    var presenter: FullSchedulePresenter? {get}
     
     func setItems(fromStationName: String,
                   toStationName: String,
-                  dayTypeValue: DayTypeEnum)
+                  dayOfWeek: String)
     
     func setNumberOfRow(rowNumber: Int)
     
 }
 
-class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
+class FullScheduleViewController: UIViewController, FullScheduleViewControllerProtocol {
     
-    var presenter: WeekdayPresenter?
+    var presenter: FullSchedulePresenter?
     private var fromStation: String?
     private var toStation: String?
     private var dayType: String?
@@ -56,7 +56,7 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TimeSheetTableViewCell.self, forCellReuseIdentifier: TimeSheetTableViewCell.key)
+        tableView.register(FullScheduleTableViewCell.self, forCellReuseIdentifier: FullScheduleTableViewCell.key)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 10
@@ -76,9 +76,9 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
         view.addSubview(toStationNameLabel)
         view.addSubview(timeSheetTableView)
         
-//        print(fromStation)
-//        print(toStation)
-//        print(dayType)
+        //        print(fromStation)
+        //        print(toStation)
+        //        print(dayType)
         
         //view.addGradientBackground(firstColor: .green, secondColor: .white)
         
@@ -89,10 +89,10 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
     
     func setItems(fromStationName: String,
                   toStationName: String,
-                  dayTypeValue: DayTypeEnum) {
+                  dayOfWeek: String) {
         stationNameLabel.text = fromStationName
         toStationNameLabel.text = toStationName
-        dayTypeLabel.text = dayTypeValue.rawValue
+        dayTypeLabel.text = dayOfWeek
     }
     
     func setNumberOfRow(rowNumber: Int) {
@@ -127,17 +127,18 @@ class WeekdayViewController: UIViewController, WeekdayViewControllerProtocol {
     }
 }
 
-extension WeekdayViewController: UITableViewDelegate, UITableViewDataSource {
+extension FullScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         numberOfRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let toStationName = toStationNameLabel.text, let stationName = stationNameLabel.text else {return UITableViewCell()}
+        guard let toStationName = toStationNameLabel.text, let stationName = stationNameLabel.text,
+        let dayOfWeek = dayTypeLabel.text else {return UITableViewCell()}
         
-        if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
-            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName)
+        if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: FullScheduleTableViewCell.key, for: indexPath) as? FullScheduleTableViewCell {
+            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName, dayOfWeek: dayOfWeek)
             cell.backgroundColor = .clear
             return cell
         }

@@ -62,10 +62,8 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateViewConstraints()
- 
-        guard let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)") else {return}
         
-        presenter.downloadAllData(dayOfWeek: dayOfWeek, view: self)
+        presenter.downloadAllData(view: self)
         presenter.setNumberOfRow()
     }
     

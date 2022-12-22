@@ -137,7 +137,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
-                         action: #selector(self.showWeekdaysButtonPressed),
+                         action: #selector(self.showWeekendButtonPressed),
                          for: .touchUpInside)
         return button
     }()
@@ -173,9 +173,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
-        
-        
-        
+
         presenter?.checkDayOfWeek()
         
     }
@@ -297,12 +295,28 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     //MARK: - Action for showWeekdaysButton
     @objc private func showWeekdaysButtonPressed() {
         
-        guard  let fromStationName = fromStationLabel.text, let toStationName = toStationLabel.text else {return}
+        guard  let fromStationName = fromStationLabel.text,
+               let toStationName = toStationLabel.text
+        else {return}
+        let dayOfWeek = DayTypeEnum.weekday.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.weekday)"
         
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayTypeValue: DayTypeEnum.weekday)
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
         
         print("На Ковальскую")
     }
     
+    //MARK: - Action for showWeekdaysButton
+    @objc private func showWeekendButtonPressed() {
+        
+        guard  let fromStationName = fromStationLabel.text,
+               let toStationName = toStationLabel.text else {return}
+        let dayOfWeek = DayTypeEnum.weekend.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.weekend)"
+        
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
+        
+        print("На Ковальскую")
+    }
     
 }
