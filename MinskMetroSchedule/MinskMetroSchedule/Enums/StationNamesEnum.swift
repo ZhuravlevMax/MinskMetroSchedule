@@ -52,7 +52,7 @@ enum firstStationIndexEnum: Int {
     case grushevka
     case institut
     case lenina
-    case oktyaborskaya
+    case oktyabrskaya
     case pobeda
     case kolasa
     case akademia

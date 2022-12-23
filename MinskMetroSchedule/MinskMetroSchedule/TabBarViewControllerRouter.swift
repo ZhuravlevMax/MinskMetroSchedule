@@ -34,9 +34,9 @@ class TabBarControllerRouter: ViewsRouterProtocol {
     
     func initViewControllers() {
         guard let builder = builder, let tabBarController = tabBarController else {return}
-        let thirdLineViewController = UINavigationController(rootViewController: builder.createThirdLineModule(title: "3 Линия", image: UIImage(systemName: "m.circle")))
+        let thirdLineViewController = UINavigationController(rootViewController: builder.createThirdLineModule(title: "Зеленолужская", image: UIImage(systemName: "m.circle")))
         
-        let firstLineViewController = UINavigationController(rootViewController: builder.createFirstLineModule(title: "1 Линия", image: UIImage(systemName: "m.circle")))
+        let firstLineViewController = UINavigationController(rootViewController: builder.createFirstLineModule(title: "Московская", image: UIImage(systemName: "m.circle")))
     
         let currentDay = Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE")
         UserDefaults.standard.set(currentDay, forKey: "\(UserDefaultsKeysEnum.currentDay)")
