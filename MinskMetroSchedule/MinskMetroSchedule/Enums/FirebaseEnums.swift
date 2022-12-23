@@ -17,6 +17,10 @@ enum FireBaseFieldsEnum: String {
     case stationName
     case toKovalskayaTimeSheet = "На Ковальскую"
     case toUbileynayaTimeSheet = "На Юбилейную"
+    case toMalinovkaTimeSheet = "На Малиновку"
+    case toUrucheTimeSheet = "На Уручье"
+    case toMogilevskyaTimeSheet = "На Могилевскую"
+    case toKamenkaTimeSheet = "На Каменную Горку"
     case transferName
     case transferColor
     case firstLine
