@@ -26,12 +26,6 @@ protocol ThirdLineViewPresenterProtocol: AnyObject {
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
-    var stationNamesArray = [StationNamesEnum.kovalskaya.rawValue,
-                             StationNamesEnum.vokzalnaya.rawValue,
-                             StationNamesEnum.bogushevicha.rawValue,
-                             StationNamesEnum.ubileynaya.rawValue]
-    //var thirdViewControllerBackgroundColor: UIColor = .white
-    
     weak var view: ThirdLineViewProtocol?
     private(set) var router: ThirdLineRouterProtocol
     

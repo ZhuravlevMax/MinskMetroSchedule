@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 protocol BuilderProtocol {
-    //    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
+
+    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
     //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
@@ -31,14 +32,12 @@ class ModuleBuilder: BuilderProtocol {
     //        <#code#>
     //    }
     
-    func createTimeModule(fromStationName: String,
-                          toStationName: String) -> UIViewController {
-        let view = TimeViewController()
-        view.setItems(fromStationName: fromStationName,
-                      toStationName: toStationName)
-        
-        let router = TimeRouter(builder: self, viewController: view)
-        let presenter = TimeViewPresenter(view: view, router: router)
+    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController {
+        let view = FirstLineViewController()
+        view.tabBarItem.title = title
+        view.tabBarItem.image = image
+        let router = FirstLineRouter(builder: self, viewController: view)
+        let presenter = FirstLineViewPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
@@ -49,6 +48,18 @@ class ModuleBuilder: BuilderProtocol {
         view.tabBarItem.image = image
         let router = ThirdLineRouter(builder: self, viewController: view)
         let presenter = ThirdLineViewPresenter(view: view, router: router)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createTimeModule(fromStationName: String,
+                          toStationName: String) -> UIViewController {
+        let view = TimeViewController()
+        view.setItems(fromStationName: fromStationName,
+                      toStationName: toStationName)
+        
+        let router = TimeRouter(builder: self, viewController: view)
+        let presenter = TimeViewPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
