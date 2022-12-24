@@ -12,13 +12,17 @@ protocol FirstLineViewProtocol: AnyObject {
     //ViewController methods here
     var presenter: FirstLineViewPresenter? {get}
     var numberOfRow: Int {get set}
-
+    
+    func setNav(appearance: UINavigationBarAppearance, titleValue: String)
+    func showErrorAlert(errorAlertController: UIAlertController)
+    func showSuccessAlert(successAlertController: UIAlertController)
+    
 }
 
 class FirstLineViewController: UIViewController, FirstLineViewProtocol {
     
     //MARK: - Cоздание элементов UI
-
+    
     private lazy var firstLineTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -38,35 +42,24 @@ class FirstLineViewController: UIViewController, FirstLineViewProtocol {
             firstLineTableView.reloadData()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let presenter else {return}
-        
         view.addSubview(firstLineTableView)
-        
-        //MARK: - Внешний вид navigationController
-        title = "Московская"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)")
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)")]
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
-        navigationItem.compactAppearance = appearance
-
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
+        guard let presenter else {return}
+
         if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") == nil {
-            
-        }
-        presenter.downloadAllData(view: self)
-        if Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") != UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") {
-            presenter.checkConnection(view: self)
+            presenter.downloadAllData()
         }
         
+        if Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") != UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") {
+            presenter.checkConnection()
+        }
+        
+        presenter.setNavBar()
         presenter.setNumberOfRow()
         
     }
@@ -80,7 +73,24 @@ class FirstLineViewController: UIViewController, FirstLineViewProtocol {
         
         super.updateViewConstraints()
     }
-
+    
+    func setNav(appearance: UINavigationBarAppearance, titleValue: String) {
+        //MARK: - Внешний вид navigationController
+        title = titleValue
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
+    }
+    
+    func showErrorAlert(errorAlertController: UIAlertController) {
+        present(errorAlertController, animated: true)
+    }
+    
+    func showSuccessAlert(successAlertController: UIAlertController) {
+        present(successAlertController, animated: true)
+    }
+    
 }
 
 extension FirstLineViewController: UITableViewDelegate, UITableViewDataSource {

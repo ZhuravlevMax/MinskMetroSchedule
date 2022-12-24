@@ -12,19 +12,20 @@ import Network
 protocol FirstLineViewPresenterProtocol: AnyObject {
     
     //var thirdViewControllerBackgroundColor: UIColor {get}
+
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     stationName: String)
     func configureFirstLineTableViewCell(indexPath: IndexPath,
                                          cell: FirstLineTableViewCellProtocol)
-    func downloadAllData(view: UIViewController)
-    func showErrorAlert(view: UIViewController)
-    func showSuccessAlert(view: UIViewController)
-    func checkConnection(view: UIViewController)
+    func downloadAllData()
+    func checkConnection()
     func setNumberOfRow()
+    func setNavBar()
 }
 
 class FirstLineViewPresenter: FirstLineViewPresenterProtocol {
+    
 
     
     weak var view: FirstLineViewProtocol?
@@ -84,48 +85,52 @@ class FirstLineViewPresenter: FirstLineViewPresenterProtocol {
         cell.setFirstStationViewDelegate(view: view)
     }
     
+    func setNavBar() {
+        let titleValue = "Московская"
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)")
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .white]
+        view?.setNav(appearance: appearance, titleValue: titleValue)
     
-    func downloadAllData(view: UIViewController) {
+    }
+    
+    func downloadAllData() {
+        
+        let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение.", preferredStyle: .alert)
+        let okErrorAlertButtonAction = UIAlertAction(title: "Повторить", style: .default) { [self] _ in
+            downloadAllData()
+        }
+        errorAlertController.addAction(okErrorAlertButtonAction)
+        
+        let successAlertController = UIAlertController(title: "Успешно!", message: "Актуальное расписание загружено. Расписание обновляется раз в день при наличии интернет соединения.", preferredStyle: .alert)
+        let okSuccesButtonButtonAction = UIAlertAction(title: "Ok", style: .default) { [self] _ in
+            setNumberOfRow()
+        }
+        successAlertController.addAction(okSuccesButtonButtonAction)
+        
+        
         FireBaseManager.shared.getAllData(completion: { [weak self] result in
             guard let self else {return}
             switch result {
             case .success(let allData):
                 UserDefaults.standard.set(allData, forKey: "\(UserDefaultsKeysEnum.allData)")
-                //print(UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)"))
-                self.showSuccessAlert(view: view)
+                self.view?.showSuccessAlert(successAlertController: successAlertController)
+                
             case .failure(_):
-                //print("FAIL")
-                self.showErrorAlert(view: view)
+                self.view?.showErrorAlert(errorAlertController: errorAlertController)
                 return
             }
         })
     }
+
     
-    
-    func showErrorAlert(view: UIViewController) {
-        let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить расписание, проверьте интернет соединение.", preferredStyle: .alert)
-        let okButtonAction = UIAlertAction(title: "Повторить", style: .default) { [self] _ in
-            downloadAllData(view: view)
-        }
-        errorAlertController.addAction(okButtonAction)
-        view.present(errorAlertController, animated: true)
-    }
-    
-    func showSuccessAlert(view: UIViewController) {
-        let errorAlertController = UIAlertController(title: "Успешно!", message: "Актуальное расписание загружено. Расписание обновляется раз в день при наличии интернет соединения.", preferredStyle: .alert)
-        let okButtonAction = UIAlertAction(title: "Ok", style: .default) { [self] _ in
-            setNumberOfRow()
-        }
-        errorAlertController.addAction(okButtonAction)
-        view.present(errorAlertController, animated: true)
-    }
-    
-    func checkConnection(view: UIViewController) {
+    func checkConnection() {
         let monitor = NWPathMonitor()
         monitor.start(queue: DispatchQueue(label: "NetworkMonitor"))
         monitor.pathUpdateHandler = { (path) in
             if path.status == .satisfied {
-                self.downloadAllData(view: view)
+               self.downloadAllData()
                 print("Connected")
             } else {
                 print("Not Connected")

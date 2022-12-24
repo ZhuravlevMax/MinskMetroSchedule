@@ -48,28 +48,11 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         
         guard let presenter else {return}
         
-        //MARK: - Внешний вид navigationController
-        title = "Зеленолужская"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")]
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
-        navigationItem.compactAppearance = appearance
+        presenter.setNavBar(view: self)
         
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateViewConstraints()
-        
-//        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") == nil {
-//            presenter.downloadAllData(view: self)
-//        }
-//        
-//        if Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") != UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") {
-//            presenter.checkConnection(view: self)
-//        }
         
         presenter.setNumberOfRow()
     }
