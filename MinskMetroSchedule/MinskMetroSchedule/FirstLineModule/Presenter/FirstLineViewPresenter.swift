@@ -84,6 +84,7 @@ class FirstLineViewPresenter: FirstLineViewPresenterProtocol {
         cell.setFirstStationViewDelegate(view: view)
     }
     
+    
     func downloadAllData(view: UIViewController) {
         FireBaseManager.shared.getAllData(completion: { [weak self] result in
             guard let self else {return}

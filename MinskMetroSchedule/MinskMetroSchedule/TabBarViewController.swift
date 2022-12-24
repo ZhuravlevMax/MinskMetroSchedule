@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.tintColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
+        
+        //tabBar.tintColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         tabBar.unselectedItemTintColor = .black
     }
 }

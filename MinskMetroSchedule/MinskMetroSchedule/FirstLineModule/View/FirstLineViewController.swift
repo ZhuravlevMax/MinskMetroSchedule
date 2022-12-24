@@ -51,8 +51,8 @@ class FirstLineViewController: UIViewController, FirstLineViewProtocol {
         navigationController?.navigationBar.prefersLargeTitles = true
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")]
+        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)")
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)")]
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
@@ -68,6 +68,7 @@ class FirstLineViewController: UIViewController, FirstLineViewProtocol {
         }
         
         presenter.setNumberOfRow()
+        
     }
     
     //MARK: - Работа с констрейнтами
