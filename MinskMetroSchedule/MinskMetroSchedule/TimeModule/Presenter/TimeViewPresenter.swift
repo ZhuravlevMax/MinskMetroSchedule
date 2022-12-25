@@ -11,10 +11,15 @@ import UIKit
 protocol TimeViewPresenterProtocol: AnyObject {
     
     var timeViewControllerBackgroundColor: UIColor {get}
+    
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String)
+    
+    func setNavBar(navColor: UIColor,
+                   navTextColor: UIColor)
+    
     func setNumberOfRow(stationName: String,
                         toStation: String,
                         timeSheetTableViewValue: UITableView)
@@ -26,6 +31,7 @@ protocol TimeViewPresenterProtocol: AnyObject {
                        toStationName: String,
                        dayOfWeek: String,
                        dayType: String)
+    
     func checkDayOfWeek()
 }
 
@@ -155,6 +161,17 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
                              toStationName: toStationName,
                              dayTypeValue: dayType,
                              dayOfWeek: dayOfWeek)
+    }
+    
+    func setNavBar(navColor: UIColor,
+                   navTextColor: UIColor) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = navColor
+        appearance.largeTitleTextAttributes = [.foregroundColor: navTextColor]
+    
+        view?.setNav(appearance: appearance, navTintColor: navTextColor)
+    
     }
     
     func checkDayOfWeek() {

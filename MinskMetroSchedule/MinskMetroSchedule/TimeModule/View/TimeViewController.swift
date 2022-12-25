@@ -12,8 +12,12 @@ protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
     var numberOfRow: Int {get set}
+    
+    func setNav(appearance: UINavigationBarAppearance, navTintColor: UIColor)
     func setItems(fromStationName: String,
-                  toStationName: String)
+                  toStationName: String,
+                  buttonColor: UIColor,
+                  textColor: UIColor)
     func setNextTimeLabel(nextTime: String)
     func setDayOfWeek(dayOfWeekValue: String)
     
@@ -146,17 +150,6 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //MARK: - Внешний вид navigationController
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")]
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
-        navigationItem.compactAppearance = appearance
-        navigationController?.navigationBar.tintColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
-        
-        
         //MARK: - Добавление элементов на экран
         view.addSubview(fromStationLabel)
         view.addSubview(viewForNextTime)
@@ -168,12 +161,13 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.addSubview(showWeekdaysButton)
         view.addSubview(showWeekendButton)
         
+        navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
+        
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
-
         presenter?.checkDayOfWeek()
         
     }
@@ -236,10 +230,31 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         super.updateViewConstraints()
     }
     
+    func setNav(appearance: UINavigationBarAppearance, navTintColor: UIColor) {
+        //MARK: - Внешний вид navigationController
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
+        
+        
+    }
+    
     func setItems(fromStationName: String,
-                  toStationName: String) {
+                  toStationName: String,
+                  buttonColor: UIColor,
+                  textColor: UIColor) {
         fromStationLabel.text = fromStationName
+        fromStationLabel.textColor = textColor
         toStationLabel.text = toStationName
+        toStationLabel.textColor = textColor
+        nextTimeLabel.textColor = textColor
+        fullScheduleLabel.textColor = textColor
+        nextTimeValueLabel.textColor = textColor
+        showWeekendButton.backgroundColor = buttonColor
+        showWeekdaysButton.backgroundColor = buttonColor
+        showWeekendButton.setTitleColor(textColor, for: .normal)
+        showWeekdaysButton.setTitleColor(textColor, for: .normal)
         title = toStationName
     }
     

@@ -10,7 +10,9 @@ import UIKit
 
 protocol FirstLineRouterProtocol: BaseModulRouterProtocol {
     func openTimeVC(fromStationName: String,
-                    toStationName: String)
+                    toStationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor)
 }
 
 class FirstLineRouter: FirstLineRouterProtocol {
@@ -23,10 +25,15 @@ class FirstLineRouter: FirstLineRouterProtocol {
         self.viewController = viewController
     }
     
-    func openTimeVC(fromStationName: String, toStationName: String) {
-
+    func openTimeVC(fromStationName: String,
+                    toStationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor) {
+        
         guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName,
-                                                         toStationName: toStationName),
+                                                         toStationName: toStationName,
+                                                         navColor: navColor,
+                                                         navTextColor: navTextColor),
               let timeVC = viewController?.navigationController else {return}
         
         timeVC.pushViewController(timeModule, animated: true)

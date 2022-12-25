@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 
 protocol BuilderProtocol {
-
+    
     func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
     //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
-                          toStationName: String) -> UIViewController
+                          toStationName: String,
+                          navColor: UIColor,
+                          navTextColor: UIColor) -> UIViewController
     func createFullScheduleModule(fromStationName: String,
                                   toStationName: String,
                                   dayTypeValue: String,
@@ -53,14 +55,18 @@ class ModuleBuilder: BuilderProtocol {
     }
     
     func createTimeModule(fromStationName: String,
-                          toStationName: String) -> UIViewController {
+                          toStationName: String,
+                          navColor: UIColor,
+                          navTextColor: UIColor) -> UIViewController {
         let view = TimeViewController()
         view.setItems(fromStationName: fromStationName,
-                      toStationName: toStationName)
-        
+                      toStationName: toStationName,
+                      buttonColor: navColor,
+                      textColor: navTextColor)
         let router = TimeRouter(builder: self, viewController: view)
         let presenter = TimeViewPresenter(view: view, router: router)
         view.presenter = presenter
+        presenter.setNavBar(navColor: navColor, navTextColor: navTextColor)
         return view
     }
     

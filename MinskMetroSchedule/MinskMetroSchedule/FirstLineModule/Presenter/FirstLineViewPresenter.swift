@@ -15,7 +15,9 @@ protocol FirstLineViewPresenterProtocol: AnyObject {
 
     func openTimeVC(fromStationName: String,
                     toStationName: String,
-                    stationName: String)
+                    stationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor)
     func configureFirstLineTableViewCell(indexPath: IndexPath,
                                          cell: FirstLineTableViewCellProtocol)
     func downloadAllData()
@@ -39,11 +41,14 @@ class FirstLineViewPresenter: FirstLineViewPresenterProtocol {
     
     func openTimeVC(fromStationName: String,
                     toStationName: String,
-                    stationName: String) {
-        
+                    stationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor) {
         
         self.router.openTimeVC(fromStationName: fromStationName,
-                               toStationName: toStationName)
+                               toStationName: toStationName,
+                               navColor: navColor,
+                               navTextColor: navTextColor)
         
     }
     
@@ -61,12 +66,13 @@ class FirstLineViewPresenter: FirstLineViewPresenterProtocol {
               let transferColor = UIColor(named: colorName)
         else {return}
         
-        var toMalinovkaDirectionExist: Bool = {
+        let toMalinovkaDirectionExist: Bool = {
             if station["\(FireBaseFieldsEnum.toMalinovkaTimeSheet)"] != nil {
                 return false }
             return true
         }()
-        var toUrucheDirectionExist: Bool = {
+        
+        let toUrucheDirectionExist: Bool = {
             if station["\(FireBaseFieldsEnum.toUrucheTimeSheet)"] != nil {
                 return false }
             return true
