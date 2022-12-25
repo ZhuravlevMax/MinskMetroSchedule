@@ -14,6 +14,7 @@ protocol ThirdLineViewProtocol: AnyObject {
     var presenter: ThirdLineViewPresenter? {get}
     var numberOfRow: Int {get set}
 
+    func setNav(appearance: UINavigationBarAppearance, titleValue: String)
 }
 
 class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
@@ -45,16 +46,17 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         // Do any additional setup after loading the view.
         //MARK: - Добавление элементов на экран
         view.addSubview(thirdLineTableView)
-        
+    
         guard let presenter else {return}
         
-        presenter.setNavBar(view: self)
+        presenter.setNavBar()
         
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         updateViewConstraints()
         
         presenter.setNumberOfRow()
+        presenter.setNavBar()
     }
     
     //MARK: - Работа с констрейнтами
@@ -65,6 +67,15 @@ class ThirdLineViewController: UIViewController, ThirdLineViewProtocol {
         }
         
         super.updateViewConstraints()
+    }
+    
+    func setNav(appearance: UINavigationBarAppearance, titleValue: String) {
+        //MARK: - Внешний вид navigationController
+        title = titleValue
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
     }
 
 }

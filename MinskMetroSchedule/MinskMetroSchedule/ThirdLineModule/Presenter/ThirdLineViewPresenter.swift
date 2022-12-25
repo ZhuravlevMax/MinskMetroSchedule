@@ -12,13 +12,16 @@ import Network
 protocol ThirdLineViewPresenterProtocol: AnyObject {
     
     //var thirdViewControllerBackgroundColor: UIColor {get}
-    func setNavBar(view: UIViewController)
     func openTimeVC(fromStationName: String,
                     toStationName: String,
-                    stationName: String)
+                    stationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor,
+                    line: String)
     func configureThirdLineTableViewCell(indexPath: IndexPath,
                                          cell: ThirdLineTableViewCellProtocol)
     func setNumberOfRow()
+    func setNavBar()
 }
 
 class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
@@ -30,19 +33,6 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
                   router: ThirdLineRouterProtocol) {
         self.view = view
         self.router = router
-    }
-    
-    func setNavBar(view: UIViewController) {
-        //MARK: - Внешний вид navigationController
-        view.title = "Зеленолужская"
-        view.navigationController?.navigationBar.prefersLargeTitles = true
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")]
-        view.navigationItem.standardAppearance = appearance
-        view.navigationItem.scrollEdgeAppearance = appearance
-        view.navigationItem.compactAppearance = appearance
     }
     
     func configureThirdLineTableViewCell(indexPath: IndexPath,
@@ -87,10 +77,16 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
     
     func openTimeVC(fromStationName: String,
                     toStationName: String,
-                    stationName: String) {
+                    stationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor,
+                    line: String) {
         
         self.router.openTimeVC(fromStationName: fromStationName,
-                               toStationName: toStationName)
+                               toStationName: toStationName,
+                               navColor: navColor,
+                               navTextColor: navTextColor,
+                               line: line)
         
     }
     
@@ -103,6 +99,16 @@ class ThirdLineViewPresenter: ThirdLineViewPresenterProtocol {
         else {return}
   
         view?.numberOfRow = thirdLineData.count
+    }
+    
+    func setNavBar() {
+        let titleValue = "Зеленолужская"
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)")
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)") ?? .white]
+        view?.setNav(appearance: appearance, titleValue: titleValue)
+    
     }
     
     

@@ -10,7 +10,10 @@ import UIKit
 
 protocol ThirdLineRouterProtocol: BaseModulRouterProtocol {
     func openTimeVC(fromStationName: String,
-                    toStationName: String)
+                    toStationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor,
+                    line: String)
 }
 
 class ThirdLineRouter: ThirdLineRouterProtocol {
@@ -24,11 +27,17 @@ class ThirdLineRouter: ThirdLineRouterProtocol {
     }
     
     func openTimeVC(fromStationName: String,
-                    toStationName: String) {
-//        guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName,
-//                                                         toStationName: toStationName),
-//              let timeVC = viewController?.navigationController else {return}
+                    toStationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor,
+                    line: String) {
+        guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName,
+                                                         toStationName: toStationName,
+                                                         navColor: navColor,
+                                                         navTextColor: navTextColor,
+                                                         line: line ),
+              let timeVC = viewController?.navigationController else {return}
         
-        //timeVC.pushViewController(timeModule, animated: true)
+        timeVC.pushViewController(timeModule, animated: true)
     }
 }
