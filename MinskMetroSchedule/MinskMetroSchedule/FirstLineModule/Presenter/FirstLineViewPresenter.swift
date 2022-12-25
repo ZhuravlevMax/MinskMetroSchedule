@@ -17,7 +17,8 @@ protocol FirstLineViewPresenterProtocol: AnyObject {
                     toStationName: String,
                     stationName: String,
                     navColor: UIColor,
-                    navTextColor: UIColor)
+                    navTextColor: UIColor,
+                    line: String)
     func configureFirstLineTableViewCell(indexPath: IndexPath,
                                          cell: FirstLineTableViewCellProtocol)
     func downloadAllData()
@@ -43,12 +44,14 @@ class FirstLineViewPresenter: FirstLineViewPresenterProtocol {
                     toStationName: String,
                     stationName: String,
                     navColor: UIColor,
-                    navTextColor: UIColor) {
+                    navTextColor: UIColor,
+                    line: String) {
         
         self.router.openTimeVC(fromStationName: fromStationName,
                                toStationName: toStationName,
                                navColor: navColor,
-                               navTextColor: navTextColor)
+                               navTextColor: navTextColor,
+                               line: line)
         
     }
     

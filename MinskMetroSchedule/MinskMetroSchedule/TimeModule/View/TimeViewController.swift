@@ -11,6 +11,7 @@ import SnapKit
 protocol TimeViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: TimeViewPresenter? {get}
+    var line: String? {get set}
     var numberOfRow: Int {get set}
     
     func setNav(appearance: UINavigationBarAppearance, navTintColor: UIColor)
@@ -27,6 +28,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
     var numberOfRow: Int = 0
     var presenter: TimeViewPresenter?
+    var line: String?
     
     
     //MARK: - Create items
@@ -164,10 +166,13 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
-        guard let toStationLabelText = toStationLabel.text, let stationNameText = fromStationLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
+        guard let toStationLabelText = toStationLabel.text,
+              let stationNameText = fromStationLabel.text,
+              let stationName = StationNamesEnum(rawValue: stationNameText),
+              let lineValue = line else {return}
         
         presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
-        presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)")
+        presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)", line: lineValue)
         presenter?.checkDayOfWeek()
         
     }

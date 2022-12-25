@@ -12,7 +12,8 @@ protocol FirstLineRouterProtocol: BaseModulRouterProtocol {
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     navColor: UIColor,
-                    navTextColor: UIColor)
+                    navTextColor: UIColor,
+                    line: String)
 }
 
 class FirstLineRouter: FirstLineRouterProtocol {
@@ -28,12 +29,13 @@ class FirstLineRouter: FirstLineRouterProtocol {
     func openTimeVC(fromStationName: String,
                     toStationName: String,
                     navColor: UIColor,
-                    navTextColor: UIColor) {
+                    navTextColor: UIColor,
+                    line: String) {
         
         guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName,
                                                          toStationName: toStationName,
                                                          navColor: navColor,
-                                                         navTextColor: navTextColor),
+                                                         navTextColor: navTextColor, line: line),
               let timeVC = viewController?.navigationController else {return}
         
         timeVC.pushViewController(timeModule, animated: true)

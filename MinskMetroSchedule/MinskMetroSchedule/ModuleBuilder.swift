@@ -16,7 +16,8 @@ protocol BuilderProtocol {
     func createTimeModule(fromStationName: String,
                           toStationName: String,
                           navColor: UIColor,
-                          navTextColor: UIColor) -> UIViewController
+                          navTextColor: UIColor,
+                          line: String) -> UIViewController
     func createFullScheduleModule(fromStationName: String,
                                   toStationName: String,
                                   dayTypeValue: String,
@@ -57,12 +58,14 @@ class ModuleBuilder: BuilderProtocol {
     func createTimeModule(fromStationName: String,
                           toStationName: String,
                           navColor: UIColor,
-                          navTextColor: UIColor) -> UIViewController {
+                          navTextColor: UIColor,
+                          line: String) -> UIViewController {
         let view = TimeViewController()
         view.setItems(fromStationName: fromStationName,
                       toStationName: toStationName,
                       buttonColor: navColor,
                       textColor: navTextColor)
+        view.line = line
         let router = TimeRouter(builder: self, viewController: view)
         let presenter = TimeViewPresenter(view: view, router: router)
         view.presenter = presenter

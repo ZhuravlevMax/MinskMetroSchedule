@@ -25,7 +25,8 @@ protocol TimeViewPresenterProtocol: AnyObject {
                         timeSheetTableViewValue: UITableView)
     
     func setNextTime(toStationName: String,
-                     stationName: String )
+                     stationName: String,
+                     line: String)
     
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
@@ -73,13 +74,13 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
     }
     
-    func setNextTime(toStationName: String, stationName: String ) {
+    func setNextTime(toStationName: String, stationName: String, line: String) {
         
         guard let direction = FireBaseFieldsEnum(rawValue: toStationName),
               let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
                     let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
                     let dayData = allData[dayOfWeek] as? [String:Any],
-                    let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
+                    let thirdLineStations = dayData["\(line)"] as? [String:Any],
               let station = thirdLineStations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int] else {return}
         

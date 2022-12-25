@@ -174,7 +174,12 @@ class FirstLineTableViewCell: UITableViewCell, FirstLineTableViewCellProtocol {
     @objc private func toMalinovkaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toMalinovkaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
         
-        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue)
+        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName,
+                                                                    toStationName: toStationName,
+                                                                    stationName: stationNameUnwrapped,
+                                                                    navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue,
+                                                                    navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue,
+                                                                    line: "\(FireBaseFieldsEnum.firstLine)")
         
         
         print("На Малиновку")
@@ -184,7 +189,7 @@ class FirstLineTableViewCell: UITableViewCell, FirstLineTableViewCellProtocol {
     @objc private func toUrucheStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toUrucheStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
 
-        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue)
+        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
         print("На Уручье")
     }
 
