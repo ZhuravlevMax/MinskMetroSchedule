@@ -13,7 +13,8 @@ protocol TimeRouterProtocol: BaseModulRouterProtocol {
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayTypeValue: String,
-                       dayOfWeek: String)
+                       dayOfWeek: String,
+                       line: String)
     
 }
 
@@ -30,11 +31,12 @@ class TimeRouter: TimeRouterProtocol {
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayTypeValue: String,
-                       dayOfWeek: String) {
+                       dayOfWeek: String,
+                       line: String) {
         guard let weekdayModule = builder?.createFullScheduleModule(fromStationName: fromStationName,
                                                                toStationName: toStationName,
                                                                dayTypeValue: dayTypeValue,
-                                                                    dayOfWeek: dayOfWeek) else {return}
+                                                                    dayOfWeek: dayOfWeek, line: line) else {return}
         
         guard let weekdayVC = viewController else {return}
         

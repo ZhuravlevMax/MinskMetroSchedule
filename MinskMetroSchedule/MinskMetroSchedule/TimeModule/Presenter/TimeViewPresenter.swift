@@ -32,7 +32,8 @@ protocol TimeViewPresenterProtocol: AnyObject {
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayOfWeek: String,
-                       dayType: String)
+                       dayType: String,
+                       line: String)
     
     func checkDayOfWeek()
 }
@@ -157,12 +158,14 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func openWeekdayVC(fromStationName: String,
                        toStationName: String,
                        dayOfWeek: String,
-                       dayType: String) {
+                       dayType: String,
+                       line: String) {
  
         router.openWeekdayVC(fromStationName: fromStationName,
                              toStationName: toStationName,
                              dayTypeValue: dayType,
-                             dayOfWeek: dayOfWeek)
+                             dayOfWeek: dayOfWeek,
+        line: line)
     }
     
     func setNavBar(navColor: UIColor,

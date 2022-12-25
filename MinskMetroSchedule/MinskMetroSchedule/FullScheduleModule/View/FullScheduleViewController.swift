@@ -11,6 +11,7 @@ import SnapKit
 protocol FullScheduleViewControllerProtocol: AnyObject {
     //ViewController methods here
     var presenter: FullSchedulePresenter? {get}
+    var line: String? {get set}
     
     func setItems(fromStationName: String,
                   toStationName: String,
@@ -27,6 +28,7 @@ class FullScheduleViewController: UIViewController, FullScheduleViewControllerPr
     private var toStation: String?
     private var dayType: String?
     private var numberOfRow: Int = 0
+    var line: String?
     
     private lazy var dayTypeLabel: UILabel = {
         let label = UILabel()
@@ -83,8 +85,8 @@ class FullScheduleViewController: UIViewController, FullScheduleViewControllerPr
         //view.addGradientBackground(firstColor: .green, secondColor: .white)
         
         
-        guard let toStationLabelText = toStationNameLabel.text, let stationNameText = stationNameLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText)  else {return}
-        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
+        guard let toStationLabelText = toStationNameLabel.text, let stationNameText = stationNameLabel.text, let stationName = StationNamesEnum(rawValue: stationNameText), let lineValue = line  else {return}
+        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView, line: lineValue)
     }
     
     func setItems(fromStationName: String,
@@ -134,11 +136,14 @@ extension FullScheduleViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let toStationName = toStationNameLabel.text, let stationName = stationNameLabel.text,
-        let dayOfWeek = dayTypeLabel.text else {return UITableViewCell()}
+        guard let toStationName = toStationNameLabel.text,
+                let stationName = stationNameLabel.text,
+              let dayOfWeek = dayTypeLabel.text,
+              let line
+        else {return UITableViewCell()}
         
         if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: FullScheduleTableViewCell.key, for: indexPath) as? FullScheduleTableViewCell {
-            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName, dayOfWeek: dayOfWeek)
+            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName, dayOfWeek: dayOfWeek, line: line)
             cell.backgroundColor = .clear
             return cell
         }

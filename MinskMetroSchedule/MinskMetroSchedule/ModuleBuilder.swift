@@ -21,7 +21,8 @@ protocol BuilderProtocol {
     func createFullScheduleModule(fromStationName: String,
                                   toStationName: String,
                                   dayTypeValue: String,
-                                  dayOfWeek: String) -> UIViewController
+                                  dayOfWeek: String,
+                                  line: String) -> UIViewController
 }
 
 class ModuleBuilder: BuilderProtocol {
@@ -76,9 +77,11 @@ class ModuleBuilder: BuilderProtocol {
     func createFullScheduleModule(fromStationName: String,
                                   toStationName: String,
                                   dayTypeValue: String,
-                                  dayOfWeek: String) -> UIViewController {
+                                  dayOfWeek: String,
+                                  line: String) -> UIViewController {
         let view = FullScheduleViewController()
         view.setItems(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek)
+        view.line = line
         let presenter = FullSchedulePresenter(view: view)
         view.presenter = presenter
         return view

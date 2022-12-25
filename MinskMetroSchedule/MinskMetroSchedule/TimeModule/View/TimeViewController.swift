@@ -311,8 +311,8 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let toStationName = toStationLabel.text,
-                let stationName = fromStationLabel.text,
-        let lineValue = line else {return UITableViewCell()}
+              let stationName = fromStationLabel.text,
+              let lineValue = line else {return UITableViewCell()}
         
         if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
             presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName, line: lineValue)
@@ -348,12 +348,13 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc private func showWeekdaysButtonPressed() {
         
         guard  let fromStationName = fromStationLabel.text,
-               let toStationName = toStationLabel.text
+               let toStationName = toStationLabel.text,
+               let line
         else {return}
         let dayOfWeek = DayTypeEnum.weekday.rawValue
         let dayType = "\(FireBaseCollectionsEnum.weekday)"
         
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType, line: line)
         
         print("На Ковальскую")
     }
@@ -362,11 +363,14 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc private func showFridayButtonPressed() {
         
         guard  let fromStationName = fromStationLabel.text,
-               let toStationName = toStationLabel.text else {return}
-        let dayOfWeek = DayTypeEnum.weekend.rawValue
-        let dayType = "\(FireBaseCollectionsEnum.weekend)"
+               let toStationName = toStationLabel.text,
+               let line
+        else {return}
         
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
+        let dayOfWeek = DayTypeEnum.friday.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.friday)"
+        
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType, line: line)
         
         print("На Ковальскую")
     }
@@ -375,11 +379,14 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc private func showWeekendButtonPressed() {
         
         guard  let fromStationName = fromStationLabel.text,
-               let toStationName = toStationLabel.text else {return}
+               let toStationName = toStationLabel.text,
+               let line
+        else {return}
+        
         let dayOfWeek = DayTypeEnum.weekend.rawValue
         let dayType = "\(FireBaseCollectionsEnum.weekend)"
         
-        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType, line: line)
         
         print("На Ковальскую")
     }

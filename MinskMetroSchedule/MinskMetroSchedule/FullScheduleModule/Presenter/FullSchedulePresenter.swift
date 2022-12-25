@@ -12,14 +12,15 @@ protocol FullSchedulePresenterProtocol: AnyObject {
     
     func setNumberOfRow(stationName: String,
                         toStation: String,
-                        timeSheetTableViewValue: UITableView)
+                        timeSheetTableViewValue: UITableView,
+                        line: String)
     
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String,
-                                         dayOfWeek: String)
-    
+                                         dayOfWeek: String,
+                                         line: String)
 }
 
 class FullSchedulePresenter: FullSchedulePresenterProtocol {
@@ -32,12 +33,13 @@ class FullSchedulePresenter: FullSchedulePresenterProtocol {
     
     func setNumberOfRow(stationName: String,
                         toStation: String,
-                        timeSheetTableViewValue: UITableView) {
+                        timeSheetTableViewValue: UITableView,
+                        line: String) {
         
         let dayOfWeek = "\(FireBaseCollectionsEnum.weekday)"
         guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
               let dayData = allData[dayOfWeek] as? [String:Any],
-              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
+              let thirdLineStations = dayData[line] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
               let station = thirdLineStations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
@@ -53,13 +55,13 @@ class FullSchedulePresenter: FullSchedulePresenterProtocol {
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String,
-                                         dayOfWeek: String) {
+                                         dayOfWeek: String,
+                                         line: String) {
         
-       
         guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
               let dayOfWeekValue = DayTypeEnum(rawValue: dayOfWeek),
               let dayData = allData["\(dayOfWeekValue)"] as? [String:Any],
-              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
+              let thirdLineStations = dayData[line] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let station = thirdLineStations["\(stationNameValue)"] as? [String:Any],
