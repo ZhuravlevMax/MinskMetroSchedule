@@ -126,7 +126,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("Будние дни", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
@@ -137,11 +137,26 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         return button
     }()
     
+    private lazy var showFridayButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
+        button.setTitle("Пятница", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
+        button.layer.cornerRadius = 2
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
+        button.dropShadow()
+        button.addTarget(self,
+                         action: #selector(self.showFridayButtonPressed),
+                         for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var showWeekendButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)")
         button.setTitle("Выходные дни", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonTitleTextColor)"), for: .normal)
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.thirdLineButtonColor)"), for: .highlighted)
@@ -166,6 +181,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.addSubview(fullScheduleLabel)
         view.addSubview(showWeekdaysButton)
         view.addSubview(showWeekendButton)
+        view.addSubview(showFridayButton)
         
         navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
@@ -225,14 +241,21 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         showWeekdaysButton.snp.makeConstraints {
             $0.left.equalToSuperview().inset(20)
             $0.top.equalTo(fullScheduleLabel.snp.bottom).offset(20)
-            $0.width.equalTo(view.frame.width * 0.3)
+            $0.width.equalTo(view.frame.width * 0.26)
+            $0.height.equalTo(50)
+        }
+        
+        showFridayButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(fullScheduleLabel.snp.bottom).offset(20)
+            $0.width.equalTo(view.frame.width * 0.26)
             $0.height.equalTo(50)
         }
         
         showWeekendButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(20)
             $0.top.equalTo(fullScheduleLabel.snp.bottom).offset(20)
-            $0.width.equalTo(view.frame.width * 0.3)
+            $0.width.equalTo(view.frame.width * 0.26)
             $0.height.equalTo(50)
         }
         
@@ -264,6 +287,9 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         showWeekdaysButton.backgroundColor = buttonColor
         showWeekendButton.setTitleColor(textColor, for: .normal)
         showWeekdaysButton.setTitleColor(textColor, for: .normal)
+        showFridayButton.backgroundColor = buttonColor
+        showFridayButton.setTitleColor(textColor, for: .normal)
+        
         title = toStationName
     }
     
@@ -326,6 +352,19 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         else {return}
         let dayOfWeek = DayTypeEnum.weekday.rawValue
         let dayType = "\(FireBaseCollectionsEnum.weekday)"
+        
+        presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
+        
+        print("На Ковальскую")
+    }
+    
+    //MARK: - Action for showFridayButton
+    @objc private func showFridayButtonPressed() {
+        
+        guard  let fromStationName = fromStationLabel.text,
+               let toStationName = toStationLabel.text else {return}
+        let dayOfWeek = DayTypeEnum.weekend.rawValue
+        let dayType = "\(FireBaseCollectionsEnum.weekend)"
         
         presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType)
         

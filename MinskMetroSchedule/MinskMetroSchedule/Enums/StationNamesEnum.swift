@@ -19,7 +19,7 @@ enum StationNamesEnum: String {
     case grushevka = "Грушевка"
     case institut = "Институт культуры"
     case lenina = "Пл.Ленина"
-    case oktyaborskaya = "Октябрьская"
+    case oktyabrskaya = "Октябрьская"
     case pobeda = "Пл.Победы"
     case kolasa = "Пл.Якуба Коласа"
     case akademia = "Академия наук"
