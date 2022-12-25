@@ -15,14 +15,15 @@ protocol TimeViewPresenterProtocol: AnyObject {
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
-                                         toStation: String)
+                                         toStation: String,
+                                         line: String)
     
     func setNavBar(navColor: UIColor,
                    navTextColor: UIColor)
     
     func setNumberOfRow(stationName: String,
                         toStation: String,
-                        timeSheetTableViewValue: UITableView)
+                        line: String)
     
     func setNextTime(toStationName: String,
                      stationName: String,
@@ -52,12 +53,12 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     
     func setNumberOfRow(stationName: String,
                         toStation: String,
-                        timeSheetTableViewValue: UITableView) {
+                        line: String) {
         
         guard let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
               let dayData = allData[dayOfWeek] as? [String:Any],
-              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
+              let thirdLineStations = dayData["\(line)"] as? [String:Any],
               let direction = FireBaseFieldsEnum(rawValue: toStation),
               let station = thirdLineStations[stationName] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]
@@ -69,8 +70,7 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
         let hoursArray = hoursArrayNext.map {$0 / 3600}
         let hours = Array(Set(hoursArray)).sorted { $0 < $1 }
-        self.view?.numberOfRow = hours.count
-        timeSheetTableViewValue.reloadData()
+        view?.numberOfRow = hours.count
         
     }
     
@@ -108,12 +108,13 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
     func configureTimeSheetTableViewCell(indexPath: IndexPath,
                                          cell: TimeSheetTableViewCellProtocol,
                                          stationName: String,
-                                         toStation: String) {
+                                         toStation: String,
+                                         line: String) {
         guard let direction = FireBaseFieldsEnum(rawValue: toStation),
               let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") as? [String:Any],
               let dayOfWeek = UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.dayOfWeek)"),
               let dayData = allData[dayOfWeek] as? [String:Any],
-              let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any],
+              let thirdLineStations = dayData[line] as? [String:Any],
               let stationNameValue = StationNamesEnum(rawValue: stationName),
               let station = thirdLineStations["\(stationNameValue)"] as? [String:Any],
               let timeSheet = station["\(direction)"] as? [Int]

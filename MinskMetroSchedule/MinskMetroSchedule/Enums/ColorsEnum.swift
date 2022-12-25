@@ -21,6 +21,7 @@ enum NameColorForThemesEnum {
     case redLineColor
     case blueLineColor
     case greenLineColor
+    case defaultColor
     
     case firstLineNavigationBarColor
     case firstLineButtonsColor

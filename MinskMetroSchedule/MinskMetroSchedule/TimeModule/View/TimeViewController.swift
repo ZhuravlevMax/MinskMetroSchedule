@@ -26,7 +26,11 @@ protocol TimeViewControllerProtocol: AnyObject {
 
 class TimeViewController: UIViewController, TimeViewControllerProtocol {
     
-    var numberOfRow: Int = 0
+    var numberOfRow: Int = 0 {
+        didSet {
+            timeSheetTableView.reloadData()
+        }
+    }
     var presenter: TimeViewPresenter?
     var line: String?
     
@@ -171,7 +175,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
               let stationName = StationNamesEnum(rawValue: stationNameText),
               let lineValue = line else {return}
         
-        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, timeSheetTableViewValue: timeSheetTableView)
+        presenter?.setNumberOfRow(stationName: "\(stationName)", toStation: toStationLabelText, line: lineValue)
         presenter?.setNextTime(toStationName: toStationLabelText, stationName: "\(stationName)", line: lineValue)
         presenter?.checkDayOfWeek()
         
@@ -280,10 +284,12 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let toStationName = toStationLabel.text, let stationName = fromStationLabel.text else {return UITableViewCell()}
+        guard let toStationName = toStationLabel.text,
+                let stationName = fromStationLabel.text,
+        let lineValue = line else {return UITableViewCell()}
         
         if let cell = timeSheetTableView.dequeueReusableCell(withIdentifier: TimeSheetTableViewCell.key, for: indexPath) as? TimeSheetTableViewCell {
-            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName)
+            presenter?.configureTimeSheetTableViewCell(indexPath: indexPath, cell: cell, stationName: stationName , toStation: toStationName, line: lineValue)
             cell.backgroundColor = .clear
             return cell
         }
@@ -301,7 +307,7 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         label.font = UIFont.systemFont(ofSize: 16,
                                        weight: .bold)
         
-        label.textColor = UIColor(named: "\(NameColorForThemesEnum.thirdLineTextColor)")
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.defaultColor)")
         
         headerView.addSubview(label)
         

@@ -181,7 +181,6 @@ class FirstLineTableViewCell: UITableViewCell, FirstLineTableViewCellProtocol {
                                                                     navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue,
                                                                     line: "\(FireBaseFieldsEnum.firstLine)")
         
-        
         print("На Малиновку")
     }
     
