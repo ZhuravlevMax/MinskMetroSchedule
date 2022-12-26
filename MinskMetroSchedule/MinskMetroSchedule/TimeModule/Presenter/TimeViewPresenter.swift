@@ -86,9 +86,9 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
               let timeSheet = station["\(direction)"] as? [Int] else {return}
         
         var currentTimeFromStartDay = Int(Date().timeIntervalSince1970) - Int(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
-        
+    
         // Здесь добавил условие, чтобы исправить баг со временем, когда пользователь смотрит расписание после 00:00
-        if currentTimeFromStartDay < 1500 {
+        if currentTimeFromStartDay < 4200 {
             currentTimeFromStartDay += 86400
         }
         
