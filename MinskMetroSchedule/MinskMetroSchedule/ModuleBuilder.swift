@@ -11,7 +11,7 @@ import UIKit
 protocol BuilderProtocol {
     
     func createFirstLineModule(title: String, image: UIImage?) -> UIViewController
-    //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
+    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createTimeModule(fromStationName: String,
                           toStationName: String,
@@ -26,22 +26,23 @@ protocol BuilderProtocol {
 }
 
 class ModuleBuilder: BuilderProtocol {
-    
-    
-    //    func createFirstLineModule(title: String, image: UIImage?) -> UIViewController {
-    //        <#code#>
-    //    }
-    //
-    //    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController {
-    //        <#code#>
-    //    }
-    
+
     func createFirstLineModule(title: String, image: UIImage?) -> UIViewController {
         let view = FirstLineViewController()
         view.tabBarItem.title = title
         view.tabBarItem.image = image
         let router = FirstLineRouter(builder: self, viewController: view)
         let presenter = FirstLineViewPresenter(view: view, router: router)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createSecondLineModule(title: String, image: UIImage?) -> UIViewController {
+        let view = SecondLineViewController()
+        view.tabBarItem.title = title
+        view.tabBarItem.image = image
+        let router = SecondLineRouter(builder: self, viewController: view)
+        let presenter = SecondLineViewPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }

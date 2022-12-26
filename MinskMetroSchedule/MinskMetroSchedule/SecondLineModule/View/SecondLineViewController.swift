@@ -1,34 +1,32 @@
 //
-//  FirstLineViewController.swift
+//  ViewController.swift
 //  MinskMetroSchedule
 //
-//  Created by Максим Журавлев on 23.12.22.
+//  Created by Максим Журавлев on 4.11.22.
 //
 
 import UIKit
 import SnapKit
+import Network
 
-protocol FirstLineViewProtocol: AnyObject {
+protocol SecondLineViewProtocol: AnyObject {
     //ViewController methods here
-    var presenter: FirstLineViewPresenter? {get}
+    var presenter: SecondLineViewPresenter? {get}
     var numberOfRow: Int {get set}
-    
+
     func setNav(appearance: UINavigationBarAppearance, titleValue: String)
-    func showErrorAlert(errorAlertController: UIAlertController)
-    func showSuccessAlert(successAlertController: UIAlertController)
-    
 }
 
-class FirstLineViewController: UIViewController, FirstLineViewProtocol {
+class SecondLineViewController: UIViewController, SecondLineViewProtocol {
     
     //MARK: - Cоздание элементов UI
-    
-    private lazy var firstLineTableView: UITableView = {
+
+    private lazy var secondLineTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
-        tableView.register(FirstLineTableViewCell.self, forCellReuseIdentifier: FirstLineTableViewCell.key)
+        tableView.register(SecondLineTableViewCell.self, forCellReuseIdentifier: SecondLineTableViewCell.key)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68
@@ -36,38 +34,35 @@ class FirstLineViewController: UIViewController, FirstLineViewProtocol {
     }()
     
     //MARK: - Создание переменных
-    var presenter: FirstLineViewPresenter?
+    var presenter: SecondLineViewPresenter?
     var numberOfRow: Int = 0 {
         didSet {
-            firstLineTableView.reloadData()
+            secondLineTableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(firstLineTableView)
-        view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
-        
+        // Do any additional setup after loading the view.
+        //MARK: - Добавление элементов на экран
+        view.addSubview(secondLineTableView)
+    
         guard let presenter else {return}
-
-        if UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allData)") == nil {
-            
-        }
-        presenter.downloadAllData()
-        if Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE") != UserDefaults.standard.string(forKey: "\(UserDefaultsKeysEnum.currentDay)") {
-            presenter.checkConnection()
-        }
         
         presenter.setNavBar()
-        presenter.setNumberOfRow()
         
+        view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
+        
+        updateViewConstraints()
+        
+        presenter.setNumberOfRow()
+        presenter.setNavBar()
     }
     
     //MARK: - Работа с констрейнтами
     override func updateViewConstraints() {
         
-        firstLineTableView.snp.makeConstraints {
+        secondLineTableView.snp.makeConstraints {
             $0.left.top.right.bottom.equalToSuperview()
         }
         
@@ -82,27 +77,18 @@ class FirstLineViewController: UIViewController, FirstLineViewProtocol {
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
     }
-    
-    func showErrorAlert(errorAlertController: UIAlertController) {
-        present(errorAlertController, animated: true)
-    }
-    
-    func showSuccessAlert(successAlertController: UIAlertController) {
-        present(successAlertController, animated: true)
-    }
-    
+
 }
 
-extension FirstLineViewController: UITableViewDelegate, UITableViewDataSource {
+extension SecondLineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //4
         numberOfRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = firstLineTableView.dequeueReusableCell(withIdentifier: FirstLineTableViewCell.key, for: indexPath) as? FirstLineTableViewCell {
+        if let cell = secondLineTableView.dequeueReusableCell(withIdentifier: SecondLineTableViewCell.key, for: indexPath) as? SecondLineTableViewCell {
             cell.selectionStyle = .none
-            presenter?.configureFirstLineTableViewCell(indexPath: indexPath, cell: cell)
+            presenter?.configureSecondLineTableViewCell(indexPath: indexPath, cell: cell)
             return cell
         }
         return UITableViewCell()
@@ -113,3 +99,5 @@ extension FirstLineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+
