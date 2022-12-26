@@ -38,7 +38,7 @@ class TabBarControllerRouter: ViewsRouterProtocol {
         let firstLineViewController = UINavigationController(rootViewController: builder.createFirstLineModule(title: "Московская", image: UIImage(named: "1tint")))
         let secondLineViewController = UINavigationController(rootViewController: builder.createSecondLineModule(title: "Автозаводская", image: UIImage(named: "2tint")))
         let thirdLineViewController = UINavigationController(rootViewController: builder.createThirdLineModule(title: "Зеленолужская", image: UIImage(named: "3tint")))
-        
+        let searchViewController = UINavigationController(rootViewController: builder.createSearchModule(title: "Поиск", image: UIImage(systemName: "magnifyingglass")))
         
     
         let currentDay = Int(Date().timeIntervalSince1970).decoderDt(format: "EEEE")
@@ -53,7 +53,7 @@ class TabBarControllerRouter: ViewsRouterProtocol {
         }
         
  
-        tabBarController.viewControllers = [firstLineViewController, secondLineViewController, thirdLineViewController]
+        tabBarController.viewControllers = [firstLineViewController, secondLineViewController, thirdLineViewController, searchViewController]
     }
     
     

@@ -27,6 +27,9 @@
 		944C49E4295A251400EA0B56 /* SecondLineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49E3295A251400EA0B56 /* SecondLineRouter.swift */; };
 		944C49E6295A256A00EA0B56 /* SecondLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49E5295A256A00EA0B56 /* SecondLineTableViewCell.swift */; };
 		944C49E8295A267600EA0B56 /* SecondLineViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49E7295A267600EA0B56 /* SecondLineViewPresenter.swift */; };
+		944C49EB295A3A4100EA0B56 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EA295A3A4100EA0B56 /* SearchViewController.swift */; };
+		944C49EF295A3A6500EA0B56 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */; };
+		944C49F2295A3C1200EA0B56 /* SearhRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F1295A3C1200EA0B56 /* SearhRouter.swift */; };
 		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
 		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
 		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
@@ -70,6 +73,9 @@
 		944C49E3295A251400EA0B56 /* SecondLineRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLineRouter.swift; sourceTree = "<group>"; };
 		944C49E5295A256A00EA0B56 /* SecondLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLineTableViewCell.swift; sourceTree = "<group>"; };
 		944C49E7295A267600EA0B56 /* SecondLineViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLineViewPresenter.swift; sourceTree = "<group>"; };
+		944C49EA295A3A4100EA0B56 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewPresenter.swift; sourceTree = "<group>"; };
+		944C49F1295A3C1200EA0B56 /* SearhRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearhRouter.swift; sourceTree = "<group>"; };
 		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +285,40 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		944C49E9295A3A1F00EA0B56 /* SearchModule */ = {
+			isa = PBXGroup;
+			children = (
+				944C49F0295A3BFA00EA0B56 /* Router */,
+				944C49ED295A3A5200EA0B56 /* Presenter */,
+				944C49EC295A3A4900EA0B56 /* View */,
+			);
+			path = SearchModule;
+			sourceTree = "<group>";
+		};
+		944C49EC295A3A4900EA0B56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				944C49EA295A3A4100EA0B56 /* SearchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		944C49ED295A3A5200EA0B56 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		944C49F0295A3BFA00EA0B56 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				944C49F1295A3C1200EA0B56 /* SearhRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		94B669C12914EC25005D6B31 = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +348,7 @@
 				94B669E32914EEDE005D6B31 /* ModuleBuilder.swift */,
 				94B669E12914EE31005D6B31 /* TabBarViewController.swift */,
 				94B669F02914F242005D6B31 /* TabBarViewControllerRouter.swift */,
+				944C49E9295A3A1F00EA0B56 /* SearchModule */,
 				9422C5C3291BE06C008D4D33 /* Enums */,
 				944C49CE2956309500EA0B56 /* FirstLineModule */,
 				944C49DB295A23C800EA0B56 /* SecondLineModule */,
@@ -512,6 +553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944C49F2295A3C1200EA0B56 /* SearhRouter.swift in Sources */,
 				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
 				944C49D6295632BB00EA0B56 /* FirstLineViewPresenter.swift in Sources */,
 				94026A9D293F6B9E00E766F2 /* DayTypeEnum.swift in Sources */,
@@ -522,6 +564,7 @@
 				94B669ED2914F0A6005D6B31 /* ThirdLineViewPresenter.swift in Sources */,
 				94B669E22914EE31005D6B31 /* TabBarViewController.swift in Sources */,
 				944C49D8295633BB00EA0B56 /* FirstLineRouter.swift in Sources */,
+				944C49EF295A3A6500EA0B56 /* SearchViewPresenter.swift in Sources */,
 				944C49E2295A242700EA0B56 /* SecondLineViewController.swift in Sources */,
 				94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */,
 				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
@@ -532,6 +575,7 @@
 				944C49E8295A267600EA0B56 /* SecondLineViewPresenter.swift in Sources */,
 				9422C5CC291E568F008D4D33 /* TimeSheetTableViewCell.swift in Sources */,
 				944C49CD2950EFB600EA0B56 /* FullScheduleTableViewCell.swift in Sources */,
+				944C49EB295A3A4100EA0B56 /* SearchViewController.swift in Sources */,
 				94B669EF2914F0D3005D6B31 /* BaseModulRouter.swift in Sources */,
 				94B669E42914EEDE005D6B31 /* ModuleBuilder.swift in Sources */,
 				94B669F12914F242005D6B31 /* TabBarViewControllerRouter.swift in Sources */,
