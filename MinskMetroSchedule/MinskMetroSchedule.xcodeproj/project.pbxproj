@@ -30,6 +30,7 @@
 		944C49EB295A3A4100EA0B56 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EA295A3A4100EA0B56 /* SearchViewController.swift */; };
 		944C49EF295A3A6500EA0B56 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */; };
 		944C49F2295A3C1200EA0B56 /* SearhRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F1295A3C1200EA0B56 /* SearhRouter.swift */; };
+		944C49F5295B773F00EA0B56 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */; };
 		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
 		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
 		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
@@ -76,6 +77,7 @@
 		944C49EA295A3A4100EA0B56 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewPresenter.swift; sourceTree = "<group>"; };
 		944C49F1295A3C1200EA0B56 /* SearhRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearhRouter.swift; sourceTree = "<group>"; };
+		944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 		944C49E9295A3A1F00EA0B56 /* SearchModule */ = {
 			isa = PBXGroup;
 			children = (
+				944C49F3295B771700EA0B56 /* TableViewCell */,
 				944C49F0295A3BFA00EA0B56 /* Router */,
 				944C49ED295A3A5200EA0B56 /* Presenter */,
 				944C49EC295A3A4900EA0B56 /* View */,
@@ -317,6 +320,14 @@
 				944C49F1295A3C1200EA0B56 /* SearhRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		944C49F3295B771700EA0B56 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		94B669C12914EC25005D6B31 = {
@@ -588,6 +599,7 @@
 				944C49D42956310B00EA0B56 /* FirstLineViewController.swift in Sources */,
 				94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */,
 				9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */,
+				944C49F5295B773F00EA0B56 /* SearchTableViewCell.swift in Sources */,
 				944C49E6295A256A00EA0B56 /* SecondLineTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
