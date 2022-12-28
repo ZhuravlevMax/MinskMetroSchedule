@@ -8,13 +8,15 @@
 import UIKit
 
 protocol SearchTableViewCellProtocol {
-//    func configureCell(stationNameText: String,
-//                       toMalinovkaStationButtonIsHidden: Bool,
-//                       toUrucheStationButtonIsHidden: Bool,
-//                       stationNameValue: String,
-//                       transferName: String,
-//                       transferColor: UIColor)
+    func configureCell(stationNameText: String,
+                       toMalinovkaStationButtonIsHidden: Bool,
+                       toUrucheStationButtonIsHidden: Bool,
+                       stationNameValue: String,
+                       transferName: String,
+                       transferColor: UIColor)
     var searchViewControllerDelegate: SearchViewProtocol? {get set}
+    
+    func setName(stationNameText: String)
 
   //  func setFirstStationViewDelegate(view: FirstLineViewProtocol)
 }
@@ -23,6 +25,56 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
 
     static let key = "SearchTableViewCell"
     var searchViewControllerDelegate: SearchViewProtocol?
+    var stationName: String?
+    
+    //MARK: - Create items
+    private lazy var stationNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Name"
+        label.font = UIFont.systemFont(ofSize: 20,
+                                       weight: .bold)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)")
+        return label
+    }()
+    
+    private lazy var transferLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 13,
+                                       weight: .bold)
+        label.textColor = UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)")
+        return label
+    }()
+    
+    private lazy var toMalinovkaStationButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)")
+        button.setTitle("\(FireBaseFieldsEnum.toMalinovkaTimeSheet.rawValue)", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.layer.cornerRadius = 2
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)"), for: .highlighted)
+        button.dropShadow()
+        button.addTarget(self,
+                         action: #selector(self.toMalinovkaStationButtonPressed),
+                         for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var toUrucheStationButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)")
+        button.setTitle("\(FireBaseFieldsEnum.toUrucheTimeSheet.rawValue)", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.layer.cornerRadius = 2
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)"), for: .highlighted)
+        button.dropShadow()
+        button.addTarget(self,
+                         action: #selector(self.toUrucheStationButtonPressed),
+                         for: .touchUpInside)
+        return button
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +89,14 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        //MARK: - Add items to contentsView
+        contentView.addSubview(stationNameLabel)
+        contentView.addSubview(toMalinovkaStationButton)
+        contentView.addSubview(toUrucheStationButton)
+        //contentView.addSubview(showFullScheduleButton)
+        contentView.addSubview(transferLabel)
+        contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
+        
         updateConstraints()
         
     }
@@ -45,7 +104,75 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    func configureCell(stationNameText: String,
+                       toMalinovkaStationButtonIsHidden: Bool,
+                       toUrucheStationButtonIsHidden: Bool,
+                       stationNameValue: String,
+                       transferName: String,
+                       transferColor: UIColor) {
+        
+        stationNameLabel.text = stationNameText
+        toMalinovkaStationButton.isHidden = toMalinovkaStationButtonIsHidden
+        toUrucheStationButton.isHidden = toUrucheStationButtonIsHidden
+        stationName = stationNameValue
+        transferLabel.text = transferName
+        transferLabel.textColor = transferColor
+        
+    }
+    
+    func setName(stationNameText: String) {
+        stationNameLabel.text = stationNameText
+    }
  
+    //MARK: - Set constraints for items
+    override func updateConstraints() {
+        
+        stationNameLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(10)
+        }
+        
+        transferLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(stationNameLabel.snp.bottom).offset(5)
+        }
+        
+        toMalinovkaStationButton.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(10)
+            $0.top.equalTo(transferLabel.snp.bottom).offset(20)
+            $0.width.equalTo(contentView.frame.width * 0.5)
+            $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().inset(10)
+        }
+        
+        toUrucheStationButton.snp.makeConstraints {
+            $0.right.equalToSuperview().inset(10)
+            $0.top.equalTo(transferLabel.snp.bottom).offset(20)
+            $0.width.equalTo(contentView.frame.width * 0.5)
+            $0.height.equalTo(50)
+        }
+        
+        super.updateConstraints()
+    }
+    
+    //MARK: - Action for toMalinovkaStationButton
+    @objc private func toMalinovkaStationButtonPressed() {
+        guard let fromStationName = stationNameLabel.text, let toStationName = toMalinovkaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        
+//        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
+        
+        print("На Малиновку")
+    }
+    
+    //MARK: - Action for toUrucheStationButton
+    @objc private func toUrucheStationButtonPressed() {
+        guard let fromStationName = stationNameLabel.text, let toStationName = toUrucheStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+
+//        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
+        print("На Уручье")
+    }
         
         
 

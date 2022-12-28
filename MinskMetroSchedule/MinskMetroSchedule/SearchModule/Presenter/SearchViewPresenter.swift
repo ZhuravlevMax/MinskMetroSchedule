@@ -10,6 +10,9 @@ import UIKit
 
 protocol SearchViewPresenterProtocol: AnyObject {
     func getStations()
+    func getStationName(station: [String : Any]) -> String
+    func filterModelsForSearch(stations: [String : Any], searchText: String)
+    func configureSearchTableViewCell(indexPath: IndexPath, cell: SearchTableViewCellProtocol, stations: [String : Any])
 }
 
 class SearchViewPresenter: SearchViewPresenterProtocol {
@@ -43,13 +46,7 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
         allStations = allStations.merging(thirdLineStations, uniquingKeysWith: { key1, key2 in
             
         })
-        
-        allStations
-        
-//        allStations.append(firstLineStations)
-//        allStations.append(secondLineStations)
-//        allStations.append(thirdLineStations)
-//
+
         view?.stations = allStations
     }
     
@@ -71,8 +68,50 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
            return getStationName(station: stationValue).lowercased().contains(searchText.lowercased())
         })
         
-        print(filteredStations)
+       // print(filteredStations)
         view?.filteredStations = filteredStations
+    }
+    
+    func configureSearchTableViewCell(indexPath: IndexPath, cell: SearchTableViewCellProtocol, stations: [String : Any] ) {
         
+        var valueArray = stations.values
+        valueArray.count
+        var array: [[String : Any]] = []
+        for i in valueArray{
+            guard let value = i as? [String : Any] else {return}
+            array.append(value)
+        }
+        
+        print(array)
+        
+        print(getStationName(station: array[indexPath.row]))
+
+//        guard let stationNameText = getStationName(station: array[indexPath.row])
+//        else {return}
+        cell.setName(stationNameText: getStationName(station: array[indexPath.row]))
+        
+//        let toMalinovkaDirectionExist: Bool = {
+//            if station["\(FireBaseFieldsEnum.toMalinovkaTimeSheet)"] != nil {
+//                return false }
+//            return true
+//        }()
+//
+//        let toUrucheDirectionExist: Bool = {
+//            if station["\(FireBaseFieldsEnum.toUrucheTimeSheet)"] != nil {
+//                return false }
+//            return true
+//        }()
+//
+//        let stationName = "\(stationNameValue)"
+//
+//        cell.configureCell(stationNameText: stationNameText,
+//                           toMalinovkaStationButtonIsHidden: toMalinovkaDirectionExist,
+//                           toUrucheStationButtonIsHidden: toUrucheDirectionExist,
+//                           stationNameValue: stationName,
+//                           transferName: transferName,
+//                           transferColor: transferColor)
+//
+//        guard let view else {return}
+        //cell.setFirstStationViewDelegate(view: view)
     }
 }

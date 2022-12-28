@@ -106,6 +106,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = searchTableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.key, for: indexPath) as? SearchTableViewCell {
+            cell.selectionStyle = .none
+            presenter?.configureSearchTableViewCell(indexPath: indexPath, cell: cell, stations: filteredStations)
+            return cell
+        }
+        
         return UITableViewCell()
     }
     
