@@ -12,15 +12,20 @@ import Firebase
 protocol SearchViewProtocol: AnyObject {
     //ViewController methods here
     var presenter: SearchViewPresenter? {get}
-    var stations: [[String : Any]]? {get set}
+    var stations: [String : Any]? {get set}
+    var filteredStations: [String : Any] {get set}
     
 }
 
-class SearchViewController: UIViewController, SearchViewProtocol, UISearchResultsUpdating {
+class SearchViewController: UIViewController, SearchViewProtocol {
     
     //MARK: - Создание переменных
-    private var filteredStations: [[String : Any]] = [] {
+    
+    var stations: [String : Any]?
+    var filteredStations: [String : Any] = [:] {
         didSet {
+            
+            searchTableView.reloadData()
 //            if filteredModels.count == 0 {
 //                UIView.animate(withDuration: 0.7) { [weak self] in
 //                    guard let self = self else {return}
@@ -33,7 +38,8 @@ class SearchViewController: UIViewController, SearchViewProtocol, UISearchResult
         }
     }
     
-    var stations: [[String : Any]]?
+    
+    
     var presenter: SearchViewPresenter?
     
     //MARK: - Cоздание элементов UI
@@ -72,17 +78,15 @@ class SearchViewController: UIViewController, SearchViewProtocol, UISearchResult
         navigationItem.searchController = searchController
         definesPresentationContext = true
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        presenter?.getStations()
+        
+        print(stations)
+        
+        print(filteredStations)
     }
 
-    func updateSearchResults(for searchController: UISearchController) {
-//        guard let text = searchController.searchBar.text else {return}
-//        filterModelsForSearch(searchText: text)
-    }
     
-    //MARK: - Метод для сравения введенного текста с массивом объектов по именам
-    func filterModelsForSearch(searchText: String) {
-
-    }
     
     //MARK: - Работа с констрейнтами
     override func updateViewConstraints() {
@@ -98,7 +102,7 @@ class SearchViewController: UIViewController, SearchViewProtocol, UISearchResult
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        filteredStations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,4 +110,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+       guard let text = searchController.searchBar.text, let stations else {return}
+        presenter?.filterModelsForSearch(stations: stations, searchText: text)
+    }
 }
