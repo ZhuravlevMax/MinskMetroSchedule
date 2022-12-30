@@ -21,13 +21,46 @@ enum FireBaseFieldsEnum: String {
     case toUrucheTimeSheet = "На Уручье"
     case toMogilevskyaTimeSheet = "На Могилевскую"
     case toKamenkaTimeSheet = "На Каменную Горку"
+    case navColor
+    case textColor
     case transferName
     case transferColor
     case firstLine
     case secondLine
     case thirdLine
+    
+    
+    
+}
+
+enum DirectionEnum: String {
+    
+case toKovalskayaTimeSheet
+case toUbileynayaTimeSheet
+case toMalinovkaTimeSheet
+case toUrucheTimeSheet
+case toMogilevskyaTimeSheet
+case toKamenkaTimeSheet
+    
+    var direction: String {
+        switch self {
+        case .toUrucheTimeSheet:
+            return "На Уручье"
+        case .toKamenkaTimeSheet:
+            return "На Каменную Горку"
+        case .toUbileynayaTimeSheet:
+            return "На Юбилейную"
+        case .toKovalskayaTimeSheet:
+            return "На Ковальскую"
+        case .toMalinovkaTimeSheet:
+            return "На Малиновку"
+        case .toMogilevskyaTimeSheet:
+            return "На Могилевскую"
+        }
+    }
 
 }
+
 
 
 

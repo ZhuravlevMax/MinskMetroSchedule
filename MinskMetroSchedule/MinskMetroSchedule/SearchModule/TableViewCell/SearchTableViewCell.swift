@@ -16,7 +16,11 @@ protocol SearchTableViewCellProtocol {
                        transferColor: UIColor)
     var searchViewControllerDelegate: SearchViewProtocol? {get set}
     
-    func setName(stationNameText: String)
+    func setName(stationNameText: String,
+                 buttonColor: String,
+                 textButtonColor: String,
+                 mainDirection: String,
+                 reverseDirection: String)
 
   //  func setFirstStationViewDelegate(view: FirstLineViewProtocol)
 }
@@ -46,32 +50,32 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
         return label
     }()
     
-    private lazy var toMalinovkaStationButton: UIButton = {
+    private lazy var mainDirectionButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)")
-        button.setTitle("\(FireBaseFieldsEnum.toMalinovkaTimeSheet.rawValue)", for: .normal)
+        button.setTitle("Посадки нет", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
-                         action: #selector(self.toMalinovkaStationButtonPressed),
+                         action: #selector(self.mainDirectionButtonPressed),
                          for: .touchUpInside)
         return button
     }()
     
-    private lazy var toUrucheStationButton: UIButton = {
+    private lazy var reverseDirectionButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)")
-        button.setTitle("\(FireBaseFieldsEnum.toUrucheTimeSheet.rawValue)", for: .normal)
+        button.setTitle("Посадки нет", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
-                         action: #selector(self.toUrucheStationButtonPressed),
+                         action: #selector(self.reverseButtonPressed),
                          for: .touchUpInside)
         return button
     }()
@@ -91,9 +95,8 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //MARK: - Add items to contentsView
         contentView.addSubview(stationNameLabel)
-        contentView.addSubview(toMalinovkaStationButton)
-        contentView.addSubview(toUrucheStationButton)
-        //contentView.addSubview(showFullScheduleButton)
+        contentView.addSubview(mainDirectionButton)
+        contentView.addSubview(reverseDirectionButton)
         contentView.addSubview(transferLabel)
         contentView.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
@@ -114,16 +117,28 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
                        transferColor: UIColor) {
         
         stationNameLabel.text = stationNameText
-        toMalinovkaStationButton.isHidden = toMalinovkaStationButtonIsHidden
-        toUrucheStationButton.isHidden = toUrucheStationButtonIsHidden
+        mainDirectionButton.isHidden = toMalinovkaStationButtonIsHidden
+        reverseDirectionButton.isHidden = toUrucheStationButtonIsHidden
         stationName = stationNameValue
         transferLabel.text = transferName
         transferLabel.textColor = transferColor
         
     }
     
-    func setName(stationNameText: String) {
+    func setName(stationNameText: String,
+                 buttonColor: String,
+                 textButtonColor: String,
+                 mainDirection: String,
+                 reverseDirection: String) {
         stationNameLabel.text = stationNameText
+        stationNameLabel.textColor = UIColor(named: "\(buttonColor)")
+        mainDirectionButton.backgroundColor = UIColor(named: "\(buttonColor)")
+        mainDirectionButton.setTitleColor(UIColor(named: "\(textButtonColor)"), for: .normal)
+        mainDirectionButton.setTitle("\(mainDirection)", for: .normal)
+        reverseDirectionButton.backgroundColor = UIColor(named: "\(buttonColor)")
+        reverseDirectionButton.setTitleColor(UIColor(named: "\(textButtonColor)"), for: .normal)
+        reverseDirectionButton.setTitle("\(reverseDirection)", for: .normal)
+        
     }
  
     //MARK: - Set constraints for items
@@ -139,7 +154,7 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
             $0.top.equalTo(stationNameLabel.snp.bottom).offset(5)
         }
         
-        toMalinovkaStationButton.snp.makeConstraints {
+        mainDirectionButton.snp.makeConstraints {
             $0.left.equalToSuperview().inset(10)
             $0.top.equalTo(transferLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
@@ -147,7 +162,7 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
             $0.bottom.equalToSuperview().inset(10)
         }
         
-        toUrucheStationButton.snp.makeConstraints {
+        reverseDirectionButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(10)
             $0.top.equalTo(transferLabel.snp.bottom).offset(20)
             $0.width.equalTo(contentView.frame.width * 0.5)
@@ -158,8 +173,8 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
     }
     
     //MARK: - Action for toMalinovkaStationButton
-    @objc private func toMalinovkaStationButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = toMalinovkaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+    @objc private func mainDirectionButtonPressed() {
+        guard let fromStationName = stationNameLabel.text, let toStationName = mainDirectionButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
         
 //        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
         
@@ -167,8 +182,8 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
     }
     
     //MARK: - Action for toUrucheStationButton
-    @objc private func toUrucheStationButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = toUrucheStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+    @objc private func reverseButtonPressed() {
+        guard let fromStationName = stationNameLabel.text, let toStationName = reverseDirectionButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
 
 //        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
         print("На Уручье")
