@@ -91,30 +91,22 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
             case "\(FireBaseFieldsEnum.toUrucheTimeSheet)":
                 return key.contains("\(FireBaseFieldsEnum.toUrucheTimeSheet)")
             default:
-                false
+               return false
             }
-            return false
         }
         
         if let nameDictUnwrapped = nameDict, let name = nameDictUnwrapped.key as? String {
             
             switch name {
-            case "toKovalskaya":
-                return "На Ковальскую"
-            case "toKovalskayaTimeSheet":
-                return "На Ковальскую"
+
             case "toUbileynayaTimeSheet":
                 return "На Юбилейную"
-            case "toMalinovkaTimeSheet":
-                return "На Малиновку"
             case "toUrucheTimeSheet":
                 return "На Уручье"
-            case "toMogilevskyaTimeSheet":
-                return "На Могилевскую"
             case "toKamenkaTimeSheet":
                 return "На Каменную Горку"
             default:
-                ""
+               return ""
             }
 
             //return "\(FireBaseFieldsEnum(rawValue: name))"
@@ -134,13 +126,22 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
             case "\(FireBaseFieldsEnum.toMalinovkaTimeSheet)":
                 return key.contains("\(FireBaseFieldsEnum.toMalinovkaTimeSheet)")
             default:
-                false
+                return false
             }
-            return false
+
         }
         
         if let nameDictUnwrapped = nameDict, let name = nameDictUnwrapped.key as? String {
-            return "\(FireBaseFieldsEnum(rawValue: name))"
+            switch name {
+            case "toKovalskayaTimeSheet":
+                return "На Ковальскую"
+            case "toMalinovkaTimeSheet":
+                return "На Малиновку"
+            case "toMogilevskyaTimeSheet":
+                return "На Могилевскую"
+            default:
+                return ""
+            }
         }
         return "Посадки нет"
     }
@@ -161,7 +162,7 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
     
     func configureSearchTableViewCell(indexPath: IndexPath, cell: SearchTableViewCellProtocol, stations: [String : Any] ) {
         
-        var valueArray = stations.values
+        let valueArray = stations.values
         var array: [[String : Any]] = []
         for field in valueArray {
             guard let value = field as? [String : Any] else {return}

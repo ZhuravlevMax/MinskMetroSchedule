@@ -130,6 +130,7 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
                  textButtonColor: String,
                  mainDirection: String,
                  reverseDirection: String) {
+        
         stationNameLabel.text = stationNameText
         stationNameLabel.textColor = UIColor(named: "\(buttonColor)")
         mainDirectionButton.backgroundColor = UIColor(named: "\(buttonColor)")

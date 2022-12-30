@@ -50,7 +50,7 @@ class FirstLineTableViewCell: UITableViewCell, FirstLineTableViewCellProtocol {
         button.setTitle("\(FireBaseFieldsEnum.toMalinovkaTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonTitleTextColor)"), for: .normal)
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
@@ -65,7 +65,7 @@ class FirstLineTableViewCell: UITableViewCell, FirstLineTableViewCellProtocol {
         button.setTitle("\(FireBaseFieldsEnum.toUrucheTimeSheet.rawValue)", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.layer.cornerRadius = 2
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonTitleTextColor)"), for: .normal)
         button.setTitleColor(UIColor(named: "\(NameColorForThemesEnum.firstLineButtonColor)"), for: .highlighted)
         button.dropShadow()
         button.addTarget(self,
