@@ -110,6 +110,18 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
                        mainDirection: String,
                        reverseDirection: String) {
         
+        if mainDirection == "Посадки нет" {
+            mainDirectionButton.isHidden = true
+        } else {
+            mainDirectionButton.isHidden = false
+        }
+        
+        if reverseDirection == "Посадки нет" {
+            reverseDirectionButton.isHidden = true
+        } else {
+            reverseDirectionButton.isHidden = false
+        }
+        
         stationNameLabel.text = stationNameText
         stationNameLabel.textColor = UIColor(named: "\(textButtonColor)")
         mainDirectionButton.backgroundColor = UIColor(named: "\(buttonColor)")
