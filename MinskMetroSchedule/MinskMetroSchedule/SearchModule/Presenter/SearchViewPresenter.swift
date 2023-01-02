@@ -11,8 +11,17 @@ import UIKit
 protocol SearchViewPresenterProtocol: AnyObject {
     func getStations()
     func getStationName(station: [String : Any]) -> String
-    func filterModelsForSearch(stations: [String : Any], searchText: String)
-    func configureSearchTableViewCell(indexPath: IndexPath, cell: SearchTableViewCellProtocol, stations: [String : Any])
+    func filterModelsForSearch(stations: [String : Any],
+                               searchText: String)
+    func configureSearchTableViewCell(indexPath: IndexPath,
+                                      cell: SearchTableViewCellProtocol,
+                                      stations: [String : Any])
+    func openTimeVC(fromStationName: String,
+                    toStationName: String,
+                    stationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor,
+                    line: String)
 }
 
 class SearchViewPresenter: SearchViewPresenterProtocol {
@@ -36,10 +45,7 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
               let thirdLineStations = dayData["\(FireBaseFieldsEnum.thirdLine)"] as? [String:Any]
                 
         else {return}
-        //
-        //        firstLineStations.forEach { station in
-        //            allStations.append(station)
-        //        }
+
         allStations = firstLineStations.merging(secondLineStations, uniquingKeysWith: { key1, key2 in
             
         })
@@ -82,7 +88,7 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
     
     func getNameMainDirection(station: [String : Any]) -> String {
         let nameDict = station.first { key, value in
-
+            
             switch key {
             case "\(FireBaseFieldsEnum.toUbileynayaTimeSheet)":
                 return key.contains("\(FireBaseFieldsEnum.toUbileynayaTimeSheet)")
@@ -91,14 +97,14 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
             case "\(FireBaseFieldsEnum.toUrucheTimeSheet)":
                 return key.contains("\(FireBaseFieldsEnum.toUrucheTimeSheet)")
             default:
-               return false
+                return false
             }
         }
         
         if let nameDictUnwrapped = nameDict, let name = nameDictUnwrapped.key as? String {
             
             switch name {
-
+                
             case "toUbileynayaTimeSheet":
                 return "На Юбилейную"
             case "toUrucheTimeSheet":
@@ -106,18 +112,16 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
             case "toKamenkaTimeSheet":
                 return "На Каменную Горку"
             default:
-               return ""
+                return ""
             }
 
-            //return "\(FireBaseFieldsEnum(rawValue: name))"
-            //return "\(FireBaseFie)"
         }
         return "Посадки нет"
     }
     
     func getNameReverseDirection(station: [String : Any]) -> String {
         let nameDict = station.first { key, value in
-
+            
             switch key {
             case "\(FireBaseFieldsEnum.toKovalskayaTimeSheet)":
                 return key.contains("\(FireBaseFieldsEnum.toKovalskayaTimeSheet)")
@@ -128,7 +132,7 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
             default:
                 return false
             }
-
+            
         }
         
         if let nameDictUnwrapped = nameDict, let name = nameDictUnwrapped.key as? String {
@@ -155,8 +159,7 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
             guard let stationValue = station.value as? [String:Any] else {return false}
             return getStationName(station: stationValue).lowercased().contains(searchText.lowercased())
         })
-        
-        // print(filteredStations)
+
         view?.filteredStations = filteredStations
     }
     
@@ -179,35 +182,30 @@ class SearchViewPresenter: SearchViewPresenterProtocol {
         print(getNameMainDirection(station: array[indexPath.row]))
         print(getNameReverseDirection(station: array[indexPath.row]))
         
-        cell.setName(stationNameText: getStationName(station: array[indexPath.row]),
-                     buttonColor: getButtonColor(station: array[indexPath.row]),
-                     textButtonColor: getTextButtonColor(station: array[indexPath.row]),
-                     mainDirection: getNameMainDirection(station: array[indexPath.row]),
-                     reverseDirection: getNameReverseDirection(station: array[indexPath.row])
-                     )
+        cell.configureCell(stationNameText: getStationName(station: array[indexPath.row]),
+                           buttonColor: getButtonColor(station: array[indexPath.row]),
+                           textButtonColor: getTextButtonColor(station: array[indexPath.row]),
+                           mainDirection: getNameMainDirection(station: array[indexPath.row]),
+                           reverseDirection: getNameReverseDirection(station: array[indexPath.row])
+        )
         
-        //        let toMalinovkaDirectionExist: Bool = {
-        //            if station["\(FireBaseFieldsEnum.toMalinovkaTimeSheet)"] != nil {
-        //                return false }
-        //            return true
-        //        }()
-        //
-        //        let toUrucheDirectionExist: Bool = {
-        //            if station["\(FireBaseFieldsEnum.toUrucheTimeSheet)"] != nil {
-        //                return false }
-        //            return true
-        //        }()
-        //
-        //        let stationName = "\(stationNameValue)"
-        //
-        //        cell.configureCell(stationNameText: stationNameText,
-        //                           toMalinovkaStationButtonIsHidden: toMalinovkaDirectionExist,
-        //                           toUrucheStationButtonIsHidden: toUrucheDirectionExist,
-        //                           stationNameValue: stationName,
-        //                           transferName: transferName,
-        //                           transferColor: transferColor)
-        //
-        //        guard let view else {return}
-        //cell.setFirstStationViewDelegate(view: view)
+        guard let view else {return}
+        cell.setSearchViewDelegate(view: view)
+
+    }
+    
+    func openTimeVC(fromStationName: String,
+                    toStationName: String,
+                    stationName: String,
+                    navColor: UIColor,
+                    navTextColor: UIColor,
+                    line: String) {
+        
+        self.router.openTimeVC(fromStationName: fromStationName,
+                               toStationName: toStationName,
+                               navColor: navColor,
+                               navTextColor: navTextColor,
+                               line: line)
+        
     }
 }

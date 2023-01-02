@@ -9,24 +9,19 @@ import UIKit
 
 protocol SearchTableViewCellProtocol {
     func configureCell(stationNameText: String,
-                       toMalinovkaStationButtonIsHidden: Bool,
-                       toUrucheStationButtonIsHidden: Bool,
-                       stationNameValue: String,
-                       transferName: String,
-                       transferColor: UIColor)
+                       buttonColor: String,
+                       textButtonColor: String,
+                       mainDirection: String,
+                       reverseDirection: String)
     var searchViewControllerDelegate: SearchViewProtocol? {get set}
     
-    func setName(stationNameText: String,
-                 buttonColor: String,
-                 textButtonColor: String,
-                 mainDirection: String,
-                 reverseDirection: String)
-
-  //  func setFirstStationViewDelegate(view: FirstLineViewProtocol)
+    func setSearchViewDelegate(view: SearchViewProtocol)
 }
 
 class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
-
+    
+    
+    
     static let key = "SearchTableViewCell"
     var searchViewControllerDelegate: SearchViewProtocol?
     var stationName: String?
@@ -84,10 +79,10 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -110,29 +105,13 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
     
     
     func configureCell(stationNameText: String,
-                       toMalinovkaStationButtonIsHidden: Bool,
-                       toUrucheStationButtonIsHidden: Bool,
-                       stationNameValue: String,
-                       transferName: String,
-                       transferColor: UIColor) {
+                       buttonColor: String,
+                       textButtonColor: String,
+                       mainDirection: String,
+                       reverseDirection: String) {
         
         stationNameLabel.text = stationNameText
-        mainDirectionButton.isHidden = toMalinovkaStationButtonIsHidden
-        reverseDirectionButton.isHidden = toUrucheStationButtonIsHidden
-        stationName = stationNameValue
-        transferLabel.text = transferName
-        transferLabel.textColor = transferColor
-        
-    }
-    
-    func setName(stationNameText: String,
-                 buttonColor: String,
-                 textButtonColor: String,
-                 mainDirection: String,
-                 reverseDirection: String) {
-        
-        stationNameLabel.text = stationNameText
-        stationNameLabel.textColor = UIColor(named: "\(buttonColor)")
+        stationNameLabel.textColor = UIColor(named: "\(textButtonColor)")
         mainDirectionButton.backgroundColor = UIColor(named: "\(buttonColor)")
         mainDirectionButton.setTitleColor(UIColor(named: "\(textButtonColor)"), for: .normal)
         mainDirectionButton.setTitle("\(mainDirection)", for: .normal)
@@ -141,7 +120,7 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
         reverseDirectionButton.setTitle("\(reverseDirection)", for: .normal)
         
     }
- 
+    
     //MARK: - Set constraints for items
     override func updateConstraints() {
         
@@ -175,21 +154,78 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
     
     //MARK: - Action for toMalinovkaStationButton
     @objc private func mainDirectionButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = mainDirectionButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        guard let fromStationName = stationNameLabel.text,
+              let toStationName = mainDirectionButton.titleLabel?.text,
+              let buttonColor = mainDirectionButton.backgroundColor,
+              let buttonTextColor = stationNameLabel.textColor
+              
+        else {return}
         
-//        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
         
-        print("На Малиновку")
+        let line: String = { [weak self] in
+            guard let self, let color = mainDirectionButton.backgroundColor else {return ""}
+            
+            switch color {
+            case UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)"):
+                return "firstLine"
+            case UIColor(named: "\(NameColorForThemesEnum.secondLineNavBarColor)"):
+                return "secondLine"
+            case UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)"):
+                return "thirdLine"
+
+            default:
+                return ""
+            }
+            
+        }()
+
+        searchViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName,
+                                                            toStationName: toStationName,
+                                                            stationName: fromStationName,
+                                                            navColor: buttonColor,
+                                                            navTextColor: buttonTextColor,
+                                                            line: line)
+
     }
     
     //MARK: - Action for toUrucheStationButton
     @objc private func reverseButtonPressed() {
-        guard let fromStationName = stationNameLabel.text, let toStationName = reverseDirectionButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        guard let fromStationName = stationNameLabel.text,
+              let toStationName = reverseDirectionButton.titleLabel?.text,
+              let buttonColor = reverseDirectionButton.backgroundColor,
+              let buttonTextColor = stationNameLabel.textColor
+              
+        else {return}
+        
+        let line: String = { [weak self] in
+            guard let self, let color = reverseDirectionButton.backgroundColor else {return ""}
+            
+            switch color {
+            case UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)"):
+                return "firstLine"
+            case UIColor(named: "\(NameColorForThemesEnum.secondLineNavBarColor)"):
+                return "secondLine"
+            case UIColor(named: "\(NameColorForThemesEnum.thirdLineNavBarColor)"):
+                return "thirdLine"
 
-//        firstLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.firstLineNavBarColor)") ?? .blue, navTextColor: UIColor(named: "\(NameColorForThemesEnum.firstLineTextColor)") ?? .systemBlue, line: "\(FireBaseFieldsEnum.firstLine)")
-        print("На Уручье")
+            default:
+                return ""
+            }
+            
+        }()
+
+        searchViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName,
+                                                            toStationName: toStationName,
+                                                            stationName: fromStationName,
+                                                            navColor: buttonColor,
+                                                            navTextColor: buttonTextColor,
+                                                            line: line)
+
     }
-        
-        
-
+    
+    func setSearchViewDelegate(view: SearchViewProtocol) {
+        searchViewControllerDelegate = view
+    }
+    
+    
 }

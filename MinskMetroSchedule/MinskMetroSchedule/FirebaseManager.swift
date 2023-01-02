@@ -30,19 +30,14 @@ class FireBaseManager: FirebaseManagerProtocol {
         ref.child(dayofWeek).child("\(stationName)").getData { [weak self] error, snapshot in
  
             if error != nil {
-//                print("ERROR")
-//                print("\(error!._code)")
+
                 guard let error else {return}
                 completion(.failure(error))
             } else {
                 guard let dict = snapshot?.value as? [String:Any],
                       let timeSheet = dict["\(direction)"] as? [Int]
                 else {return}
-//                UserDefaults.standard.set(dict, forKey: "\(UserDefaultsKeysEnum.allDayData)")
-//                let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)")
-                //allData?.value
-                //print(timeSheet)
-                
+
                 completion(.success(timeSheet))
             }
         }
@@ -51,20 +46,14 @@ class FireBaseManager: FirebaseManagerProtocol {
     func getChildCount(completion: @escaping (Result<Int, Error>) -> Void) {
         ref.child("stations").getData { error, snapshot in
             if error != nil {
-               // print("ERROR")
-               // print("\(error!._code)")
+
                 guard let error else {return}
                 completion(.failure(error))
             } else {
                 guard let childCount = snapshot?.childrenCount
-                //let dict = snapshot?.value as? [String:Any]
+
                 else {return}
-                
-//                UserDefaults.standard.set(dict, forKey: "\(UserDefaultsKeysEnum.allDayData)")
-//                let allData = UserDefaults.standard.object(forKey: "\(UserDefaultsKeysEnum.allDayData)") as! [String:Any]
-//                let station = allData["vokzalnaya"] as! [String:Any]
-//                let stationName = station["stationName"] as? String
-                //print(childCount)
+
                 completion(.success(Int(childCount)))
                 
             }
@@ -74,13 +63,11 @@ class FireBaseManager: FirebaseManagerProtocol {
     func getAllData(completion: @escaping (Result<[String:Any], Error>) -> Void) {
         ref.getData { error, snapshot in
             if error != nil {
-                //print("ERROR")
-                //print("\(error!._code)")
+
                 guard let error else {return}
                 completion(.failure(error))
             } else {
                 guard let dailyData = snapshot?.value as? [String:Any] else {return}
-                //print(dailyData)
                 completion(.success(dailyData))
                 
             }

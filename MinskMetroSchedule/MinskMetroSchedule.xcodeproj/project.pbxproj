@@ -29,7 +29,7 @@
 		944C49E8295A267600EA0B56 /* SecondLineViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49E7295A267600EA0B56 /* SecondLineViewPresenter.swift */; };
 		944C49EB295A3A4100EA0B56 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EA295A3A4100EA0B56 /* SearchViewController.swift */; };
 		944C49EF295A3A6500EA0B56 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */; };
-		944C49F2295A3C1200EA0B56 /* SearhRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F1295A3C1200EA0B56 /* SearhRouter.swift */; };
+		944C49F2295A3C1200EA0B56 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F1295A3C1200EA0B56 /* SearchRouter.swift */; };
 		944C49F5295B773F00EA0B56 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */; };
 		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
 		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
@@ -76,7 +76,7 @@
 		944C49E7295A267600EA0B56 /* SecondLineViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLineViewPresenter.swift; sourceTree = "<group>"; };
 		944C49EA295A3A4100EA0B56 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewPresenter.swift; sourceTree = "<group>"; };
-		944C49F1295A3C1200EA0B56 /* SearhRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearhRouter.swift; sourceTree = "<group>"; };
+		944C49F1295A3C1200EA0B56 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 		944C49F0295A3BFA00EA0B56 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				944C49F1295A3C1200EA0B56 /* SearhRouter.swift */,
+				944C49F1295A3C1200EA0B56 /* SearchRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -564,7 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				944C49F2295A3C1200EA0B56 /* SearhRouter.swift in Sources */,
+				944C49F2295A3C1200EA0B56 /* SearchRouter.swift in Sources */,
 				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
 				944C49D6295632BB00EA0B56 /* FirstLineViewPresenter.swift in Sources */,
 				94026A9D293F6B9E00E766F2 /* DayTypeEnum.swift in Sources */,
