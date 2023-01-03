@@ -58,6 +58,8 @@ class SearchViewController: UIViewController, SearchViewProtocol {
         searchController.searchBar.searchBarStyle = .default
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите название станции"
+        searchController.searchBar.setValue("Назад", forKey: "cancelButtonText")
         return searchController
     }()
     
@@ -69,7 +71,7 @@ class SearchViewController: UIViewController, SearchViewProtocol {
     
     private lazy var searchInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Введите название станции"
+        label.text = "Поиск станции"
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
