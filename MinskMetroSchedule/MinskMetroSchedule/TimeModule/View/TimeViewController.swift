@@ -183,7 +183,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         view.addSubview(showWeekendButton)
         view.addSubview(showFridayButton)
         
-        navigationController?.navigationBar.tintColor = .white
+        
         view.backgroundColor = UIColor(named: "\(NameColorForThemesEnum.backgroundColor)")
         
         guard let toStationLabelText = toStationLabel.text,
@@ -268,6 +268,7 @@ class TimeViewController: UIViewController, TimeViewControllerProtocol {
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
+        navigationController?.navigationBar.tintColor = navTintColor
         
         
     }
