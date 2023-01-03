@@ -190,7 +190,9 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
             }
             
         }()
-
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         searchViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName,
                                                             toStationName: toStationName,
                                                             stationName: fromStationName,
@@ -225,7 +227,9 @@ class SearchTableViewCell: UITableViewCell, SearchTableViewCellProtocol {
             }
             
         }()
-
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         searchViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName,
                                                             toStationName: toStationName,
                                                             stationName: fromStationName,

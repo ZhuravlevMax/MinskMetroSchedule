@@ -27,12 +27,12 @@ class SearchViewController: UIViewController, SearchViewProtocol {
             searchTableView.reloadData()
             if filteredStations.count == 0 {
                 
-                guard var searchTextFieldIsEmpty = searchController.searchBar.searchTextField.text?.isEmpty
+                guard let searchTextFieldIsEmpty = searchController.searchBar.searchTextField.text?.isEmpty
                 else {return}
                 
                 switch searchTextFieldIsEmpty {
                 case true:
-                    searchInfoLabel.text = "Введите название станции"
+                    searchInfoLabel.text = "Поиск станции"
                 case false:
                     searchInfoLabel.text = "Проверьте название введенной станции"
                 }

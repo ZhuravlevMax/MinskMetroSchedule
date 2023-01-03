@@ -355,6 +355,10 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         let dayOfWeek = DayTypeEnum.weekday.rawValue
         let dayType = "\(FireBaseCollectionsEnum.weekday)"
         
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType, line: line)
         
         print("На Ковальскую")
@@ -371,6 +375,10 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
         let dayOfWeek = DayTypeEnum.friday.rawValue
         let dayType = "\(FireBaseCollectionsEnum.friday)"
         
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         presenter?.openWeekdayVC(fromStationName: fromStationName, toStationName: toStationName, dayOfWeek: dayOfWeek, dayType: dayType, line: line)
         
         print("На Ковальскую")
@@ -383,6 +391,10 @@ extension TimeViewController: UITableViewDelegate, UITableViewDataSource {
                let toStationName = toStationLabel.text,
                let line
         else {return}
+        
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         
         let dayOfWeek = DayTypeEnum.weekend.rawValue
         let dayType = "\(FireBaseCollectionsEnum.weekend)"

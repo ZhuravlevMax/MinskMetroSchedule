@@ -178,6 +178,10 @@ class SecondLineTableViewCell: UITableViewCell, SecondLineTableViewCellProtocol 
     @objc private func toMogilevskyaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toMogilevskyaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
         
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         secondLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.secondLineNavBarColor)") ?? .green, navTextColor: UIColor(named: "\(NameColorForThemesEnum.secondLineTextColor)") ?? .systemGreen, line: "\(FireBaseFieldsEnum.secondLine)")
         
         
@@ -187,6 +191,10 @@ class SecondLineTableViewCell: UITableViewCell, SecondLineTableViewCellProtocol 
     //MARK: - Action for toUbileinayaStationButton
     @objc private func toKamenkaStationButtonPressed() {
         guard let fromStationName = stationNameLabel.text, let toStationName = toKamenkaStationButton.titleLabel?.text, let stationNameUnwrapped = stationName else {return}
+        
+        //вибрация по нажатию
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
 
         secondLineTableViewControllerDelegate?.presenter?.openTimeVC(fromStationName: fromStationName, toStationName: toStationName, stationName: stationNameUnwrapped, navColor: UIColor(named: "\(NameColorForThemesEnum.secondLineNavBarColor)") ?? .green, navTextColor: UIColor(named: "\(NameColorForThemesEnum.secondLineTextColor)") ?? .systemGreen, line: "\(FireBaseFieldsEnum.secondLine)")
         print("На Юбилейную")
