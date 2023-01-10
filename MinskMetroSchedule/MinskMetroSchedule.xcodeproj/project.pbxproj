@@ -31,6 +31,10 @@
 		944C49EF295A3A6500EA0B56 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */; };
 		944C49F2295A3C1200EA0B56 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F1295A3C1200EA0B56 /* SearchRouter.swift */; };
 		944C49F5295B773F00EA0B56 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */; };
+		944C49FC296C02B500EA0B56 /* FirstSecondTimeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49FB296C02B500EA0B56 /* FirstSecondTimeRouter.swift */; };
+		944C49FE296C02DC00EA0B56 /* FirstSecondTimeSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49FD296C02DB00EA0B56 /* FirstSecondTimeSheetTableViewCell.swift */; };
+		944C4A00296C037300EA0B56 /* FirstSecondTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C49FF296C037300EA0B56 /* FirstSecondTimeViewController.swift */; };
+		944C4A02296C038900EA0B56 /* FirstSecondTimeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C4A01296C038900EA0B56 /* FirstSecondTimeViewPresenter.swift */; };
 		9475B7D629374E2100D6D4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9475B7D529374E2100D6D4D3 /* SnapKit */; };
 		9475B7D8293A79A700D6D4D3 /* ColorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */; };
 		947FDDA6291A8473007DE286 /* StationNamesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FDDA5291A8473007DE286 /* StationNamesEnum.swift */; };
@@ -78,6 +82,10 @@
 		944C49EE295A3A6500EA0B56 /* SearchViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewPresenter.swift; sourceTree = "<group>"; };
 		944C49F1295A3C1200EA0B56 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		944C49F4295B773F00EA0B56 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		944C49FB296C02B500EA0B56 /* FirstSecondTimeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSecondTimeRouter.swift; sourceTree = "<group>"; };
+		944C49FD296C02DB00EA0B56 /* FirstSecondTimeSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSecondTimeSheetTableViewCell.swift; sourceTree = "<group>"; };
+		944C49FF296C037300EA0B56 /* FirstSecondTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSecondTimeViewController.swift; sourceTree = "<group>"; };
+		944C4A01296C038900EA0B56 /* FirstSecondTimeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSecondTimeViewPresenter.swift; sourceTree = "<group>"; };
 		9475B7D7293A79A700D6D4D3 /* ColorsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsEnum.swift; sourceTree = "<group>"; };
 		947FDDA5291A8473007DE286 /* StationNamesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNamesEnum.swift; sourceTree = "<group>"; };
 		94B669CA2914EC25005D6B31 /* MinskMetroSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinskMetroSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,6 +338,49 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
+		944C49F6296C025600EA0B56 /* FirstSecondTimeModule */ = {
+			isa = PBXGroup;
+			children = (
+				944C49FA296C028C00EA0B56 /* Presenter */,
+				944C49F9296C028600EA0B56 /* View */,
+				944C49F8296C027A00EA0B56 /* TableViewCell */,
+				944C49F7296C027300EA0B56 /* Router */,
+			);
+			path = FirstSecondTimeModule;
+			sourceTree = "<group>";
+		};
+		944C49F7296C027300EA0B56 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				944C49FB296C02B500EA0B56 /* FirstSecondTimeRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		944C49F8296C027A00EA0B56 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				944C49FD296C02DB00EA0B56 /* FirstSecondTimeSheetTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		944C49F9296C028600EA0B56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				944C49FF296C037300EA0B56 /* FirstSecondTimeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		944C49FA296C028C00EA0B56 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				944C4A01296C038900EA0B56 /* FirstSecondTimeViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		94B669C12914EC25005D6B31 = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +415,7 @@
 				944C49CE2956309500EA0B56 /* FirstLineModule */,
 				944C49DB295A23C800EA0B56 /* SecondLineModule */,
 				94B669E62914F030005D6B31 /* ThirdLineModule */,
+				944C49F6296C025600EA0B56 /* FirstSecondTimeModule */,
 				9424EE82291583E300C52F42 /* TimeModule */,
 				944C49C22950E0AD00EA0B56 /* FullScheduleModule */,
 				94B669D82914EC29005D6B31 /* LaunchScreen.storyboard */,
@@ -564,10 +616,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944C4A00296C037300EA0B56 /* FirstSecondTimeViewController.swift in Sources */,
 				944C49F2295A3C1200EA0B56 /* SearchRouter.swift in Sources */,
 				94B669FA29152BC5005D6B31 /* UIView+Extension.swift in Sources */,
 				944C49D6295632BB00EA0B56 /* FirstLineViewPresenter.swift in Sources */,
 				94026A9D293F6B9E00E766F2 /* DayTypeEnum.swift in Sources */,
+				944C49FC296C02B500EA0B56 /* FirstSecondTimeRouter.swift in Sources */,
 				9424EE862915853000C52F42 /* TimeViewController.swift in Sources */,
 				94FBA6CC29199AF300510979 /* FirebaseManager.swift in Sources */,
 				9422C5C5291C401A008D4D33 /* Int+Extension.swift in Sources */,
@@ -578,6 +632,7 @@
 				944C49EF295A3A6500EA0B56 /* SearchViewPresenter.swift in Sources */,
 				944C49E2295A242700EA0B56 /* SecondLineViewController.swift in Sources */,
 				94B669F729152279005D6B31 /* ThirdLineTableViewCell.swift in Sources */,
+				944C4A02296C038900EA0B56 /* FirstSecondTimeViewPresenter.swift in Sources */,
 				94B669D22914EC25005D6B31 /* ThirdLineViewController.swift in Sources */,
 				94B669CE2914EC25005D6B31 /* AppDelegate.swift in Sources */,
 				944C49C82950E13500EA0B56 /* FullSchedulePresenter.swift in Sources */,
@@ -599,6 +654,7 @@
 				944C49D42956310B00EA0B56 /* FirstLineViewController.swift in Sources */,
 				94B669D02914EC25005D6B31 /* SceneDelegate.swift in Sources */,
 				9424EE882915854000C52F42 /* TimeViewPresenter.swift in Sources */,
+				944C49FE296C02DC00EA0B56 /* FirstSecondTimeSheetTableViewCell.swift in Sources */,
 				944C49F5295B773F00EA0B56 /* SearchTableViewCell.swift in Sources */,
 				944C49E6295A256A00EA0B56 /* SecondLineTableViewCell.swift in Sources */,
 			);

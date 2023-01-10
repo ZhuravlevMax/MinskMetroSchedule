@@ -14,6 +14,11 @@ protocol BuilderProtocol {
     func createSecondLineModule(title: String, image: UIImage?) -> UIViewController
     func createThirdLineModule(title: String, image: UIImage?) -> UIViewController
     func createSearchModule(title: String, image: UIImage?) -> UIViewController
+    func createFirstSecondTimeModule(fromStationName: String,
+                          toStationName: String,
+                          navColor: UIColor,
+                          navTextColor: UIColor,
+                          line: String) -> UIViewController
     func createTimeModule(fromStationName: String,
                           toStationName: String,
                           navColor: UIColor,
@@ -81,6 +86,24 @@ class ModuleBuilder: BuilderProtocol {
         view.line = line
         let router = TimeRouter(builder: self, viewController: view)
         let presenter = TimeViewPresenter(view: view, router: router)
+        view.presenter = presenter
+        presenter.setNavBar(navColor: navColor, navTextColor: navTextColor)
+        return view
+    }
+    
+    func createFirstSecondTimeModule(fromStationName: String,
+                          toStationName: String,
+                          navColor: UIColor,
+                          navTextColor: UIColor,
+                          line: String) -> UIViewController {
+        let view = FirstSecondTimeViewController()
+        view.setItems(fromStationName: fromStationName,
+                      toStationName: toStationName,
+                      buttonColor: navColor,
+                      textColor: navTextColor)
+        view.line = line
+        let router = FirstSecondTimeRouter(builder: self, viewController: view)
+        let presenter = FirstSecondTimeViewPresenter(view: view, router: router)
         view.presenter = presenter
         presenter.setNavBar(navColor: navColor, navTextColor: navTextColor)
         return view

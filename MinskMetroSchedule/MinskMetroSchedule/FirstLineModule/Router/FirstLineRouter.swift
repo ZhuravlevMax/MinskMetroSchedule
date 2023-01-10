@@ -32,7 +32,7 @@ class FirstLineRouter: FirstLineRouterProtocol {
                     navTextColor: UIColor,
                     line: String) {
         
-        guard let timeModule = builder?.createTimeModule(fromStationName: fromStationName,
+        guard let timeModule = builder?.createFirstSecondTimeModule(fromStationName: fromStationName,
                                                          toStationName: toStationName,
                                                          navColor: navColor,
                                                          navTextColor: navTextColor, line: line),

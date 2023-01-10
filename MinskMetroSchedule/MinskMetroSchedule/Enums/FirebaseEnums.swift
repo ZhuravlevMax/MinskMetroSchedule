@@ -29,6 +29,11 @@ enum FireBaseFieldsEnum: String {
     case secondLine
     case thirdLine
     
+    case toKamenkaTimeSheetInterval
+    case toMogilevskyaTimeSheetInterval
+    case toUrucheTimeSheetInterval
+    case toMalinovkaTimeSheetInterval
+    
     
     
 }

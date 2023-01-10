@@ -1,5 +1,5 @@
 //
-//  TimeViewPresenter.swift
+//  FirstSecondTimeViewPresenter.swift
 //  MinskMetroSchedule
 //
 //  Created by Максим Журавлев on 4.11.22.
@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol TimeViewPresenterProtocol: AnyObject {
+protocol FirstSecondTimeViewPresenterProtocol: AnyObject {
     
-    var timeViewControllerBackgroundColor: UIColor {get}
+    var FirstSecondTimeViewControllerBackgroundColor: UIColor {get}
     
-    func configureTimeSheetTableViewCell(indexPath: IndexPath,
-                                         cell: TimeSheetTableViewCellProtocol,
+    func configureFirstSecondTimeSheetTableViewCell(indexPath: IndexPath,
+                                         cell: FirstSecondTimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String,
                                          line: String)
@@ -38,16 +38,16 @@ protocol TimeViewPresenterProtocol: AnyObject {
     func checkDayOfWeek()
 }
 
-class TimeViewPresenter: TimeViewPresenterProtocol {
+class FirstSecondTimeViewPresenter: FirstSecondTimeViewPresenterProtocol {
     
-    var timeViewControllerBackgroundColor: UIColor = .white
+    var FirstSecondTimeViewControllerBackgroundColor: UIColor = .white
     
-    weak var view: TimeViewControllerProtocol?
-    private(set) var router: TimeRouterProtocol
+    weak var view: FirstSecondTimeViewControllerProtocol?
+    private(set) var router: FirstSecondTimeRouterProtocol
     
     
-    required init(view: TimeViewControllerProtocol,
-                  router: TimeRouterProtocol) {
+    required init(view: FirstSecondTimeViewControllerProtocol,
+                  router: FirstSecondTimeRouterProtocol) {
         self.view = view
         self.router = router
     }
@@ -106,8 +106,8 @@ class TimeViewPresenter: TimeViewPresenterProtocol {
         
     }
     
-    func configureTimeSheetTableViewCell(indexPath: IndexPath,
-                                         cell: TimeSheetTableViewCellProtocol,
+    func configureFirstSecondTimeSheetTableViewCell(indexPath: IndexPath,
+                                         cell: FirstSecondTimeSheetTableViewCellProtocol,
                                          stationName: String,
                                          toStation: String,
                                          line: String) {

@@ -60,6 +60,7 @@ class SearchViewController: UIViewController, SearchViewProtocol {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите название станции"
         searchController.searchBar.setValue("Назад", forKey: "cancelButtonText")
+        searchController.searchBar.searchTextField.becomeFirstResponder()
         return searchController
     }()
     
@@ -111,9 +112,17 @@ class SearchViewController: UIViewController, SearchViewProtocol {
         searchInfoView.addSubview(mainImageView)
         
         view.backgroundColor = .white
+        
+//        let newPosition = searchController.searchBar.searchTextField.beginningOfDocument
+//        searchController.searchBar.searchTextField.selectedTextRange = searchController.searchBar.searchTextField.textRange(from: newPosition, to: newPosition)
+        
+        
+        
         //MARK: - Работа с searchController
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        
+        
 
         //MARK: - Работа с navigationController
         navigationItem.searchController = searchController
@@ -125,6 +134,11 @@ class SearchViewController: UIViewController, SearchViewProtocol {
         print(stations)
         
         print(filteredStations)
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        searchController.searchBar.searchTextField.becomeFirstResponder()
     }
 
     
